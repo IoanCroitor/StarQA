@@ -48,7 +48,7 @@ export async function login(email: string, password: string) {
     const authData = await pb
       .collection('users')
       .authWithPassword(email, password)
-    document.cookie = pb.authStore.exportToCookie({ secure: true })
+    document.cookie = pb.authStore.exportToCookie({ secure: false })
     return authData
   } catch (error) {
     console.error('Login failed', error)

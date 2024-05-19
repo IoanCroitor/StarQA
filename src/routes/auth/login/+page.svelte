@@ -7,19 +7,16 @@
   import { LoaderCircle } from 'lucide-svelte'
 
   let isLoading = false
-  let email: any
-  let password: any
+  let email = ''
+  let password = ''
   let errorMessage: string = ''
 
   async function onSubmit() {
     isLoading = true
     errorMessage = ''
-    const emailFormatted: string = email.$$.ctx[0]
-    const passwordFormatted: string = password.$$.ctx[0]
 
-    console.log(emailFormatted, passwordFormatted)
     try {
-      const authData = await login(emailFormatted, passwordFormatted)
+      await login(email, password)
       // Redirect to a protected page
       await goto('/home')
       isLoading = false
@@ -32,7 +29,9 @@
 
 <div class="grid gap-2">
   <div class="grid gap-1">
-    <h2 class="text-sm font-bold text-red-500 mx-auto">{errorMessage}</h2>
+    {#if errorMessage}
+      <h2 class="text-sm font-bold text-red-500 mx-auto">{errorMessage}</h2>
+    {/if}
     <div class="grid gap-2">
       <Label for="email">Email</Label>
       <Input
@@ -43,12 +42,12 @@
         autocomplete="email"
         autocorrect="off"
         disabled={isLoading}
-        bind:this={email}
+        bind:value={email}
       />
     </div>
     <div class="grid gap-2 pt-2">
       <Label for="password">Password</Label>
-      <Input id="password" type="password" bind:this={password} />
+      <Input id="password" type="password" bind:value={password} />
     </div>
   </div>
   <Button type="submit" disabled={isLoading} on:click={onSubmit}>

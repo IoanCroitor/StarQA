@@ -4,15 +4,22 @@
   import { Label } from '$lib/components/ui/label/index.js'
   import { LoaderCircle } from 'lucide-svelte'
   import { Progress } from '$lib/components/ui/progress/index.js'
-  import { calculateStrength, progressColorFunction } from './functions'
-  import { signUp } from '@/pocketbase'
+  import {
+    calculateStrength,
+    progressColorFunction,
+    removeAfterAt,
+  } from './functions'
+  import { logout, signUp } from '@/pocketbase'
   import { goto } from '$app/navigation'
+  import { generateUsername } from '@/utils_server'
 
   let email = ''
   let password = ''
   let passwordConfirm = ''
   let strength: number = 0
   let progressColor = ''
+
+  let errorMessage: string = ''
 
   let passwordFormatted: string,
     passwordConfirmFormatted: string,
@@ -32,19 +39,26 @@
 
   let isLoading = false
   async function onSubmit() {
+    logout()
+    errorMessage = ''
     isLoading = true
+    const username = generateUsername(removeAfterAt(emailFormatted))
+    console.log(username)
     try {
-      await signUp(emailFormatted, passwordFormatted, 'uhwiuAHIHIUHSIU') // Call the signUp function
+      await signUp(emailFormatted, passwordFormatted, username) // Call the signUp function
       console.log('Signup successful')
-      await goto('/dashboard') // Redirect to dashboard after successful signup
+      await goto('/home') // Redirect to dashboard after successful signup
     } catch (error) {
+      isLoading = false
       console.error('Signup failed', error)
-      error = error || 'Signup failed'
+      errorMessage =
+        'Something went wrong, check your credentials (posibly email already used)'
     }
   }
 </script>
 
-<div class="grid gap-6">
+<div class="">
+  <h2 class="text-sm font-bold text-red-500 mx-auto">{errorMessage}</h2>
   <form on:submit={onSubmit}>
     <div class="grid gap-2">
       <div class="grid gap-1">
