@@ -1,0 +1,23 @@
+// interface Locals {
+// 	userPb: PocketBase;
+// 	user?: ReturnType<typeof serializeNonPOJOs>;
+// }
+//OLD METHOD
+
+// export const handle: Handle = async ({ event, resolve }) => {
+// 	const locals = event.locals as Locals;
+// 	locals.pb = new PocketBase(PUBLIC_VITE_POCKETBASE_URL);
+// 	locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
+
+// 	if (locals.pb.authStore.isValid) {
+// 		locals.user = serializeNonPOJOs(locals.pb.authStore.model);
+// 	} else {
+// 		locals.user = undefined;
+// 	}
+
+// 	const response = await resolve(event);
+
+// 	response.headers.set('set-cookie', locals.pb.authStore.exportToCookie({ secure: false }));
+
+// 	return response;
+// };

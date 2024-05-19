@@ -1,7 +1,10 @@
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<script lang="ts">
+	import * as Tabs from '$lib/components/ui/tabs/index.js';
+	import * as Card from '$lib/components/ui/card/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { Input } from '$lib/components/ui/input/index.js';
+	import { Label } from '$lib/components/ui/label/index.js';
+	import Account from '$lib/components/Account.svelte';
+</script>
 
-<style lang="postcss">
-	:global(html) {
-		background-color: theme(colors.gray.100);
-	}
-</style>
+<Account />
