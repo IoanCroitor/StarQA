@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-ignore
 export const load = ({ locals }) => {
 	if (locals.user) {
 		return {

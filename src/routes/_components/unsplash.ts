@@ -25,6 +25,24 @@ const fetchData = async (search_term: string) => {
 // 		return image_formated;
 // 	});
 // }
+
+// export async function getRandomImage(imageThemes: string[], fetch: typeof window.fetch) {
+// 	const theme = imageThemes[Math.floor(Math.random() * imageThemes.length)];
+// 	const url = `https://api.unsplash.com/search/photos?page=1&query=${theme}&client_id=YOUR_UNSPLASH_API_KEY`;
+
+// 	const response = await fetch(url);
+// 	const data = await response.json();
+
+// 	if (!response.ok) {
+// 		throw new Error(data.errors || 'Failed to fetch image');
+// 	}
+
+// 	const images = data.results;
+// 	const randomImage = images[Math.floor(Math.random() * images.length)];
+
+// 	return randomImage;
+// }
+// }
 export async function getRandomImage(imageThemes: Array<string>): Promise<ImageFormatted> {
 	try {
 		// Select a random theme from the provided array

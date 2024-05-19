@@ -7,4 +7,4 @@
 	import Account from '$lib/components/Account.svelte';
 </script>
 
-<Account />
+<h1>StarQA main / page</h1>
