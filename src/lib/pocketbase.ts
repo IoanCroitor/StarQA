@@ -88,7 +88,7 @@ export async function getRecordByID(
 export async function GetUserProp(id: string, prop: string) {
   try {
     const record = await pb.collection('users').getOne(id, {
-      expand: 'prop',
+      expand: prop,
     })
     return record
   } catch (error) {
@@ -119,4 +119,15 @@ export async function GetRecordsRelated(collection: string, id: string) {
     console.error('Fetching record failed', error)
     throw error
   }
+}
+
+export async function updateRecords(collection:string, recordID:string, data:object ) {
+  try {
+    const record = await pb.collection(collection).update(recordID, data);
+    return record
+  } catch (error) {
+    console.error('Updating record failed', error)
+    throw error
+  }
+  
 }

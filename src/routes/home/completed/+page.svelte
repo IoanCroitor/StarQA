@@ -61,10 +61,7 @@
           title={quiz.title}
           description={quiz.description}
           cover_image={quiz.cover_image}
-          join_code={quiz.join_code}
-          updated={quiz.updated}
         />
-        <!-- Adjust according to the actual properties of your quiz object -->
       {/each}
     </div>
   </div>
