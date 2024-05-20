@@ -3,7 +3,9 @@
   import { Button } from '$lib/components/ui/button/index.js'
   import { Input } from '$lib/components/ui/input/index.js'
   import { Label } from '$lib/components/ui/label/index.js'
-  import { login } from '@/pocketbase'
+  import Logo from '@/components/ui/icons/logo.svelte'
+  import { Portal } from '@/components/ui/sheet'
+  import { login, logout } from '@/pocketbase'
   import { LoaderCircle } from 'lucide-svelte'
 
   let isLoading = false
@@ -12,6 +14,7 @@
   let errorMessage: string = ''
 
   async function onSubmit() {
+    logout()
     isLoading = true
     errorMessage = ''
 
@@ -26,6 +29,10 @@
     }
   }
 </script>
+
+<svelte:head>
+  <title>Login Portal</title>
+</svelte:head>
 
 <div class="grid gap-2">
   <div class="grid gap-1">

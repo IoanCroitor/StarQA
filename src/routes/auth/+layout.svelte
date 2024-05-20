@@ -2,6 +2,9 @@
   import Skeleton from '$lib/components/ui/skeleton/skeleton.svelte'
   import { Button, type Props } from '$lib/components/ui/button/index'
   import ContinueWithGoogle from './ContinueWithGoogle.svelte'
+  import { onMount } from 'svelte'
+  import { getUser } from '@/pocketbase'
+  import { goto } from '$app/navigation'
 
   export let data: any
   let photo: {
@@ -35,6 +38,10 @@
     route = route === 'login' ? 'register' : 'login'
     buttontext = route === 'login' ? 'Register' : 'Sign in'
   }
+
+  onMount(() => {
+    if (getUser()) goto('/home')
+  })
 </script>
 
 <div

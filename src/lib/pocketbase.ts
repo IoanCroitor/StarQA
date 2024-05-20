@@ -60,3 +60,63 @@ export async function logout() {
   pb.authStore.clear()
   document.cookie = pb.authStore.exportToCookie({ secure: true })
 }
+
+export function getUser() {
+  const user = localStorage.getItem('pocketbase_auth')
+  if (user) {
+    return JSON.parse(user)
+  }
+  return null
+}
+
+export async function getRecordByID(
+  collection: string,
+  id: string,
+  expand: string,
+) {
+  try {
+    const record = await pb.collection(collection).getOne(id, {
+      expand: expand,
+    })
+    return record
+  } catch (error) {
+    console.error('Fetching record failed', error)
+    throw error
+  }
+}
+
+export async function GetUserProp(id: string, prop: string) {
+  try {
+    const record = await pb.collection('users').getOne(id, {
+      expand: 'prop',
+    })
+    return record
+  } catch (error) {
+    console.error('Fetching record failed', error)
+    throw error
+  }
+}
+
+export async function GetAllRecords(collection: string) {
+  try {
+    const records = await pb.collection(collection).getFullList({
+      sort: '-created',
+    })
+    return records
+  } catch (error) {
+    console.error('Fetching record failed', error)
+    throw error
+  }
+}
+
+export async function GetRecordsRelated(collection: string, id: string) {
+  try {
+    const records = await pb.collection(collection).getFullList({
+      filter: `quiz_id="${id}"`,
+    })
+    return records
+  } catch (error) {
+    console.error('Fetching record failed', error)
+    throw error
+  }
+}

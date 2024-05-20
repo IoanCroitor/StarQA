@@ -57,6 +57,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Register an account</title>
+</svelte:head>
+
 <div class="">
   <h2 class="text-sm font-bold text-red-500 mx-auto">{errorMessage}</h2>
   <form on:submit={onSubmit}>
