@@ -3,10 +3,14 @@
   import { Button } from '$lib/components/ui/button'
   import Input from '@/components/ui/input/input.svelte'
   import { goto } from '$app/navigation'
+    import { onMount } from 'svelte'
 
   let redirect: string
+
+  
   function handleRedirect() {
     goto(`/home/${redirect}`)
+    
   }
 </script>
 
@@ -21,7 +25,7 @@
     <Card.Content>
       <div class="flex flex-row gap-2">
         <Input bind:value={redirect} type="text" />
-        <Button class="w-20" on:click={handleRedirect}>Join</Button>
+        <Button class="w-20" on:click={handleRedirect} >Join</Button>
       </div>
 
       <p class="flex justify-center text-muted-foreground text-xs my-1">or</p>

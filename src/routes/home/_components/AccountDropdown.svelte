@@ -5,6 +5,7 @@
   import { getUser, logout } from '@/pocketbase'
   import { onMount } from 'svelte'
 
+  
   let data = {
     model: {
       username: 'loading',
@@ -20,7 +21,6 @@
     goto('/auth/login')
   }
 </script>
-
 <DropdownMenu.Root>
   <DropdownMenu.Trigger asChild let:builder>
     <Button
