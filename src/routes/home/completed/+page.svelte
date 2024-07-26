@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Button } from '@/components/ui/button'
   import Card from './Card.svelte'
-  import { GetUserProp, getRecordByID, getUser } from '@/pocketbase'
   import { onMount } from 'svelte'
 
   // Import writable store from Svelte
@@ -21,26 +20,23 @@
 
   // Function to fetch and set records
   async function fetchRecords() {
-    let userid = getUser().model.id
-    const record = await GetUserProp(userid, 'finished_quizzes')
-    const finished_quizzes = record.finished_quizzes || []
-
-    const updatedRecords: Quiz[] = []
-
-    // Iterate over each finished quiz ID and fetch the corresponding record
-    for (let i = 0; i < finished_quizzes.length; i++) {
-      const quizId = finished_quizzes[i]
-      try {
-        // Replace 'quizzes' with the actual collection name if it's different
-        const quiz = await getRecordByID('quizzes', quizId, '')
-        updatedRecords.push(quiz as any) // Store the fetched quiz in the records array
-      } catch (error) {
-        console.error(`Error fetching quiz with ID ${quizId}:`, error)
-      }
-    }
-
-    // Set the updated records in the store
-    records.set(updatedRecords)
+    // let userid = getUser().model.id
+    // const record = await GetUserProp(userid, 'finished_quizzes')
+    // const finished_quizzes = record.finished_quizzes || []
+    // const updatedRecords: Quiz[] = []
+    // // Iterate over each finished quiz ID and fetch the corresponding record
+    // for (let i = 0; i < finished_quizzes.length; i++) {
+    //   const quizId = finished_quizzes[i]
+    //   try {
+    //     // Replace 'quizzes' with the actual collection name if it's different
+    //     const quiz = await getRecordByID('quizzes', quizId, '')
+    //     updatedRecords.push(quiz as any) // Store the fetched quiz in the records array
+    //   } catch (error) {
+    //     console.error(`Error fetching quiz with ID ${quizId}:`, error)
+    //   }
+    // }
+    // // Set the updated records in the store
+    // records.set(updatedRecords)
   }
 
   // Fetch records on mount

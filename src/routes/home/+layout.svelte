@@ -16,7 +16,6 @@
   import AccountDropdown from './_components/AccountDropdown.svelte'
   import { onMount } from 'svelte'
 
-  import { GetUserProp, getUser } from '@/pocketbase'
   import { goto } from '$app/navigation'
   import JoinCard from './_components/JoinCard.svelte'
   import Content from './_components/Content.svelte'
@@ -25,25 +24,41 @@
   let finished_quizzes_length = 0
 
   onMount(async () => {
-    let userid = getUser().model.id
-    const record = await GetUserProp(userid, 'finished_quizzes')
-    finished_quizzes_length = record.finished_quizzes.length
+    // let userid = getUser().model.id
+    // const record = await GetUserProp(userid, 'finished_quizzes')
+    // finished_quizzes_length = record.finished_quizzes.length
   })
 
   onMount(() => {
-    if (getUser()) {
-      render = true
-    } else {
-      goto('/auth/login')
-    }
+    // if (getUser()) {
+    //   render = true
+    // } else {
+    //   goto('/auth/login')
+    // }
   })
 
-  let render = false
+  let render = true
+  export let data
+  $: ({ supabase } = data)
+
+  $: logout = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.error(error)
+    }
+  }
 </script>
 
 <svelte:head>
   <title>Home</title>
 </svelte:head>
+
+<header>
+  <nav>
+    <a href="/">Home</a>
+  </nav>
+  <button on:click={logout}>Logout</button>
+</header>
 {#if render}
   <div
     class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]"

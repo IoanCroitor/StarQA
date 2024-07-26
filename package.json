@@ -37,15 +37,22 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"bits-ui": "^0.21.8",
+		"@supabase/ssr": "^0.4.0",
+		"@supabase/supabase-js": "^2.44.4",
+		"appwrite": "^14.0.1",
+		"bits-ui": "^0.21.12",
 		"clsx": "^2.1.1",
 		"embla-carousel-svelte": "^8.1.2",
+		"formsnap": "^1.0.1",
 		"lucide-svelte": "^0.378.0",
+		"mode-watcher": "^0.4.0",
 		"paneforge": "^0.0.4",
-		"pocketbase": "^0.21.2",
 		"svelte-radix": "^1.1.0",
+		"svelte-sonner": "^0.3.27",
+		"sveltekit-superforms": "^2.16.1",
 		"tailwind-merge": "^2.3.0",
 		"tailwind-variants": "^0.2.1",
-		"unsplash-js": "^7.0.19"
+		"unsplash-js": "^7.0.19",
+		"zod": "^3.23.8"
 	}
 }
