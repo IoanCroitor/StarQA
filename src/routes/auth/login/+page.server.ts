@@ -31,7 +31,6 @@ export const actions: Actions = {
       const status = supabaseError.status as number
       return message(form, { status, message: supabaseError.message })
     } else {
-      console.log('success')
       throw redirect(303, '/home')
     }
   },

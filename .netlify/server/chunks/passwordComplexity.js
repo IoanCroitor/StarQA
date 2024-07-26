@@ -1,7 +1,7 @@
-import { d as compute_rest_props, s as subscribe } from "./lifecycle.js";
+import { e as compute_rest_props, s as subscribe } from "./lifecycle.js";
 import { c as create_ssr_component, s as spread, b as escape_object, d as add_attribute, v as validate_component, a as escape_attribute_value } from "./ssr.js";
 import "dequal";
-import { o as omit, m as makeElement, a as createElHelpers, c as cn } from "./index2.js";
+import { o as omit, m as makeElement, a as createElHelpers, c as cn } from "./index4.js";
 import { t as toWritableStores, o as overridable, r as removeUndefined, g as getOptionUpdater } from "./updater.js";
 import { w as writable } from "./index3.js";
 import { c as createBitAttrs } from "./input.js";

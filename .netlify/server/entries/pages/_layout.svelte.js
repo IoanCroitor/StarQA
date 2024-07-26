@@ -1,8 +1,90 @@
-import { c as create_ssr_component, d as add_attribute, f as each, g as add_styles, h as merge_ssr_styles, e as escape, v as validate_component, m as missing_component, s as spread, a as escape_attribute_value, b as escape_object } from "../../chunks/ssr.js";
-import { s as subscribe, n as noop, d as compute_rest_props, o as onDestroy, f as get_store_value } from "../../chunks/lifecycle.js";
+import { c as create_ssr_component, f as each, d as add_attribute, v as validate_component, g as add_styles, h as merge_ssr_styles, e as escape, m as missing_component, s as spread, a as escape_attribute_value, b as escape_object } from "../../chunks/ssr.js";
+import { s as subscribe, f as get_store_value, n as noop, e as compute_rest_props, o as onDestroy } from "../../chunks/lifecycle.js";
+import { p as page } from "../../chunks/stores.js";
+import { n as normaliseBase, p as parseRoute, s as serializeRoute, g as getHrefBetween, i as i18n } from "../../chunks/i18n.js";
+import { b as base } from "../../chunks/paths.js";
+import "../../chunks/client.js";
+import { s as setParaglideContext, g as getTranslationFunctions } from "../../chunks/index2.js";
+import "@inlang/paraglide-js/internal/adapter-utils";
 import { c as cn, a as toastState, u as useEffect } from "../../chunks/Toaster.svelte_svelte_type_style_lang.js";
 import { d as derived, w as writable } from "../../chunks/index3.js";
-import "../../chunks/client.js";
+function isExternal(url, currentUrl, base2) {
+  const absoluteBase = new URL(base2 ?? "/", currentUrl).pathname;
+  return url.origin !== currentUrl.origin || !url.pathname.startsWith(absoluteBase);
+}
+const AlternateLinks = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let localisedPath;
+  let canonicalPath;
+  let alternateLinks;
+  let $page, $$unsubscribe_page;
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  const absoluteBase = normaliseBase(base, new URL($page.url)) || "/";
+  let { availableLanguageTags } = $$props;
+  let { strategy } = $$props;
+  let { currentLang } = $$props;
+  const getAlternateLinks = (canonicalPath2, strategy2) => {
+    const links = [];
+    for (const lang of availableLanguageTags) {
+      const localisedPath2 = strategy2.getLocalisedPath(canonicalPath2, lang);
+      const fullPath = serializeRoute(localisedPath2, absoluteBase, void 0);
+      const link = new URL(fullPath, new URL($page.url)).href;
+      links.push(link);
+    }
+    return links;
+  };
+  if ($$props.availableLanguageTags === void 0 && $$bindings.availableLanguageTags && availableLanguageTags !== void 0) $$bindings.availableLanguageTags(availableLanguageTags);
+  if ($$props.strategy === void 0 && $$bindings.strategy && strategy !== void 0) $$bindings.strategy(strategy);
+  if ($$props.currentLang === void 0 && $$bindings.currentLang && currentLang !== void 0) $$bindings.currentLang(currentLang);
+  localisedPath = parseRoute($page.url.pathname, absoluteBase)[0];
+  canonicalPath = strategy.getCanonicalPath(localisedPath, currentLang);
+  alternateLinks = getAlternateLinks(canonicalPath, strategy);
+  $$unsubscribe_page();
+  return ` ${availableLanguageTags.length >= 1 ? `${each(alternateLinks, (href, i) => {
+    return `<link rel="alternate"${add_attribute("hreflang", availableLanguageTags[i], 0)}${add_attribute("href", href, 0)}>`;
+  })}` : ``}`;
+});
+const ParaglideJS = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let lang;
+  let $page, $$unsubscribe_page;
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  const absoluteBase = normaliseBase(base, new URL($page.url)) || "/";
+  let { languageTag = void 0 } = $$props;
+  let { i18n: i18n2 } = $$props;
+  function translateHref(href, hreflang) {
+    try {
+      const localisedCurrentUrl = new URL(get_store_value(page).url);
+      const [localisedCurrentPath, suffix] = parseRoute(localisedCurrentUrl.pathname, absoluteBase);
+      const canonicalCurrentPath = i18n2.strategy.getCanonicalPath(localisedCurrentPath, lang);
+      const canonicalCurrentUrl = new URL(localisedCurrentUrl);
+      canonicalCurrentUrl.pathname = serializeRoute(canonicalCurrentPath, absoluteBase, suffix);
+      const original_to = new URL(href, new URL(canonicalCurrentUrl));
+      if (isExternal(original_to, localisedCurrentUrl, absoluteBase) || i18n2.config.exclude(original_to.pathname)) return href;
+      const targetLanguage = hreflang ?? lang;
+      const [canonicalPath, dataSuffix] = parseRoute(original_to.pathname, absoluteBase);
+      const translatedPath = i18n2.strategy.getLocalisedPath(canonicalPath, targetLanguage);
+      const to = new URL(original_to);
+      to.pathname = serializeRoute(translatedPath, absoluteBase, dataSuffix);
+      return getHrefBetween(localisedCurrentUrl, to);
+    } catch (error) {
+      return href;
+    }
+  }
+  setParaglideContext({ translateHref });
+  if ($$props.languageTag === void 0 && $$bindings.languageTag && languageTag !== void 0) $$bindings.languageTag(languageTag);
+  if ($$props.i18n === void 0 && $$bindings.i18n && i18n2 !== void 0) $$bindings.i18n(i18n2);
+  lang = languageTag ?? i18n2.getLanguageFromUrl($page.url);
+  $$unsubscribe_page();
+  return `  ${$$result.head += `<!-- HEAD_svelte-12suvtl_START -->${i18n2.config.seo.noAlternateLinks !== true && !i18n2.config.exclude($page.url.pathname) ? `${validate_component(AlternateLinks, "AlternateLinks").$$render(
+    $$result,
+    {
+      availableLanguageTags: i18n2.config.runtime.availableLanguageTags,
+      strategy: i18n2.strategy,
+      currentLang: lang
+    },
+    {},
+    {}
+  )}` : ``}<!-- HEAD_svelte-12suvtl_END -->`, ""}  ${slots.default ? slots.default({}) : ``}`;
+});
 const Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { type = "success" } = $$props;
   if ($$props.type === void 0 && $$bindings.type && type !== void 0) $$bindings.type(type);
@@ -113,6 +195,7 @@ const Toast = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     );
   }
   let effect;
+  getTranslationFunctions();
   if ($$props.toast === void 0 && $$bindings.toast && toast !== void 0) $$bindings.toast(toast);
   if ($$props.index === void 0 && $$bindings.index && index !== void 0) $$bindings.index(index);
   if ($$props.expanded === void 0 && $$bindings.expanded && expanded !== void 0) $$bindings.expanded(expanded);
@@ -655,7 +738,11 @@ const Sonner_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => 
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
-  return `${validate_component(Sonner_1, "Toaster").$$render($$result, {}, {}, {})} ${slots.default ? slots.default({}) : ``}`;
+  return `${validate_component(ParaglideJS, "ParaglideJS").$$render($$result, { i18n }, {}, {
+    default: () => {
+      return `${validate_component(Sonner_1, "Toaster").$$render($$result, {}, {}, {})} ${slots.default ? slots.default({}) : ``}`;
+    }
+  })}`;
 });
 export {
   Layout as default

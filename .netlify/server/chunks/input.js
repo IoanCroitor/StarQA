@@ -1,6 +1,6 @@
-import { e as createEventDispatcher, d as compute_rest_props } from "./lifecycle.js";
+import { h as createEventDispatcher, e as compute_rest_props } from "./lifecycle.js";
 import { c as create_ssr_component, s as spread, a as escape_attribute_value, b as escape_object, d as add_attribute } from "./ssr.js";
-import { c as cn } from "./index2.js";
+import { c as cn } from "./index4.js";
 function createBitAttrs(bit, parts) {
   const attrs = {};
   parts.forEach((part) => {

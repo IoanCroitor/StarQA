@@ -1,5 +1,3 @@
-import "../../../chunks/index.js";
-import "../../../chunks/client.js";
 const apiUrl = "CYkDr0Uz91KszajL_mlSyM08cYWvmMmX7V7K0SYfNHI";
 const fetchData = async (search_term) => {
   const res = await fetch(

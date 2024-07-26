@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button/index.js'
+  import * as m from '$lib/paraglide/messages'
 </script>
 
 <svelte:head>
@@ -11,16 +12,14 @@
   </nav>
   <article class="flex flex-col justify-center items-center h-screen mx-4">
     <h1 class="text-3xl text-center font-semibold">
-      <span class="font-bold">StarQA⭐:</span> Crafting
-      <span class="underline decoration-wavy decoration-purple-300"
-        >Stellar</span
-      >
-      Quizzes
+      <span class="font-bold">StarQA⭐:</span>{m.crafting_stellar_quizzes()}
     </h1>
-    <h1 class="text-3xl text-center text-primary/80">Tailored Just for You</h1>
+    <h1 class="text-3xl text-center text-primary/80">
+      {m.tailored_just_for_you()}
+    </h1>
     <div class="flex flex-row gap-2 pt-2">
-      <Button variant="outline" href="auth/login">Login</Button>
-      <Button variant="default" href="auth/register">Register</Button>
+      <Button variant="outline" href="auth/login">{m.login()}</Button>
+      <Button variant="default" href="auth/register">{m.register()}</Button>
     </div>
   </article>
 </div>

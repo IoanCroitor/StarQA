@@ -1,28 +1,17 @@
 import { r as redirect } from "../../../../chunks/index.js";
-const GET = async ({ url, locals: { supabase } }) => {
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: `${url.origin}/auth/callback`
+const GET = async (event) => {
+  const {
+    url,
+    locals: { supabase }
+  } = event;
+  const code = url.searchParams.get("code");
+  const next = url.searchParams.get("next") ?? "/";
+  if (code) {
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (!error) {
+      redirect(303, `/${next.slice(1)}`);
     }
-  });
-  if (error) {
-    console.error("Supabase OAuth error:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" }
-    });
   }
-  if (data.url) {
-    throw redirect(303, data.url);
-  }
-  return new Response(
-    JSON.stringify({ error: "No URL returned from Supabase" }),
-    {
-      status: 400,
-      headers: { "Content-Type": "application/json" }
-    }
-  );
 };
 export {
   GET

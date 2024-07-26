@@ -14,23 +14,31 @@
   } from '$lib/config/zod-schema'
   import Spinner from '@/assets/Spinner.svelte'
   import { Progress } from '@/components/ui/progress'
-
+  import * as m from '$lib/paraglide/messages'
+  import { handleToast } from '@/handleToast'
   import {
     calculateStrength,
     progressColorFunction,
   } from '$lib/passwordComplexity'
-  function handleErrorToast(status: number, error: string) {
-    toast.error(error, {
-      description: 'Error Code: ' + status,
-      action: {
-        label: 'Close',
-        onClick: () =>
-          console.info(
-            'Closed error message: ' + error + ' with the status: ' + status,
-          ),
-      },
-    })
-  }
+
+  // function handleErrorToast(status: number, error: string) {
+  //   toast.error(error, {
+  //     description: m.error_code() + ': ' + status,
+  //     action: {
+  //       label: m.close(),
+  //       onClick: () =>
+  //         console.info(
+  //           m.closed_error_message() +
+  //             ': ' +
+  //             error +
+  //             ' ' +
+  //             m.with_the_status() +
+  //             ': ' +
+  //             status,
+  //         ),
+  //     },
+  //   })
+  // }
 
   export let data: SuperValidated<Infer<PasswordConfirmSchema>>
 
@@ -42,7 +50,7 @@
 
   message.subscribe((value) => {
     if (value) {
-      handleErrorToast(value.status, value.message)
+      handleToast('error', value.status, value.message)
     }
   })
 
@@ -67,13 +75,13 @@
     <!-- Password -->
     <Form.Field {form} name="password">
       <Form.Control let:attrs>
-        <Form.Label class="font-semibold">Password</Form.Label>
+        <Form.Label class="font-semibold">{m.password()}</Form.Label>
         <Input
           {...attrs}
           bind:value={$formData.password}
           type="password"
           disabled={$delayed}
-          placeholder="Enter your password"
+          placeholder={m.enter_your_password()}
         />
       </Form.Control>
       <Form.FieldErrors />
@@ -82,19 +90,19 @@
     </Form.Field>
     <Form.Field {form} name="password">
       <Form.Control let:attrs>
-        <Form.Label class="font-semibold">Confirm password</Form.Label>
+        <Form.Label class="font-semibold">{m.confirm_password()}</Form.Label>
         <Input
           {...attrs}
           bind:value={$formData.confirmPassword}
           type="password"
           disabled={$delayed}
-          placeholder="Enter your password"
+          placeholder={m.enter_your_password()}
         />
       </Form.Control>
     </Form.Field>
 
     <div class="w-full px-1 my-1">
-      <Progress value={strength} max={100} class={` ${progressColor} `} />
+      <Progress value={strength} max={100} class={` ${progressColor}`} />
     </div>
 
     <!-- Submit Button -->
@@ -106,7 +114,7 @@
       {#if $delayed}
         <Spinner />
       {:else}
-        Change Password
+        {m.change_password()}
       {/if}
     </Form.Button>
   </form>

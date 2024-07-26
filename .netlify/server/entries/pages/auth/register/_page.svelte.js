@@ -1,6 +1,7 @@
-import { c as create_ssr_component, v as validate_component } from "../../../../chunks/ssr.js";
+import { c as create_ssr_component, d as add_attribute, v as validate_component } from "../../../../chunks/ssr.js";
 import { s as subscribe } from "../../../../chunks/lifecycle.js";
-import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index4.js";
+import { g as getTranslationFunctions } from "../../../../chunks/index2.js";
+import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index5.js";
 import { I as Input } from "../../../../chunks/input.js";
 import { t as toast } from "../../../../chunks/Toaster.svelte_svelte_type_style_lang.js";
 import "../../../../chunks/client.js";
@@ -12,7 +13,7 @@ import "devalue";
 import "memoize-weak";
 import { c as calculateStrength, p as progressColorFunction, P as Progress } from "../../../../chunks/passwordComplexity.js";
 import "dequal";
-import "../../../../chunks/index2.js";
+import "../../../../chunks/index4.js";
 const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let arePasswordsMathing;
   let strength;
@@ -38,6 +39,11 @@ const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots
       handleErrorToast(value.status, value.message);
     }
   });
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
   let $$settled;
   let $$rendered;
@@ -48,7 +54,7 @@ const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots
     arePasswordsMathing = $formData.password === $formData.confirmPassword;
     strength = calculateStrength($formData.password);
     progressColor = progressColorFunction(arePasswordsMathing, $formData.confirmPassword, strength);
-    $$rendered = `${$$result.head += `<!-- HEAD_svelte-1hsbyuy_START -->${$$result.title = `<title>Register an account</title>`, ""}<!-- HEAD_svelte-1hsbyuy_END -->`, ""} <div class="grid gap-2"><form method="POST" action="?/formSubmit" class="w-full grid gap-1"> ${validate_component(Form_field, "Form.Field").$$render($$result, { form, name: "email" }, {}, {
+    $$rendered = `${$$result.head += `<!-- HEAD_svelte-1hsbyuy_START -->${$$result.title = `<title>Register an account</title>`, ""}<!-- HEAD_svelte-1hsbyuy_END -->`, ""} <div class="grid gap-2"><form method="POST"${add_attribute("action", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`?/formSubmit`, void 0), 0)} class="w-full grid gap-1"> ${validate_component(Form_field, "Form.Field").$$render($$result, { form, name: "email" }, {}, {
       default: () => {
         return `${validate_component(Control, "Form.Control").$$render($$result, {}, {}, {
           default: ({ attrs }) => {

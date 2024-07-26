@@ -1,7 +1,8 @@
-import { d as compute_rest_props } from "./lifecycle.js";
-import { c as create_ssr_component, s as spread, a as escape_attribute_value, b as escape_object, d as add_attribute, v as validate_component } from "./ssr.js";
+import { e as compute_rest_props } from "./lifecycle.js";
+import { c as create_ssr_component, s as spread, b as escape_object, d as add_attribute, v as validate_component } from "./ssr.js";
 import "dequal";
-import { i as is_void, c as cn, b as buttonVariants } from "./index2.js";
+import { i as is_void, c as cn, b as buttonVariants } from "./index4.js";
+import { g as getTranslationFunctions } from "./index2.js";
 function getAttrs(builders) {
   const attrs = {};
   builders.forEach((builder) => {
@@ -20,6 +21,11 @@ const Button$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   let { builders = [] } = $$props;
   let { el = void 0 } = $$props;
   const attrs = { "data-button-root": "" };
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0) $$bindings.href(href);
   if ($$props.type === void 0 && $$bindings.type && type !== void 0) $$bindings.type(type);
   if ($$props.builders === void 0 && $$bindings.builders && builders !== void 0) $$bindings.builders(builders);
@@ -27,27 +33,94 @@ const Button$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   return `${builders && builders.length ? ` ${((tag) => {
     return tag ? `<${href ? "a" : "button"}${spread(
       [
-        {
-          type: escape_attribute_value(href ? void 0 : type)
-        },
-        { href: escape_attribute_value(href) },
-        { tabindex: "0" },
-        escape_object(getAttrs(builders)),
-        escape_object($$restProps),
-        escape_object(attrs)
+        escape_object(`${href ? "a" : "button"}` === "button" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "type": href ? void 0 : type,
+            href,
+            "tabindex": `0`,
+            ...getAttrs(builders),
+            ...$$restProps,
+            ...attrs
+          },
+          [{ attribute_name: "formaction" }]
+        ) : `${href ? "a" : "button"}` === "form" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "type": href ? void 0 : type,
+            href,
+            "tabindex": `0`,
+            ...getAttrs(builders),
+            ...$$restProps,
+            ...attrs
+          },
+          [{ attribute_name: "action" }]
+        ) : `${href ? "a" : "button"}` === "a" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "type": href ? void 0 : type,
+            href,
+            "tabindex": `0`,
+            ...getAttrs(builders),
+            ...$$restProps,
+            ...attrs
+          },
+          [
+            {
+              attribute_name: "href",
+              lang_attribute_name: "hreflang"
+            }
+          ]
+        ) : {
+          "type": href ? void 0 : type,
+          href,
+          "tabindex": `0`,
+          ...getAttrs(builders),
+          ...$$restProps,
+          ...attrs
+        })
       ],
       {}
     )}${add_attribute("this", el, 0)}>${is_void(tag) ? "" : `${slots.default ? slots.default({}) : ``}`}${is_void(tag) ? "" : `</${tag}>`}` : "";
   })(href ? "a" : "button")}` : ` ${((tag) => {
     return tag ? `<${href ? "a" : "button"}${spread(
       [
-        {
-          type: escape_attribute_value(href ? void 0 : type)
-        },
-        { href: escape_attribute_value(href) },
-        { tabindex: "0" },
-        escape_object($$restProps),
-        escape_object(attrs)
+        escape_object(`${href ? "a" : "button"}` === "button" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "type": href ? void 0 : type,
+            href,
+            "tabindex": `0`,
+            ...$$restProps,
+            ...attrs
+          },
+          [{ attribute_name: "formaction" }]
+        ) : `${href ? "a" : "button"}` === "form" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "type": href ? void 0 : type,
+            href,
+            "tabindex": `0`,
+            ...$$restProps,
+            ...attrs
+          },
+          [{ attribute_name: "action" }]
+        ) : `${href ? "a" : "button"}` === "a" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "type": href ? void 0 : type,
+            href,
+            "tabindex": `0`,
+            ...$$restProps,
+            ...attrs
+          },
+          [
+            {
+              attribute_name: "href",
+              lang_attribute_name: "hreflang"
+            }
+          ]
+        ) : {
+          "type": href ? void 0 : type,
+          href,
+          "tabindex": `0`,
+          ...$$restProps,
+          ...attrs
+        })
       ],
       {}
     )}${add_attribute("this", el, 0)}>${is_void(tag) ? "" : `${slots.default ? slots.default({}) : ``}`}${is_void(tag) ? "" : `</${tag}>`}` : "";

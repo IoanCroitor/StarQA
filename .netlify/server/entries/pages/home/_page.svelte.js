@@ -1,9 +1,15 @@
-import { c as create_ssr_component, v as validate_component } from "../../../chunks/ssr.js";
-import "../../../chunks/index2.js";
+import { c as create_ssr_component, v as validate_component, d as add_attribute } from "../../../chunks/ssr.js";
+import "../../../chunks/index4.js";
+import { g as getTranslationFunctions } from "../../../chunks/index2.js";
 import { C as Card, a as Card_content } from "../../../chunks/card-content.js";
 import { C as Card_header, a as Card_title, b as Card_description } from "../../../chunks/card-title.js";
 import "clsx";
 const PromotedWebsite = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   return `${validate_component(Card, "Card.Root").$$render($$result, {}, {}, {
     default: () => {
       return `${validate_component(Card_header, "Card.Header").$$render(
@@ -14,7 +20,7 @@ const PromotedWebsite = create_ssr_component(($$result, $$props, $$bindings, slo
         {},
         {
           default: () => {
-            return `<div class="space-y-4"><div class="w-full h-24 rounded-lg overflow-hidden" data-svelte-h="svelte-16t4if9"><img class="object-cover w-full h-full" alt="Space Race" src="https://cdn.mos.cms.futurecdn.net/iBN6fuoeYTJmqb7y4fjzDn-1200-80.jpg.webp"></div> <div class="px-1"><a href="https://printrestele.netlify.app/" target="_blank" class="space-y-1">${validate_component(Card_title, "Card.Title").$$render($$result, {}, {}, {
+            return `<div class="space-y-4"><div class="w-full h-24 rounded-lg overflow-hidden" data-svelte-h="svelte-16t4if9"><img class="object-cover w-full h-full" alt="Space Race" src="https://cdn.mos.cms.futurecdn.net/iBN6fuoeYTJmqb7y4fjzDn-1200-80.jpg.webp"></div> <div class="px-1"><a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`https://printrestele.netlify.app/`, void 0), 0)} target="_blank" class="space-y-1">${validate_component(Card_title, "Card.Title").$$render($$result, {}, {}, {
               default: () => {
                 return `Razboiul Rece Printre Stele`;
               }

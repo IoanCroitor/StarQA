@@ -1,6 +1,7 @@
-import { d as compute_rest_props } from "./lifecycle.js";
+import { e as compute_rest_props } from "./lifecycle.js";
 import { c as create_ssr_component, s as spread, a as escape_attribute_value, b as escape_object } from "./ssr.js";
-import { c as cn, i as is_void } from "./index2.js";
+import { c as cn, i as is_void } from "./index4.js";
+import { g as getTranslationFunctions } from "./index2.js";
 const Card_description = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["class"]);
   let { class: className = void 0 } = $$props;
@@ -33,15 +34,43 @@ const Card_title = create_ssr_component(($$result, $$props, $$bindings, slots) =
   let $$restProps = compute_rest_props($$props, ["class", "tag"]);
   let { class: className = void 0 } = $$props;
   let { tag = "h3" } = $$props;
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.class === void 0 && $$bindings.class && className !== void 0) $$bindings.class(className);
   if ($$props.tag === void 0 && $$bindings.tag && tag !== void 0) $$bindings.tag(tag);
   return `${((tag$1) => {
     return tag$1 ? `<${tag}${spread(
       [
-        {
-          class: escape_attribute_value(cn("font-semibold leading-none tracking-tight", className))
-        },
-        escape_object($$restProps)
+        escape_object(`${tag}` === "button" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "class": cn("font-semibold leading-none tracking-tight", className),
+            ...$$restProps
+          },
+          [{ attribute_name: "formaction" }]
+        ) : `${tag}` === "form" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "class": cn("font-semibold leading-none tracking-tight", className),
+            ...$$restProps
+          },
+          [{ attribute_name: "action" }]
+        ) : `${tag}` === "a" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            "class": cn("font-semibold leading-none tracking-tight", className),
+            ...$$restProps
+          },
+          [
+            {
+              attribute_name: "href",
+              lang_attribute_name: "hreflang"
+            }
+          ]
+        ) : {
+          "class": cn("font-semibold leading-none tracking-tight", className),
+          ...$$restProps
+        })
       ],
       {}
     )}>${is_void(tag$1) ? "" : `${slots.default ? slots.default({}) : ``}`}${is_void(tag$1) ? "" : `</${tag$1}>`}` : "";

@@ -1,6 +1,7 @@
-import { c as create_ssr_component, s as spread, a as escape_attribute_value, b as escape_object, d as add_attribute, f as each, v as validate_component, e as escape } from "../../../chunks/ssr.js";
-import { f as get_store_value, g as getContext, j as setContext, d as compute_rest_props, s as subscribe, l as split_css_unit, m as identity } from "../../../chunks/lifecycle.js";
-import { n as noop, e as isBrowser, f as isHTMLElement, w as withGet, g as isFunction, h as isElement, u as useEscapeKeydown, j as executeCallbacks, k as addEventListener, m as makeElement, s as styleToString, p as portalAttr, l as effect, d as addMeltEventListener, F as FIRST_LAST_KEYS, q as kbd, S as SELECTION_KEYS, r as isElementDisabled, t as safeOnMount, a as createElHelpers, v as disabledAttr, o as omit, i as is_void, c as cn, x as cubicOut, y as flyAndScale } from "../../../chunks/index2.js";
+import { c as create_ssr_component, s as spread, b as escape_object, d as add_attribute, a as escape_attribute_value, f as each, v as validate_component, e as escape } from "../../../chunks/ssr.js";
+import { g as getTranslationFunctions } from "../../../chunks/index2.js";
+import { f as get_store_value, g as getContext, b as setContext, e as compute_rest_props, s as subscribe, l as split_css_unit, m as identity } from "../../../chunks/lifecycle.js";
+import { n as noop, e as isBrowser, f as isHTMLElement, w as withGet, g as isFunction, h as isElement, u as useEscapeKeydown, j as executeCallbacks, k as addEventListener, m as makeElement, s as styleToString, p as portalAttr, l as effect, d as addMeltEventListener, F as FIRST_LAST_KEYS, q as kbd, S as SELECTION_KEYS, r as isElementDisabled, t as safeOnMount, a as createElHelpers, v as disabledAttr, o as omit, i as is_void, c as cn, x as cubicOut, y as flyAndScale } from "../../../chunks/index4.js";
 import { tv } from "tailwind-variants";
 import "clsx";
 import "dequal";
@@ -2333,6 +2334,11 @@ const Menu_item = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   const { elements: { item }, getAttrs } = getCtx$1();
   $$unsubscribe_item = subscribe(item, (value) => $item = value);
   createDispatcher();
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0) $$bindings.href(href);
   if ($$props.asChild === void 0 && $$bindings.asChild && asChild !== void 0) $$bindings.asChild(asChild);
   if ($$props.disabled === void 0 && $$bindings.disabled && disabled !== void 0) $$bindings.disabled(disabled);
@@ -2349,9 +2355,12 @@ const Menu_item = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   return `${asChild ? `${slots.default ? slots.default({ builder }) : ``}` : `${((tag) => {
     return tag ? `<${href ? "a" : "div"}${spread(
       [
-        { href: escape_attribute_value(href) },
-        escape_object(builder),
-        escape_object($$restProps)
+        escape_object(`${href ? "a" : "div"}` === "button" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes({ href, ...builder, ...$$restProps }, [{ attribute_name: "formaction" }]) : `${href ? "a" : "div"}` === "form" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes({ href, ...builder, ...$$restProps }, [{ attribute_name: "action" }]) : `${href ? "a" : "div"}` === "a" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes({ href, ...builder, ...$$restProps }, [
+          {
+            attribute_name: "href",
+            lang_attribute_name: "hreflang"
+          }
+        ]) : { href, ...builder, ...$$restProps })
       ],
       {}
     )}${add_attribute("this", el, 0)}>${is_void(tag) ? "" : `${slots.default ? slots.default({ builder }) : ``}`}${is_void(tag) ? "" : `</${tag}>`}` : "";
@@ -2505,6 +2514,11 @@ const Dialog_close = create_ssr_component(($$result, $$props, $$bindings, slots)
   $$unsubscribe_close = subscribe(close, (value) => $close = value);
   createDispatcher();
   const attrs = getAttrs("close");
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.asChild === void 0 && $$bindings.asChild && asChild !== void 0) $$bindings.asChild(asChild);
   if ($$props.el === void 0 && $$bindings.el && el !== void 0) $$bindings.el(el);
   builder = $close;
@@ -2512,7 +2526,19 @@ const Dialog_close = create_ssr_component(($$result, $$props, $$bindings, slots)
     Object.assign(builder, attrs);
   }
   $$unsubscribe_close();
-  return `${asChild ? `${slots.default ? slots.default({ builder }) : ``}` : `<button${spread([escape_object(builder), { type: "button" }, escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</button>`}`;
+  return `${asChild ? `${slots.default ? slots.default({ builder }) : ``}` : `<button${spread(
+    [
+      escape_object(paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+        {
+          ...builder,
+          "type": `button`,
+          ...$$restProps
+        },
+        [{ attribute_name: "formaction" }]
+      ))
+    ],
+    {}
+  )}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</button>`}`;
 });
 const Dialog_portal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let builder;
@@ -2634,6 +2660,11 @@ const Dialog_trigger = create_ssr_component(($$result, $$props, $$bindings, slot
   $$unsubscribe_trigger = subscribe(trigger, (value) => $trigger = value);
   createDispatcher();
   const attrs = getAttrs("trigger");
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.asChild === void 0 && $$bindings.asChild && asChild !== void 0) $$bindings.asChild(asChild);
   if ($$props.el === void 0 && $$bindings.el && el !== void 0) $$bindings.el(el);
   builder = $trigger;
@@ -2641,7 +2672,19 @@ const Dialog_trigger = create_ssr_component(($$result, $$props, $$bindings, slot
     Object.assign(builder, attrs);
   }
   $$unsubscribe_trigger();
-  return `${asChild ? `${slots.default ? slots.default({ builder }) : ``}` : `<button${spread([escape_object(builder), { type: "button" }, escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</button>`}`;
+  return `${asChild ? `${slots.default ? slots.default({ builder }) : ``}` : `<button${spread(
+    [
+      escape_object(paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+        {
+          ...builder,
+          "type": `button`,
+          ...$$restProps
+        },
+        [{ attribute_name: "formaction" }]
+      ))
+    ],
+    {}
+  )}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</button>`}`;
 });
 const Menu$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $idValues, $$unsubscribe_idValues;
@@ -2844,6 +2887,11 @@ const Menu_trigger = create_ssr_component(($$result, $$props, $$bindings, slots)
   $$unsubscribe_trigger = subscribe(trigger, (value) => $trigger = value);
   createDispatcher();
   const attrs = getAttrs("trigger");
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.asChild === void 0 && $$bindings.asChild && asChild !== void 0) $$bindings.asChild(asChild);
   if ($$props.id === void 0 && $$bindings.id && id !== void 0) $$bindings.id(id);
   if ($$props.el === void 0 && $$bindings.el && el !== void 0) $$bindings.el(el);
@@ -2857,7 +2905,19 @@ const Menu_trigger = create_ssr_component(($$result, $$props, $$bindings, slots)
     Object.assign(builder, attrs);
   }
   $$unsubscribe_trigger();
-  return `${asChild ? `${slots.default ? slots.default({ builder }) : ``}` : `<button${spread([escape_object(builder), { type: "button" }, escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</button>`}`;
+  return `${asChild ? `${slots.default ? slots.default({ builder }) : ``}` : `<button${spread(
+    [
+      escape_object(paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+        {
+          ...builder,
+          "type": `button`,
+          ...$$restProps
+        },
+        [{ attribute_name: "formaction" }]
+      ))
+    ],
+    {}
+  )}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</button>`}`;
 });
 /**
  * @license lucide-svelte v0.378.0 - ISC
@@ -2895,6 +2955,11 @@ const Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const mergeClasses = (...classes) => classes.filter((className, index, array) => {
     return Boolean(className) && array.indexOf(className) === index;
   }).join(" ");
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.name === void 0 && $$bindings.name && name2 !== void 0) $$bindings.name(name2);
   if ($$props.color === void 0 && $$bindings.color && color !== void 0) $$bindings.color(color);
   if ($$props.size === void 0 && $$bindings.size && size2 !== void 0) $$bindings.size(size2);
@@ -2919,7 +2984,17 @@ const Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {}
   )}>${each(iconNode, ([tag, attrs]) => {
     return `${((tag$1) => {
-      return tag$1 ? `<${tag}${spread([escape_object(attrs)], {})}>${is_void(tag$1) ? "" : ``}${is_void(tag$1) ? "" : `</${tag$1}>`}` : "";
+      return tag$1 ? `<${tag}${spread(
+        [
+          escape_object(`${tag}` === "button" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes({ ...attrs }, [{ attribute_name: "formaction" }]) : `${tag}` === "form" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes({ ...attrs }, [{ attribute_name: "action" }]) : `${tag}` === "a" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes({ ...attrs }, [
+            {
+              attribute_name: "href",
+              lang_attribute_name: "hreflang"
+            }
+          ]) : { ...attrs })
+        ],
+        {}
+      )}>${is_void(tag$1) ? "" : ``}${is_void(tag$1) ? "" : `</${tag$1}>`}` : "";
     })(tag)}`;
   })}${slots.default ? slots.default({}) : ``}</svg>`;
 });
@@ -2961,17 +3036,48 @@ const Badge = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { class: className = void 0 } = $$props;
   let { href = void 0 } = $$props;
   let { variant = "default" } = $$props;
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.class === void 0 && $$bindings.class && className !== void 0) $$bindings.class(className);
   if ($$props.href === void 0 && $$bindings.href && href !== void 0) $$bindings.href(href);
   if ($$props.variant === void 0 && $$bindings.variant && variant !== void 0) $$bindings.variant(variant);
   return `${((tag) => {
     return tag ? `<${href ? "a" : "span"}${spread(
       [
-        { href: escape_attribute_value(href) },
-        {
-          class: escape_attribute_value(cn(badgeVariants({ variant, className })))
-        },
-        escape_object($$restProps)
+        escape_object(`${href ? "a" : "span"}` === "button" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            href,
+            "class": cn(badgeVariants({ variant, className })),
+            ...$$restProps
+          },
+          [{ attribute_name: "formaction" }]
+        ) : `${href ? "a" : "span"}` === "form" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            href,
+            "class": cn(badgeVariants({ variant, className })),
+            ...$$restProps
+          },
+          [{ attribute_name: "action" }]
+        ) : `${href ? "a" : "span"}` === "a" ? paraglide_sveltekit_translate_attribute_pass_handle_attributes(
+          {
+            href,
+            "class": cn(badgeVariants({ variant, className })),
+            ...$$restProps
+          },
+          [
+            {
+              attribute_name: "href",
+              lang_attribute_name: "hreflang"
+            }
+          ]
+        ) : {
+          href,
+          "class": cn(badgeVariants({ variant, className })),
+          ...$$restProps
+        })
       ],
       {}
     )}>${is_void(tag) ? "" : `${slots.default ? slots.default({}) : ``}`}${is_void(tag) ? "" : `</${tag}>`}` : "";
@@ -3451,9 +3557,14 @@ const Menu = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 let finished_quizzes_length = 0;
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
-  return `${$$result.head += `<!-- HEAD_svelte-n3ior8_START -->${$$result.title = `<title>Home</title>`, ""}<!-- HEAD_svelte-n3ior8_END -->`, ""} <header><nav data-svelte-h="svelte-q6398h"><a href="/">Home</a></nav> <button data-svelte-h="svelte-hd9vso">Logout</button></header> ${`<div class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]"><div class="hidden border-r bg-muted/40 md:block"><div class="flex h-full max-h-screen flex-col gap-2"><div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6" data-svelte-h="svelte-e14o6p"><a href="/" class="flex items-center gap-2 font-semibold"><img src="/favicon.svg" alt="StarQA logo" class="h-6 w-6"> <span class="">StarQA</span></a></div> <div class="flex-1"><nav class="grid items-start px-2 text-sm font-medium lg:px-4"><a href="/home" class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">${validate_component(Home, "Home").$$render($$result, { class: "h-4 w-4" }, {}, {})}
-              Quizzes</a> <a href="/home/completed" class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">${validate_component(Shopping_cart, "ShoppingCart").$$render($$result, { class: "h-4 w-4" }, {}, {})}
+  return `${$$result.head += `<!-- HEAD_svelte-n3ior8_START -->${$$result.title = `<title>Home</title>`, ""}<!-- HEAD_svelte-n3ior8_END -->`, ""} <header><nav><a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`/`, void 0), 0)}>Home</a></nav> <button data-svelte-h="svelte-hd9vso">Logout</button></header> ${`<div class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]"><div class="hidden border-r bg-muted/40 md:block"><div class="flex h-full max-h-screen flex-col gap-2"><div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6"><a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`/`, void 0), 0)} class="flex items-center gap-2 font-semibold"><img src="/favicon.svg" alt="StarQA logo" class="h-6 w-6"> <span class="" data-svelte-h="svelte-hzdydz">StarQA</span></a></div> <div class="flex-1"><nav class="grid items-start px-2 text-sm font-medium lg:px-4"><a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`/home`, void 0), 0)} class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">${validate_component(Home, "Home").$$render($$result, { class: "h-4 w-4" }, {}, {})}
+              Quizzes</a> <a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`/home/completed`, void 0), 0)} class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">${validate_component(Shopping_cart, "ShoppingCart").$$render($$result, { class: "h-4 w-4" }, {}, {})}
               Completed
               ${validate_component(Badge, "Badge").$$render(
     $$result,
@@ -3489,7 +3600,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         }
       })} ${validate_component(Sheet_content, "Sheet.Content").$$render($$result, { side: "left", class: "flex flex-col" }, {}, {
         default: () => {
-          return `<nav class="grid gap-2 text-lg font-medium"><a href="/" class="flex items-center gap-2 text-lg font-semibold" data-svelte-h="svelte-1ddkt0u"><span class="sr-only">StarQA</span></a> <a href="/home" class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground" data-svelte-h="svelte-1u8ykxi">Quizzes</a> <a href="/home/completed" class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">Completed
+          return `<nav class="grid gap-2 text-lg font-medium"><a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`/`, void 0), 0)} class="flex items-center gap-2 text-lg font-semibold"><span class="sr-only" data-svelte-h="svelte-nxnogh">StarQA</span></a> <a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`/home`, void 0), 0)} class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">Quizzes</a> <a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`/home/completed`, void 0), 0)} class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">Completed
                 ${validate_component(Badge, "Badge").$$render(
             $$result,
             {

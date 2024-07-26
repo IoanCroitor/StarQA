@@ -1,4 +1,4 @@
-import { w as withGet } from "./index2.js";
+import { w as withGet } from "./index4.js";
 import { w as writable } from "./index3.js";
 const overridable = (_store, onChange) => {
   const store = withGet(_store);

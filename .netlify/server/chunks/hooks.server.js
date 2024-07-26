@@ -1,3 +1,4 @@
+import { i as i18n } from "./i18n.js";
 import { createServerClient } from "@supabase/ssr";
 import { r as redirect } from "./index.js";
 import { P as PUBLIC_SUPABASE_URL, a as PUBLIC_SUPABASE_ANON_KEY } from "./public.js";
@@ -81,17 +82,12 @@ const authGuard = async ({ event, resolve }) => {
   if (!event.locals.session && event.url.pathname.startsWith("/home")) {
     redirect(303, "/auth/login");
   }
-  await event.locals.supabase.auth.onAuthStateChange((event2, session2) => {
-    if (event2 === "PASSWORD_RECOVERY") {
-      event2.cookies.set("password_recovery", "true", { path: "/" });
-    }
-  });
   if (event.locals.session && (event.url.pathname === "/auth/login" || event.url.pathname === "/auth/register")) {
     redirect(303, "/home");
   }
   return resolve(event);
 };
-const handle = sequence(supabase, authGuard);
+const handle = sequence(supabase, authGuard, i18n.handle());
 export {
   handle
 };

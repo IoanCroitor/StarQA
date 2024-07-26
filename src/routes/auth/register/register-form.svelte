@@ -16,19 +16,20 @@
   } from '$lib/passwordComplexity'
   import { Progress } from '@/components/ui/progress'
   import { Dialog } from 'bits-ui'
+  import { handleToast } from '@/handleToast'
 
-  function handleErrorToast(status: number, error: string) {
-    toast.error(error, {
-      description: 'Error Code: ' + status,
-      action: {
-        label: 'Close',
-        onClick: () =>
-          console.info(
-            'Closed error message: ' + error + ' with the status: ' + status,
-          ),
-      },
-    })
-  }
+  // function handleErrorToast(status: number, error: string) {
+  //   toast.error(error, {
+  //     description: 'Error Code: ' + status,
+  //     action: {
+  //       label: 'Close',
+  //       onClick: () =>
+  //         console.info(
+  //           'Closed error message: ' + error + ' with the status: ' + status,
+  //         ),
+  //     },
+  //   })
+  // }
 
   export let data: SuperValidated<Infer<RegisterSchema>>
 
@@ -40,7 +41,7 @@
 
   message.subscribe((value) => {
     if (value) {
-      handleErrorToast(value.status, value.message)
+      handleToast('error', value.status, value.message)
     }
   })
 

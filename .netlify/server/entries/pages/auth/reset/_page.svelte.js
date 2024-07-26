@@ -1,6 +1,7 @@
-import { c as create_ssr_component, v as validate_component } from "../../../../chunks/ssr.js";
+import { c as create_ssr_component, d as add_attribute, v as validate_component } from "../../../../chunks/ssr.js";
 import { s as subscribe } from "../../../../chunks/lifecycle.js";
-import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index4.js";
+import { g as getTranslationFunctions } from "../../../../chunks/index2.js";
+import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index5.js";
 import { I as Input } from "../../../../chunks/input.js";
 import { t as toast } from "../../../../chunks/Toaster.svelte_svelte_type_style_lang.js";
 import "../../../../chunks/client.js";
@@ -34,6 +35,11 @@ const Password_reset_form = create_ssr_component(($$result, $$props, $$bindings,
       handleErrorToast(value.status, value.message);
     }
   });
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
   let $$settled;
   let $$rendered;
@@ -41,7 +47,7 @@ const Password_reset_form = create_ssr_component(($$result, $$props, $$bindings,
   do {
     $$settled = true;
     $$result.head = previous_head;
-    $$rendered = `<div class="grid gap-2"><form method="POST" action="?/formSubmit" class="w-full grid gap-1"> ${validate_component(Form_field, "Form.Field").$$render($$result, { form, name: "email" }, {}, {
+    $$rendered = `<div class="grid gap-2"><form method="POST"${add_attribute("action", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`?/formSubmit`, void 0), 0)} class="w-full grid gap-1"> ${validate_component(Form_field, "Form.Field").$$render($$result, { form, name: "email" }, {}, {
       default: () => {
         return `${validate_component(Control, "Form.Control").$$render($$result, {}, {}, {
           default: ({ attrs }) => {

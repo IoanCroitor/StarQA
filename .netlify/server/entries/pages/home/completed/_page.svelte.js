@@ -1,6 +1,7 @@
 import { s as subscribe } from "../../../../chunks/lifecycle.js";
 import { c as create_ssr_component, v as validate_component, d as add_attribute, e as escape, f as each } from "../../../../chunks/ssr.js";
-import "../../../../chunks/index2.js";
+import "../../../../chunks/index4.js";
+import { g as getTranslationFunctions } from "../../../../chunks/index2.js";
 import { C as Card, a as Card_content } from "../../../../chunks/card-content.js";
 import { C as Card_header, a as Card_title, b as Card_description } from "../../../../chunks/card-title.js";
 import "clsx";
@@ -11,6 +12,11 @@ const Card_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { description } = $$props;
   let { cover_image } = $$props;
   console.log(`https://starqa.pockethost.io/api/files/collections/quizzes/${id}/${cover_image}`);
+  const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
+  const [
+    paraglide_sveltekit_translate_attribute_pass_translateAttribute,
+    paraglide_sveltekit_translate_attribute_pass_handle_attributes
+  ] = paraglide_sveltekit_translate_attribute_pass_translationFunctions;
   if ($$props.id === void 0 && $$bindings.id && id !== void 0) $$bindings.id(id);
   if ($$props.title === void 0 && $$bindings.title && title !== void 0) $$bindings.title(title);
   if ($$props.description === void 0 && $$bindings.description && description !== void 0) $$bindings.description(description);
@@ -25,7 +31,7 @@ const Card_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         {},
         {
           default: () => {
-            return `<div class="space-y-4"><div class="h-24 rounded-lg overflow-hidden w-full"><img class="object-cover" alt="Space Race"${add_attribute("src", `https://starqa.pockethost.io/api/files/quizzes/${id}/${cover_image}`, 0)}></div> <div class="px-1"><a${add_attribute("href", `/home/${id}`, 0)} target="_blank" class="space-y-1">${validate_component(Card_title, "Card.Title").$$render($$result, {}, {}, {
+            return `<div class="space-y-4"><div class="h-24 rounded-lg overflow-hidden w-full"><img class="object-cover" alt="Space Race"${add_attribute("src", `https://starqa.pockethost.io/api/files/quizzes/${id}/${cover_image}`, 0)}></div> <div class="px-1"><a${add_attribute("href", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`/home/${id}`, void 0), 0)} target="_blank" class="space-y-1">${validate_component(Card_title, "Card.Title").$$render($$result, {}, {}, {
               default: () => {
                 return `${escape(title)}`;
               }

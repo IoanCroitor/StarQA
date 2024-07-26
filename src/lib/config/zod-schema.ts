@@ -1,58 +1,65 @@
-//This is the Zod form validation schema
-
 import { z } from 'zod'
+import * as m from '$lib/paraglide/messages'
 
 export const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  email: z
+    .string({ message: m.must_be_a_string() })
+    .email({ message: m.must_be_a_valid_email() }),
+  password: z
+    .string({ message: m.p_must_be_a_string() })
+    .min(8, { message: m.p_must_be_at_least_8_characters() }),
 })
 
 export const registerSchema = z
   .object({
-    email: z.string().email(),
+    email: z
+      .string({ message: m.must_be_a_string() })
+      .email({ message: m.must_be_a_valid_email() }),
     password: z
-      .string()
-      .min(8, { message: 'Password must be at least 8 characters long' })
+      .string({ message: m.p_must_be_a_string() })
+      .min(8, { message: m.p_must_be_at_least_8_characters() })
       .regex(/[a-z]/, {
-        message: 'Password must contain at least one lowercase letter',
+        message: m.p_must_contain_at_least_one_lowercase_letter(),
       })
       .regex(/[A-Z]/, {
-        message: 'Password must contain at least one uppercase letter',
+        message: m.p_must_contain_at_least_one_uppercase_letter(),
       })
-      .regex(/\d/, { message: 'Password must contain at least one number' })
+      .regex(/\d/, { message: m.p_must_contain_at_least_one_number() })
       .regex(/[\W_]/, {
-        message: 'Password must contain at least one special character',
+        message: m.p_must_contain_at_least_one_special_character(),
       }),
-    confirmPassword: z.string(),
+    confirmPassword: z.string({ message: m.must_be_a_string() }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
+    message: m.passwords_dont_match(),
     path: ['confirmPassword'],
   })
 
 export const passwordResetSchema = z.object({
-  email: z.string().email(),
+  email: z
+    .string({ message: m.must_be_a_string() })
+    .email({ message: m.must_be_a_valid_email() }),
 })
 
 export const passwordConfirmSchema = z
   .object({
     password: z
-      .string()
-      .min(8, { message: 'Password must be at least 8 characters long' })
+      .string({ message: m.p_must_be_a_string() })
+      .min(8, { message: m.p_must_be_at_least_8_characters() })
       .regex(/[a-z]/, {
-        message: 'Password must contain at least one lowercase letter',
+        message: m.p_must_contain_at_least_one_lowercase_letter(),
       })
       .regex(/[A-Z]/, {
-        message: 'Password must contain at least one uppercase letter',
+        message: m.p_must_contain_at_least_one_uppercase_letter(),
       })
-      .regex(/\d/, { message: 'Password must contain at least one number' })
+      .regex(/\d/, { message: m.p_must_contain_at_least_one_number() })
       .regex(/[\W_]/, {
-        message: 'Password must contain at least one special character',
+        message: m.p_must_contain_at_least_one_special_character(),
       }),
-    confirmPassword: z.string(),
+    confirmPassword: z.string({ message: m.must_be_a_string() }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
+    message: m.passwords_dont_match(),
     path: ['confirmPassword'],
   })
 

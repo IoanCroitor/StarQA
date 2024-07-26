@@ -1,3 +1,10 @@
 {
-    "$schema": "https://inlang.com/schema/inlang-message-format"
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "hello_world": "Salut Lume!",
+    "tailored_just_for_you": "Personalizat doar pentru tine",
+    "login": "Log in",
+    "register": "Inregistreaza-te",
+    "stellar": "Stelar",
+    "quizzes": "Chestionare",
+    "crafting_stellar_quizzes": "Creaza chestionare stelare"
 }

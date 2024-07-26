@@ -10,19 +10,8 @@
   import { zodClient } from 'sveltekit-superforms/adapters'
   import { loginSchema, type LoginSchema } from '$lib/config/zod-schema'
   import Spinner from '@/assets/Spinner.svelte'
-
-  function handleErrorToast(status: number, error: string) {
-    toast.error(error, {
-      description: 'Error Code: ' + status,
-      action: {
-        label: 'Close',
-        onClick: () =>
-          console.info(
-            'Closed error message: ' + error + ' with the status: ' + status,
-          ),
-      },
-    })
-  }
+  import * as m from '$lib/paraglide/messages'
+  import { handleToast } from '@/handleToast'
 
   export let data: SuperValidated<Infer<LoginSchema>>
 
@@ -34,13 +23,13 @@
 
   message.subscribe((value) => {
     if (value) {
-      handleErrorToast(value.status, value.message)
+      handleToast('error', value.status, value.message)
     }
   })
 </script>
 
 <svelte:head>
-  <title>Login Portal</title>
+  <title>{m.login_portal()}</title>
 </svelte:head>
 
 <div class="grid gap-2">
@@ -53,7 +42,7 @@
     <!-- Email -->
     <Form.Field {form} name="email">
       <Form.Control let:attrs>
-        <Form.Label class="font-semibold">Email</Form.Label>
+        <Form.Label class="font-semibold">{m.email()}</Form.Label>
         <Input
           disabled={$delayed}
           autocapitalize="none"
@@ -71,13 +60,13 @@
     <!-- Password -->
     <Form.Field {form} name="password">
       <Form.Control let:attrs>
-        <Form.Label class="font-semibold">Password</Form.Label>
+        <Form.Label class="font-semibold">{m.password()}</Form.Label>
         <Input
           {...attrs}
           bind:value={$formData.password}
           type="password"
           disabled={$delayed}
-          placeholder="Enter your password"
+          placeholder={m.enter_your_password()}
         />
       </Form.Control>
       <Form.FieldErrors />
@@ -88,11 +77,11 @@
       {#if $delayed}
         <Spinner />
       {:else}
-        Login
+        {m.login()}
       {/if}
     </Form.Button>
   </form>
   <a href="/auth/reset" class="mx-auto text-sm underline text-foreground"
-    >Forgot password?</a
+    >{m.forgot_password()}</a
   >
 </div>
