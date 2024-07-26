@@ -6,7 +6,6 @@
   export let description: string
   export let cover_image: string
   export let join_code: string
-  export let updated: string
 
   console.log(
     `https://starqa.pockethost.io/api/files/collections/quizzes/${id}/${cover_image}`,

@@ -3,10 +3,12 @@
   import { Button, type Props } from '$lib/components/ui/button/index'
   import ContinueWithGoogle from './ContinueWithGoogle.svelte'
   import { onMount } from 'svelte'
-  import { getUser } from '@/pocketbase'
+
   import { goto } from '$app/navigation'
+  import { page } from '$app/stores'
 
   export let data: any
+
   let photo: {
     image_id: string
     image_description: string
@@ -32,16 +34,14 @@
 
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
 
-  let route = 'login'
-  let buttontext = 'Register'
+  let fullRoute: string = $page.url.pathname
+  let route = fullRoute.split('/').pop()
+
+  let buttontext = route === 'login' ? 'Register' : 'Sign in'
   function changeRoute() {
     route = route === 'login' ? 'register' : 'login'
     buttontext = route === 'login' ? 'Register' : 'Sign in'
   }
-
-  onMount(() => {
-    if (getUser()) goto('/home')
-  })
 </script>
 
 <div

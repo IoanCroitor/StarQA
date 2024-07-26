@@ -2,10 +2,9 @@
   import { goto } from '$app/navigation'
   import { Button } from '$lib/components/ui/button/index.js'
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js'
-  import { getUser, logout } from '@/pocketbase'
+
   import { onMount } from 'svelte'
 
-  
   let data = {
     model: {
       username: 'loading',
@@ -13,14 +12,15 @@
     },
   }
   onMount(() => {
-    data = getUser()
+    // data = getUser()
   })
 
   function handleLogout() {
-    logout()
-    goto('/auth/login')
+    // logout()
+    // goto('/auth/login')
   }
 </script>
+
 <DropdownMenu.Root>
   <DropdownMenu.Trigger asChild let:builder>
     <Button

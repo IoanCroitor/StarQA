@@ -1,8 +1,7 @@
 <script lang="ts">
   import { Button } from '@/components/ui/button'
   import PromotedWebsite from './PromotedWebsite.svelte'
-  import Card from './Card.svelte'
-  import { GetAllRecords, GetUserProp, getUser } from '@/pocketbase'
+
   import { onMount } from 'svelte'
   import { writable } from 'svelte/store'
 
@@ -18,16 +17,15 @@
   const records = writable<Quiz[]>([])
 
   async function fetchRecords() {
-    let recordsupdate: Quiz[] = []
-    try {
-      const fetchedRecords = await GetAllRecords('quizzes')
-
-      recordsupdate = fetchedRecords as any
-    } catch (error) {
-      console.error(`Error fetching quiz:`, error)
-    }
-    records.set(recordsupdate)
-    console.log(records)
+    // let recordsupdate: Quiz[] = []
+    // try {
+    //   const fetchedRecords = await GetAllRecords('quizzes')
+    //   recordsupdate = fetchedRecords as any
+    // } catch (error) {
+    //   console.error(`Error fetching quiz:`, error)
+    // }
+    // records.set(recordsupdate)
+    // console.log(records)
   }
 
   onMount(fetchRecords)

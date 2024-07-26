@@ -1,0 +1,53 @@
+
+<div class="">
+  <h2 class="text-sm font-bold text-red-500 mx-auto">{errorMessage}</h2>
+  <form on:submit={onSubmit}>
+    <div class="grid gap-2">
+      <div class="grid gap-1">
+        <div class="grid gap-2">
+          <Label for="email">Email</Label>
+          <Input
+            id="email"
+            placeholder="ioan@example.com"
+            type="email"
+            autocapitalize="none"
+            autocomplete="email"
+            autocorrect="off"
+            disabled={isLoading}
+            bind:value={email}
+          />
+        </div>
+        <div class="grid gap-2 pt-2">
+          <Label for="password">Password</Label>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Password"
+            disabled={isLoading}
+            bind:value={password}
+          />
+        </div>
+        <div class="grid gap-2">
+          <Label for="password" class="sr-only">Confirm Password</Label>
+          <Input
+            id="passwordconfirm"
+            type="password"
+            placeholder="Confirm Password"
+            bind:value={passwordConfirm}
+            disabled={isLoading}
+          />
+        </div>
+        <div class="w-full mx-1 mt-2 mb-1">
+          <Progress value={strength} max={100} class={` ${progressColor} `} />
+        </div>
+      </div>
+      <Button type="submit" disabled={isLoading}>
+        {#if isLoading}
+          <LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
+          <!-- <Icons.spinner class="mr-2 h-4 w-4 animate-spin" /> -->
+        {/if}
+        Sign Up with Email
+      </Button>
+    </div>
+  </form>
+</div>
