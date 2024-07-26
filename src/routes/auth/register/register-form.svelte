@@ -13,8 +13,7 @@
   import {
     calculateStrength,
     progressColorFunction,
-    removeAfterAt,
-  } from './passwordComplexity'
+  } from '$lib/passwordComplexity'
   import { Progress } from '@/components/ui/progress'
   import { Dialog } from 'bits-ui'
 
@@ -127,9 +126,10 @@
       {#if $delayed}
         <Spinner />
       {:else}
-        Authentificate!
+        Register an account
       {/if}
     </Form.Button>
   </form>
-  <SuperDebug data={formData} />
+  <!-- Debug  -->
+  <!-- <SuperDebug data={formData} /> -->
 </div>

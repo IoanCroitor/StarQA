@@ -88,8 +88,11 @@
       {#if $delayed}
         <Spinner />
       {:else}
-        Authentificate!
+        Login
       {/if}
     </Form.Button>
   </form>
+  <a href="/auth/reset" class="mx-auto text-sm underline text-foreground"
+    >Forgot password?</a
+  >
 </div>

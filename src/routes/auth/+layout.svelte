@@ -75,8 +75,8 @@
 
     <div class="relative flex z-20 mt-auto justify-between">
       <blockquote class="">
-        <p class="text-xl">&ldquo;{randomQuote.text}&rdquo;</p>
-        <footer class="text-sm">{randomQuote.author}</footer>
+        <p class="text-xl">&ldquo;{randomQuote?.text}&rdquo;</p>
+        <footer class="text-sm">{randomQuote?.author}</footer>
       </blockquote>
 
       <blockquote class="text-primary/70 text-right">
@@ -108,9 +108,10 @@
     <div
       class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]"
     >
-      <h1 class="text-4xl font-bold tracking-tight capitalize">{route}</h1>
       <slot />
-      <ContinueWithGoogle />
+
+      <!-- Google auth not working cors issue -->
+      <!-- <ContinueWithGoogle /> -->
       <p class="px-8 text-center text-sm text-muted-foreground">
         By clicking continue, you agree to our
         <a

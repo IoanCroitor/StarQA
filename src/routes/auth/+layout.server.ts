@@ -1,9 +1,4 @@
-// src/routes/+layout.server.js
-import { redirect } from '@sveltejs/kit'
-
 import { getRandomImage } from '../_components/unsplash'
-
-import { goto } from '$app/navigation'
 
 export const load = async () => {
   // Fetch random image
