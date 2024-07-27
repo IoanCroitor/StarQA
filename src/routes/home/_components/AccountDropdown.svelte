@@ -1,23 +1,19 @@
 <script lang="ts">
-  import { goto } from '$app/navigation'
   import { Button } from '$lib/components/ui/button/index.js'
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js'
 
   import { onMount } from 'svelte'
+  export let data
 
-  let data = {
-    model: {
-      username: 'loading',
-      email: 'loading',
-    },
-  }
   onMount(() => {
     // data = getUser()
   })
 
-  function handleLogout() {
-    // logout()
-    // goto('/auth/login')
+  async function handleLogout() {
+    // const { error } = await supabase.auth.signOut()
+    // if (error) {
+    //   handleToast('error', 400, error as unknown as string)
+    // }
   }
 </script>
 
@@ -32,7 +28,7 @@
       <img
         alt="User Avatar"
         class="w-full h-full object-cover"
-        src={`https://kawaii-avatar.now.sh/api/avatar?username=${data.model.username}&mood=blissful,happy,excited&background=%2300000`}
+        src={`https://kawaii-avatar.now.sh/api/avatar?username=${data?.user?.email}&mood=blissful,happy,excited&background=%2300000`}
       />
       <span class="sr-only">Toggle user menu</span>
     </Button>
@@ -41,7 +37,7 @@
     <DropdownMenu.Label>
       <div class="flex flex-col font-normal">
         <p class="text-lg font-semibold">Hello again!</p>
-        <p class="text-primary/70">{data.model.email}</p>
+        <p class="text-primary/70">{data?.user?.email}</p>
       </div>
     </DropdownMenu.Label>
 
@@ -49,7 +45,7 @@
     <DropdownMenu.Item href="https://github.com/IoanCroitor" target="_blank"
       >Support</DropdownMenu.Item
     >
-    <DropdownMenu.Item class="text-red-500" on:click={handleLogout}
+    <DropdownMenu.Item class="text-red-500" href="/logout"
       >Logout</DropdownMenu.Item
     >
   </DropdownMenu.Content>

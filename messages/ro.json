@@ -6,5 +6,7 @@
     "register": "Inregistreaza-te",
     "stellar": "Stelar",
     "quizzes": "Chestionare",
-    "crafting_stellar_quizzes": "Creaza chestionare stelare"
+    "crafting_stellar_quizzes": "Creaza chestionare stelare",
+    "error_loading_image_from": "Eroare la încărcarea imaginii de la {author}",
+    "on": "pe {name}"
 }

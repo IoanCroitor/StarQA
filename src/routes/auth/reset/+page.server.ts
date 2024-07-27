@@ -3,7 +3,7 @@ import { message, superValidate, type ErrorStatus } from 'sveltekit-superforms'
 import { zod } from 'sveltekit-superforms/adapters'
 import type { Actions, PageServerLoad } from './$types'
 import { passwordResetSchema } from '$lib/config/zod-schema'
-
+import * as m from '$lib/paraglide/messages'
 export const load: PageServerLoad = async () => {
   return {
     form: await superValidate(zod(passwordResetSchema)),
@@ -34,7 +34,7 @@ export const actions: Actions = {
     } else {
       return message(form, {
         status: 200,
-        message: "We've sent you an email to reset your password",
+        message: m.we_have_sent_you_an_email_to_reset_your_password(),
       })
     }
   },

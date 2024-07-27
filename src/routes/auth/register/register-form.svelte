@@ -17,6 +17,7 @@
   import { Progress } from '@/components/ui/progress'
   import { Dialog } from 'bits-ui'
   import { handleToast } from '@/handleToast'
+  import * as m from '$lib/paraglide/messages'
 
   // function handleErrorToast(status: number, error: string) {
   //   toast.error(error, {
@@ -57,7 +58,7 @@
 </script>
 
 <svelte:head>
-  <title>Register an account</title>
+  <title>{m.register_an_account()}</title>
 </svelte:head>
 
 <div class="grid gap-2">
@@ -70,7 +71,7 @@
     <!-- Email -->
     <Form.Field {form} name="email">
       <Form.Control let:attrs>
-        <Form.Label class="font-semibold">Email</Form.Label>
+        <Form.Label class="font-semibold">{m.email()}</Form.Label>
         <Input
           disabled={$delayed}
           autocapitalize="none"
@@ -79,7 +80,7 @@
           {...attrs}
           bind:value={$formData.email}
           type="email"
-          placeholder="Enter your email"
+          placeholder={m.enter_your_email()}
         />
       </Form.Control>
       <Form.FieldErrors />
@@ -88,13 +89,13 @@
     <!-- Password -->
     <Form.Field {form} name="password">
       <Form.Control let:attrs>
-        <Form.Label class="font-semibold">Password</Form.Label>
+        <Form.Label class="font-semibold">{m.password()}</Form.Label>
         <Input
           {...attrs}
           bind:value={$formData.password}
           type="password"
           disabled={$delayed}
-          placeholder="Enter your password"
+          placeholder={m.enter_your_password()}
         />
       </Form.Control>
       <Form.FieldErrors />
@@ -103,13 +104,13 @@
     </Form.Field>
     <Form.Field {form} name="password">
       <Form.Control let:attrs>
-        <Form.Label class="font-semibold">Confirm password</Form.Label>
+        <Form.Label class="font-semibold">{m.confirm_password()}</Form.Label>
         <Input
           {...attrs}
           bind:value={$formData.confirmPassword}
           type="password"
           disabled={$delayed}
-          placeholder="Enter your password"
+          placeholder={m.enter_your_password()}
         />
       </Form.Control>
     </Form.Field>
@@ -127,7 +128,7 @@
       {#if $delayed}
         <Spinner />
       {:else}
-        Register an account
+        {m.register_an_account()}
       {/if}
     </Form.Button>
   </form>

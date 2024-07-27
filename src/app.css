@@ -125,6 +125,7 @@
 
     --radius: 0.5rem;
     --pop: hsl(261, 100%, 55%);
+    --pop-foreground: hsl(261, 100%, 25%);
   }
 
   .dark {
@@ -156,7 +157,8 @@
     --destructive-foreground: 210 40% 98%;
 
     --ring: hsl(212.7, 26.8%, 83.9);
-    --pop: hsl(261, 100%, 55%);
+    --pop: hsl(261, 100%, 50%);
+    --pop-foreground: hsl(261, 100%, 29%);
   }
 }
 

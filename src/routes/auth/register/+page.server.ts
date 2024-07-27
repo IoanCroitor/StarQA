@@ -21,7 +21,7 @@ export const actions: Actions = {
     }
     const email = form.data.email as string
     const password = form.data.password as string
-    const { error: supabaseError } = await supabase.auth.signUp({
+    const { error: supabaseError, data } = await supabase.auth.signUp({
       email,
       password,
     })
@@ -31,7 +31,6 @@ export const actions: Actions = {
       const status = supabaseError.status as number
       return message(form, { status, message: supabaseError.message })
     } else {
-      console.log('success')
       throw redirect(303, '/home')
     }
   },

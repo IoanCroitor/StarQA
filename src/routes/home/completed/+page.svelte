@@ -5,7 +5,6 @@
 
   // Import writable store from Svelte
   import { writable } from 'svelte/store'
-
   interface Quiz {
     id: string
     title: string

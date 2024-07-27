@@ -4,7 +4,7 @@
   import { goto } from '$app/navigation'
   import Spinner from '@/assets/Spinner.svelte'
   import { toast } from 'svelte-sonner'
-
+  import * as m from '$lib/paraglide/messages'
   let isLoading = false
   let errorMessage = ''
 
@@ -79,7 +79,7 @@
   </div>
   <div class="relative flex justify-center text-xs uppercase">
     <span class="bg-background px-2 text-muted-foreground">
-      Or continue with
+      {m.or_continue_with()}
     </span>
   </div>
 </div>

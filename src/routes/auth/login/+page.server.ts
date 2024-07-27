@@ -21,10 +21,11 @@ export const actions: Actions = {
     }
     const email = form.data.email as string
     const password = form.data.password as string
-    const { error: supabaseError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
+    const { error: supabaseError, data } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
 
     if (supabaseError) {
       console.log(supabaseError)

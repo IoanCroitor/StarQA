@@ -13,6 +13,7 @@
     type PasswordResetSchema,
   } from '$lib/config/zod-schema'
   import Spinner from '@/assets/Spinner.svelte'
+  import * as m from '$lib/paraglide/messages'
 
   function handleErrorToast(status: number, error: string) {
     toast.error(error, {
@@ -52,7 +53,7 @@
     <!-- Email -->
     <Form.Field {form} name="email">
       <Form.Control let:attrs>
-        <Form.Label class="font-semibold">Email</Form.Label>
+        <Form.Label class="font-semibold">{m.email()}</Form.Label>
         <Input
           disabled={$delayed}
           autocapitalize="none"
@@ -61,7 +62,7 @@
           {...attrs}
           bind:value={$formData.email}
           type="email"
-          placeholder="Enter your email"
+          placeholder={m.enter_your_email()}
         />
       </Form.Control>
       <Form.FieldErrors />
@@ -71,7 +72,7 @@
       {#if $delayed}
         <Spinner />
       {:else}
-        Reset Password
+        {m.reset_password()}
       {/if}
     </Form.Button>
   </form>

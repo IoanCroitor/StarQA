@@ -1,8 +1,5 @@
 <script>
   import Content from './_components/Content.svelte'
-
-
 </script>
 
-
-<Content />
+<h1>hello nfbawehb</h1>

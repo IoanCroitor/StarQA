@@ -6,6 +6,7 @@
 
   import { goto } from '$app/navigation'
   import { page } from '$app/stores'
+  import * as m from '$lib/paraglide/messages'
 
   export let data: any
 
@@ -84,7 +85,7 @@
           <p class="text-sm truncate">
             <span class="text-right">{photo.image_author} </span><a
               class=""
-              href={photo.image_url}>on Unsplash</a
+              href={photo.image_url}>{m.on({ name: 'Unsplash' })}</a
             >
           </p>
           <footer class="text-xs truncate max-w-40">
@@ -93,12 +94,12 @@
         {:else}
           <p class="text-sm truncate">
             <span class="">Error loading image from </span><a
-              class=""
               href="unsplash.com">Unsplash</a
             >
+            {m.error_loading_image_from({ author: 'Unsplash' })}
           </p>
           <footer class="text-xs truncate max-w-40">
-            Error fetching author
+            {m.error_fetching_author()}
           </footer>
         {/if}
       </blockquote>
@@ -113,19 +114,19 @@
       <!-- Google auth not working cors issue -->
       <!-- <ContinueWithGoogle /> -->
       <p class="px-8 text-center text-sm text-muted-foreground">
-        By clicking continue, you agree to our
+        {m.by_continuing_you_agree_to_the()}
         <a
           href="/terms"
           class="underline underline-offset-4 hover:text-primary"
         >
-          Terms of Service
+          {m.terms_of_service()}
         </a>
-        and
+        {m.and()}
         <a
           href="/privacy"
           class="underline underline-offset-4 hover:text-primary"
         >
-          Privacy Policy
+          {m.privacy_policy()}
         </a>
         .
       </p>
