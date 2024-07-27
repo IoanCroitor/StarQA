@@ -110,7 +110,7 @@
           <g style:color="hsl(185, 62%, 45%)">
             <g fill="currentColor">
               <g
-                in:scale={{
+                in:scale|global={{
                   duration: durations.in,
                   delay: delays.inAnswer,
                 }}
@@ -120,7 +120,7 @@
             </g>
             <g fill="none" stroke="currentColor" stroke-width="1.5">
               <g
-                in:scale={{
+                in:scale|global={{
                   duration: durations.in,
                   delay: delays.inAnswer + 100,
                 }}
@@ -130,7 +130,7 @@
             </g>
 
             <g
-              in:fade={{
+              in:fade|global={{
                 duration: durations.in,
                 delay: delays.inAnswer + durations.in,
               }}
@@ -165,7 +165,7 @@
           <g style:color="hsl(205, 87%, 29%)">
             <g fill="currentColor">
               <g
-                in:scale={{
+                in:scale|global={{
                   duration: durations.in,
                   delay: delays.inGuess,
                 }}
@@ -175,7 +175,7 @@
             </g>
             <g fill="none" stroke="currentColor" stroke-width="1.5">
               <g
-                in:scale={{
+                in:scale|global={{
                   duration: durations.in,
                   delay: delays.inGuess + 100,
                 }}
@@ -184,7 +184,7 @@
               </g>
             </g>
             <g
-              in:fade={{
+              in:fade|global={{
                 duration: durations.in,
                 delay: delays.inGuess + durations.in,
               }}
@@ -229,7 +229,7 @@
           <g style:pointer-events="none">
             <g transform="translate({x1} 0)">
               <g style:color="hsl(205, 87%, 29%)">
-                <g out:scale={{ duration: durations.out }}>
+                <g out:scale|global={{ duration: durations.out }}>
                   <g transform="translate(0 -28)">
                     <g
                       fill="currentColor"
@@ -273,7 +273,7 @@
   </svg>
 
   {#if isRevealed}
-    <p class="text-slate-200" in:fade={{ delay: delays.details }}>
+    <p class="text-slate-200" in:fade|global={{ delay: delays.details }}>
       {details}
     </p>
   {:else}
