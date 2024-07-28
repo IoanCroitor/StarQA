@@ -1,114 +1,129 @@
 <script lang="ts">
-  import { Badge } from '$lib/components/ui/badge/index.js'
+  import * as Avatar from '$lib/components/ui/avatar/index.js'
   import { Button } from '$lib/components/ui/button/index.js'
-  import * as Sheet from '$lib/components/ui/sheet/index.js'
-  import AccountDropdown from './_components/AccountDropdown.svelte'
-  import { onMount } from 'svelte'
-
-  import JoinCard from './_components/JoinCard.svelte'
-  import { ConstructionIcon, Menu } from 'lucide-svelte'
-  import { handleToast } from '@/handleToast'
-
-  let finished_quizzes_length = 0
+  import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js'
+  import {
+    getProfilePictureByUserId,
+    getUsernameByUserId,
+    getNameById,
+  } from './querryUtils'
 
   export let data
 
-  // export async function handleLogout() {
-  //   const { error } = await data.supabase.auth.signOut()
-  //   if (error) {
-  //     handleToast("error", 400, error as unknown as string)
-  // }
+  let user_username: string,
+    user_name: string,
+    user_name_avatar_fallback: string
+  let profile_picture: string
+  const { supabase, user } = data
+
+  const specificUserId = user?.id as string
+
+  getUsernameByUserId(specificUserId, supabase).then((username) => {
+    if (username) {
+      user_username = username
+    }
+  })
+  getProfilePictureByUserId(specificUserId, supabase).then(
+    (profilePictureUrl: string) => {
+      if (profilePictureUrl) {
+        profile_picture = profilePictureUrl
+      }
+    },
+  )
+  getNameById(specificUserId, supabase).then((name) => {
+    if (name) {
+      user_name = name
+    }
+  })
+
+  function getFirstCharacters(str: string): string {
+    if (str && typeof str === 'string') {
+      // Split the string into words
+      const words = str.trim().split(/\s+/)
+
+      // Get the first character of each word and join with spaces
+      return words.map((word) => word.charAt(0).toUpperCase()).join(' ')
+    }
+    return ''
+  }
+
+  $: user_name_avatar_fallback = getFirstCharacters(user_name)
 </script>
 
-<svelte:head>
-  <title>Home</title>
-</svelte:head>
-
-<div
-  class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]"
->
-  <div class="hidden border-r bg-muted/40 md:block">
-    <div class="flex h-full max-h-screen flex-col gap-2">
-      <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-        <a href="/" class="flex items-center gap-2 font-semibold">
-          <img src="/favicon.svg" alt="StarQA logo" class="h-6 w-6" />
-          <span class="">StarQA</span>
-        </a>
-      </div>
-      <div class="flex-1">
-        <nav class="grid items-start px-2 text-sm font-medium lg:px-4">
-          <a
-            href="/home"
-            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            Quizzes
-          </a>
-          <a
-            href="/home/completed"
-            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            Completed
-            <Badge
-              variant="outline"
-              class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-primary/70"
-              >{finished_quizzes_length}</Badge
-            >
-          </a>
-        </nav>
-      </div>
-      <div class="p-2">
-        <JoinCard />
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-col">
-    <header
-      class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6"
+<nav class="bg-muted/40 backdrop-blur-lg w-full fixed z-40">
+  <div
+    class="flex gap-4 top-0 h-14
+  items-center text-slate-200 px-4 justify-between max-w-[100rem] mx-auto"
+  >
+    <a class="hover:underline font-semibold decoration-wavy" href="/home"
+      >StarQA</a
     >
-      <Sheet.Root>
-        <Sheet.Trigger asChild let:builder>
-          <Button
-            variant="outline"
-            size="icon"
-            class="shrink-0 md:hidden"
-            builders={[builder]}
-          >
-            <Menu class="h-5 w-5" />
-            <span class="sr-only">Toggle navigation menu</span>
-          </Button>
-        </Sheet.Trigger>
-        <Sheet.Content side="left" class="flex flex-col">
-          <nav class="grid gap-2 text-lg font-medium">
-            <a href="/" class="flex items-center gap-2 text-lg font-semibold">
-              <span class="sr-only">StarQA</span>
-            </a>
-            <a
-              href="/home"
-              class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            >
-              Quizzes
-            </a>
-            <a
-              href="/home/completed"
-              class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            >
-              Completed
-              <Badge
-                class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+
+    <div class="flex flex-row gap-2">
+      <Button variant="ghost" class="hidden sm:block" href="/home"
+        >Explore</Button
+      >
+      <Button variant="ghost" href="/home/create">Create a quiz</Button>
+      <Button variant="ghost" href="/home/my-quizzes">My quizzes</Button>
+    </div>
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild let:builder>
+        <Button builders={[builder]} variant="ghost" class="h-6 w-6">
+          <Avatar.Root>
+            <Avatar.Image src={profile_picture} alt={`@${user_username}`} />
+            <Avatar.Fallback>{user_name_avatar_fallback}</Avatar.Fallback>
+          </Avatar.Root></Button
+        >
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content class="w-56">
+        <DropdownMenu.Label>{user?.email}</DropdownMenu.Label>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Group>
+          <DropdownMenu.Item href="/home">
+            Home
+            <DropdownMenu.Shortcut>⇧H</DropdownMenu.Shortcut>
+          </DropdownMenu.Item>
+        </DropdownMenu.Group>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Group>
+          <DropdownMenu.Item href="/home/profile">Profile</DropdownMenu.Item>
+          <DropdownMenu.Sub>
+            <DropdownMenu.SubTrigger>Invite users</DropdownMenu.SubTrigger>
+            <DropdownMenu.SubContent>
+              <DropdownMenu.Item
+                href="mailto:?subject=Join%20Me%20on%20StarQA&body=Hey!%20I'm%20on%20StarQA%20and%20I%20think%20you%20should%20try%20it%20too.%20Come%20join%20me%20at:%20starqa.org/auth/register
+">Email</DropdownMenu.Item
               >
-                {finished_quizzes_length}
-              </Badge>
-            </a>
-          </nav>
-          <JoinCard />
-        </Sheet.Content>
-      </Sheet.Root>
-      <div class="w-full flex-1"></div>
-      <AccountDropdown {data} />
-    </header>
-    <main class="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 h-full w-full">
-      <!-- slot here -->
-      <slot />
-    </main>
+              <DropdownMenu.Item
+                target="_blank"
+                href="https://wa.me/?text=Hey!%20I'm%20on%20StarQA%20and%20I%20think%20you%20should%20try%20it%20too.%20Come%20join%20me%20at:%20starqa.org/auth/register
+">Whatsapp</DropdownMenu.Item
+              >
+              <DropdownMenu.Separator />
+            </DropdownMenu.SubContent>
+          </DropdownMenu.Sub>
+        </DropdownMenu.Group>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Item href="https://github.com/IoanCroitor/StarQA"
+          >GitHub</DropdownMenu.Item
+        >
+        <DropdownMenu.Item href="https://github.com/IoanCroitor/StarQA/issues"
+          >Support</DropdownMenu.Item
+        >
+        <DropdownMenu.Item href="https://github.com/IoanCroitor/StarQA"
+          >Documentation</DropdownMenu.Item
+        >
+        <DropdownMenu.Separator />
+        <DropdownMenu.Item href="/logout">
+          Log out
+          <DropdownMenu.Shortcut>⇧Q</DropdownMenu.Shortcut>
+        </DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
   </div>
+</nav>
+
+<div class="h-14 w-full"></div>
+<div class="max-w-6xl mx-auto px-4">
+  <slot />
 </div>

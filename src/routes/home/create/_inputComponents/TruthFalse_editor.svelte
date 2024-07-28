@@ -14,7 +14,7 @@
       const truthy = options[tindex]
       component.truth_or_false.truth = truthy as string
 
-      const findex = tindex === 0 ? 1 : 0
+      const findex = tindex === 1 ? 0 : 1
       const falsey = options[findex]
       component.truth_or_false.false = falsey as string
     }

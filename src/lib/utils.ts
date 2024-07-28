@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { cubicOut } from 'svelte/easing'
 import type { TransitionConfig } from 'svelte/transition'
+import type { MediaType } from '../routes/dashboard/types'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -63,4 +64,31 @@ export const flyAndScale = (
 
 export const serializeNonPOJOs = (obj: any) => {
   return structuredClone(obj)
+}
+
+export function splitBySpaces(input: string): string[] {
+  return input.split(' ').filter((word) => word.length > 0)
+}
+
+export function getAcceptType(type: MediaType): string {
+  switch (type) {
+    case 'image':
+      return 'image/*'
+    case 'model':
+      return '.obj,.fbx,.dae'
+    case 'video':
+      return 'video/*'
+    case 'music':
+      return 'audio/*'
+    default:
+      return ''
+  }
+}
+
+export function generate8DigitCode(): string {
+  let code = ''
+  for (let i = 0; i < 8; i++) {
+    code += Math.floor(Math.random() * 10)
+  }
+  return code
 }
