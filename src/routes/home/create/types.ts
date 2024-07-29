@@ -5,9 +5,9 @@ export type AnswerComponent = {
     false: string
   }
   slider: {
-    minValue: number
-    maxValue: number
-    desiredValue: number
+    minValue: string
+    maxValue: string
+    desiredValue: string
   }
   trivia: {
     options: string[]
@@ -31,9 +31,9 @@ export type MediaType = 'image' | 'model' | 'video' | 'music'
 export interface QuestionChildrenData {
   question_answer: string
   slider: {
-    minValue: number
-    maxValue: number
-    desiredValue: number
+    minValue: string
+    maxValue: string
+    desiredValue: string
   }
   truth_or_false: {
     truth: string

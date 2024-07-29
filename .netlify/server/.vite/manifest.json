@@ -14,7 +14,7 @@
     "name": "Toaster.svelte_svelte_type_style_lang",
     "imports": [
       "_lifecycle.js",
-      "_index3.js"
+      "_index4.js"
     ],
     "css": [
       "_app/immutable/assets/Toaster.CDv3jphE.css"
@@ -26,17 +26,18 @@
     "imports": [
       "_lifecycle.js",
       "_ssr.js",
-      "_index4.js",
-      "_index2.js"
+      "_index2.js",
+      "_utils.js",
+      "_index3.js"
     ]
   },
-  "_card-content.js": {
-    "file": "chunks/card-content.js",
-    "name": "card-content",
+  "_card-description.js": {
+    "file": "chunks/card-description.js",
+    "name": "card-description",
     "imports": [
       "_lifecycle.js",
       "_ssr.js",
-      "_index4.js"
+      "_utils.js"
     ]
   },
   "_card-title.js": {
@@ -45,8 +46,23 @@
     "imports": [
       "_lifecycle.js",
       "_ssr.js",
-      "_index4.js",
-      "_index2.js"
+      "_utils.js",
+      "_index3.js"
+    ]
+  },
+  "_carta.js": {
+    "file": "chunks/carta.js",
+    "name": "carta",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js"
+    ],
+    "dynamicImports": [
+      "node_modules/carta-md/dist/internal/highlight.js",
+      "node_modules/carta-md/dist/internal/highlight.js"
+    ],
+    "css": [
+      "_app/immutable/assets/carta.DWxLKexL.css"
     ]
   },
   "_client.js": {
@@ -60,9 +76,48 @@
     "file": "chunks/constants.js",
     "name": "constants"
   },
+  "_email.js": {
+    "file": "chunks/email.js",
+    "name": "email",
+    "imports": [
+      "_runtime.js"
+    ]
+  },
+  "_enter_your_email.js": {
+    "file": "chunks/enter_your_email.js",
+    "name": "enter_your_email",
+    "imports": [
+      "_runtime.js"
+    ]
+  },
+  "_events.js": {
+    "file": "chunks/events.js",
+    "name": "events",
+    "imports": [
+      "_lifecycle.js"
+    ]
+  },
   "_exports.js": {
     "file": "chunks/exports.js",
     "name": "exports"
+  },
+  "_handleToast.js": {
+    "file": "chunks/handleToast.js",
+    "name": "handleToast",
+    "imports": [
+      "_runtime.js",
+      "_Toaster.svelte_svelte_type_style_lang.js"
+    ]
+  },
+  "_helpers.js": {
+    "file": "chunks/helpers.js",
+    "name": "helpers",
+    "imports": [
+      "_index2.js",
+      "_index4.js",
+      "_lifecycle.js",
+      "_scheduler.js"
+    ]
   },
   "_i18n.js": {
     "file": "chunks/i18n.js",
@@ -76,6 +131,10 @@
       "_runtime.js"
     ]
   },
+  "_id.js": {
+    "file": "chunks/id.js",
+    "name": "id"
+  },
   "_index.js": {
     "file": "chunks/index.js",
     "name": "index"
@@ -84,14 +143,16 @@
     "file": "chunks/index2.js",
     "name": "index",
     "imports": [
-      "_constants.js",
-      "_lifecycle.js"
+      "_index4.js",
+      "_lifecycle.js",
+      "_ssr2.js"
     ]
   },
   "_index3.js": {
     "file": "chunks/index3.js",
     "name": "index",
     "imports": [
+      "_constants.js",
       "_lifecycle.js"
     ]
   },
@@ -99,21 +160,47 @@
     "file": "chunks/index4.js",
     "name": "index",
     "imports": [
-      "_index3.js",
-      "_lifecycle.js",
-      "_ssr2.js"
+      "_lifecycle.js"
     ]
   },
   "_index5.js": {
     "file": "chunks/index5.js",
     "name": "index",
     "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_utils.js",
+      "_index3.js"
+    ]
+  },
+  "_index6.js": {
+    "file": "chunks/index6.js",
+    "name": "index",
+    "imports": [
       "_ssr.js",
       "_lifecycle.js",
+      "_label.js",
+      "_utils.js",
       "_index4.js",
-      "_input.js",
-      "_index3.js",
+      "_index2.js",
       "_button.js"
+    ]
+  },
+  "_index7.js": {
+    "file": "chunks/index7.js",
+    "name": "index",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index2.js",
+      "_utils.js",
+      "_index3.js",
+      "_events.js",
+      "_index4.js",
+      "_updater.js",
+      "_helpers.js",
+      "_id.js",
+      "_scheduler.js"
     ]
   },
   "_input.js": {
@@ -122,7 +209,7 @@
     "imports": [
       "_lifecycle.js",
       "_ssr.js",
-      "_index4.js"
+      "_utils.js"
     ]
   },
   "_internal.js": {
@@ -139,20 +226,40 @@
       "src/hooks.ts"
     ]
   },
+  "_label.js": {
+    "file": "chunks/label.js",
+    "name": "label",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index2.js",
+      "_events.js",
+      "_utils.js"
+    ]
+  },
   "_lifecycle.js": {
     "file": "chunks/lifecycle.js",
     "name": "lifecycle"
+  },
+  "_login.js": {
+    "file": "chunks/login.js",
+    "name": "login",
+    "imports": [
+      "_runtime.js"
+    ]
   },
   "_passwordComplexity.js": {
     "file": "chunks/passwordComplexity.js",
     "name": "passwordComplexity",
     "imports": [
+      "_runtime.js",
       "_lifecycle.js",
       "_ssr.js",
-      "_index4.js",
+      "_index2.js",
       "_updater.js",
-      "_index3.js",
-      "_input.js"
+      "_index4.js",
+      "_events.js",
+      "_utils.js"
     ]
   },
   "_paths.js": {
@@ -166,6 +273,13 @@
   "_public.js": {
     "file": "chunks/public.js",
     "name": "public"
+  },
+  "_register.js": {
+    "file": "chunks/register.js",
+    "name": "register",
+    "imports": [
+      "_runtime.js"
+    ]
   },
   "_runtime.js": {
     "file": "chunks/runtime.js",
@@ -209,20 +323,25 @@
     "file": "chunks/updater.js",
     "name": "updater",
     "imports": [
-      "_index4.js",
-      "_index3.js"
+      "_index2.js",
+      "_index4.js"
     ]
+  },
+  "_utils.js": {
+    "file": "chunks/utils.js",
+    "name": "utils"
   },
   "_zod-schema.js": {
     "file": "chunks/zod-schema.js",
     "name": "zod-schema",
     "imports": [
-      "_index3.js",
+      "_index4.js",
       "_stores.js",
       "_prod-ssr.js",
       "_lifecycle.js",
       "_scheduler.js",
-      "_client.js"
+      "_client.js",
+      "_runtime.js"
     ]
   },
   "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
@@ -246,8 +365,37 @@
       "_paths.js",
       "_index.js",
       "_exports.js",
-      "_index3.js",
+      "_index4.js",
       "_internal.js"
+    ]
+  },
+  "node_modules/carta-md/dist/internal/assets/markdown.js": {
+    "file": "chunks/markdown.js",
+    "name": "markdown",
+    "src": "node_modules/carta-md/dist/internal/assets/markdown.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/carta-md/dist/internal/assets/theme-dark.js": {
+    "file": "chunks/theme-dark.js",
+    "name": "theme-dark",
+    "src": "node_modules/carta-md/dist/internal/assets/theme-dark.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/carta-md/dist/internal/assets/theme-light.js": {
+    "file": "chunks/theme-light.js",
+    "name": "theme-light",
+    "src": "node_modules/carta-md/dist/internal/assets/theme-light.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/carta-md/dist/internal/highlight.js": {
+    "file": "chunks/highlight.js",
+    "name": "highlight",
+    "src": "node_modules/carta-md/dist/internal/highlight.js",
+    "isDynamicEntry": true,
+    "dynamicImports": [
+      "node_modules/carta-md/dist/internal/assets/theme-light.js",
+      "node_modules/carta-md/dist/internal/assets/theme-dark.js",
+      "node_modules/carta-md/dist/internal/assets/markdown.js"
     ]
   },
   "src/hooks.server.ts": {
@@ -288,12 +436,12 @@
       "_i18n.js",
       "_paths.js",
       "_client.js",
-      "_index2.js",
+      "_index3.js",
       "_Toaster.svelte_svelte_type_style_lang.js",
-      "_index3.js"
+      "_index4.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.DgCQkmxa.css"
+      "_app/immutable/assets/_layout.DYgsFBXY.css"
     ]
   },
   "src/routes/+layout.ts": {
@@ -312,9 +460,11 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
+      "_index3.js",
       "_index2.js",
-      "_index4.js",
       "_runtime.js",
+      "_login.js",
+      "_register.js",
       "_button.js"
     ],
     "css": [
@@ -335,10 +485,12 @@
     "imports": [
       "_lifecycle.js",
       "_ssr.js",
+      "_index3.js",
+      "_utils.js",
       "_index2.js",
-      "_index4.js",
       "_client.js",
       "_Toaster.svelte_svelte_type_style_lang.js",
+      "_runtime.js",
       "_stores.js",
       "_button.js"
     ]
@@ -390,13 +542,17 @@
     "imports": [
       "_ssr.js",
       "_lifecycle.js",
-      "_index2.js",
-      "_index5.js",
+      "_index3.js",
+      "_index6.js",
       "_input.js",
       "_Toaster.svelte_svelte_type_style_lang.js",
       "_client.js",
       "_zod-schema.js",
-      "_index.js"
+      "_index.js",
+      "_login.js",
+      "_runtime.js",
+      "_handleToast.js",
+      "_email.js"
     ]
   },
   "src/routes/auth/new-password/+page.server.ts": {
@@ -419,14 +575,16 @@
     "imports": [
       "_ssr.js",
       "_lifecycle.js",
-      "_index2.js",
-      "_index5.js",
+      "_index3.js",
+      "_index6.js",
       "_input.js",
       "_Toaster.svelte_svelte_type_style_lang.js",
       "_client.js",
       "_zod-schema.js",
       "_index.js",
-      "_passwordComplexity.js"
+      "_passwordComplexity.js",
+      "_handleToast.js",
+      "_runtime.js"
     ]
   },
   "src/routes/auth/register/+page.server.ts": {
@@ -449,15 +607,20 @@
     "imports": [
       "_ssr.js",
       "_lifecycle.js",
-      "_index2.js",
-      "_index5.js",
+      "_index3.js",
+      "_index6.js",
       "_input.js",
       "_Toaster.svelte_svelte_type_style_lang.js",
       "_client.js",
       "_zod-schema.js",
       "_index.js",
       "_passwordComplexity.js",
-      "_index4.js"
+      "_index2.js",
+      "_handleToast.js",
+      "_email.js",
+      "_runtime.js",
+      "_enter_your_email.js",
+      "_register.js"
     ]
   },
   "src/routes/auth/reset/+page.server.ts": {
@@ -469,7 +632,8 @@
       "_index.js",
       "_client.js",
       "_zod-schema.js",
-      "_superValidate.js"
+      "_superValidate.js",
+      "_runtime.js"
     ]
   },
   "src/routes/auth/reset/+page.svelte": {
@@ -480,13 +644,78 @@
     "imports": [
       "_ssr.js",
       "_lifecycle.js",
-      "_index2.js",
-      "_index5.js",
+      "_index3.js",
+      "_index6.js",
       "_input.js",
       "_Toaster.svelte_svelte_type_style_lang.js",
       "_client.js",
       "_zod-schema.js",
-      "_index.js"
+      "_index.js",
+      "_email.js",
+      "_runtime.js",
+      "_enter_your_email.js"
+    ]
+  },
+  "src/routes/home-2/+layout.svelte": {
+    "file": "entries/pages/home-2/_layout.svelte.js",
+    "name": "entries/pages/home-2/_layout.svelte",
+    "src": "src/routes/home-2/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_index3.js",
+      "_index5.js",
+      "_index2.js",
+      "_lifecycle.js",
+      "_index4.js",
+      "_scheduler.js",
+      "_updater.js",
+      "_id.js",
+      "_helpers.js",
+      "_index7.js",
+      "_events.js",
+      "_button.js",
+      "_card-title.js",
+      "_card-description.js",
+      "_input.js",
+      "_client.js",
+      "_runtime.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_utils.js"
+    ]
+  },
+  "src/routes/home-2/+page.svelte": {
+    "file": "entries/pages/home-2/_page.svelte.js",
+    "name": "entries/pages/home-2/_page.svelte",
+    "src": "src/routes/home-2/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_index2.js"
+    ]
+  },
+  "src/routes/home-2/completed/+page.svelte": {
+    "file": "entries/pages/home-2/completed/_page.svelte.js",
+    "name": "entries/pages/home-2/completed/_page.svelte",
+    "src": "src/routes/home-2/completed/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index2.js",
+      "_index3.js",
+      "_card-title.js",
+      "_card-description.js",
+      "_index4.js"
+    ]
+  },
+  "src/routes/home-2/create/+page.svelte": {
+    "file": "entries/pages/home-2/create/_page.svelte.js",
+    "name": "entries/pages/home-2/create/_page.svelte",
+    "src": "src/routes/home-2/create/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js"
     ]
   },
   "src/routes/home/+layout.server.ts": {
@@ -502,17 +731,15 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_index2.js",
-      "_lifecycle.js",
-      "_index4.js",
       "_index3.js",
-      "_scheduler.js",
+      "_lifecycle.js",
+      "_index2.js",
       "_updater.js",
-      "_input.js",
-      "_client.js",
-      "_button.js",
-      "_card-content.js",
-      "_card-title.js"
+      "_index4.js",
+      "_events.js",
+      "_utils.js",
+      "_index7.js",
+      "_button.js"
     ]
   },
   "src/routes/home/+page.svelte": {
@@ -521,57 +748,96 @@
     "src": "src/routes/home/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_ssr.js",
-      "_index4.js",
-      "_index2.js",
-      "_card-content.js",
-      "_card-title.js"
+      "_ssr.js"
     ]
   },
-  "src/routes/home/[slug]/+page.svelte": {
-    "file": "entries/pages/home/_slug_/_page.svelte.js",
-    "name": "entries/pages/home/_slug_/_page.svelte",
-    "src": "src/routes/home/[slug]/+page.svelte",
-    "isEntry": true,
-    "imports": [
-      "_lifecycle.js",
-      "_ssr.js",
-      "_card-content.js",
-      "_index3.js",
-      "_index4.js",
-      "_button.js"
-    ],
-    "css": [
-      "_app/immutable/assets/_page.DU9EbIzh.css"
-    ]
-  },
-  "src/routes/home/[slug]/+page.ts": {
-    "file": "entries/pages/home/_slug_/_page.ts.js",
-    "name": "entries/pages/home/_slug_/_page.ts",
-    "src": "src/routes/home/[slug]/+page.ts",
+  "src/routes/home/[quizID]/+page.server.ts": {
+    "file": "entries/pages/home/_quizID_/_page.server.ts.js",
+    "name": "entries/pages/home/_quizID_/_page.server.ts",
+    "src": "src/routes/home/[quizID]/+page.server.ts",
     "isEntry": true
   },
-  "src/routes/home/completed/+page.svelte": {
-    "file": "entries/pages/home/completed/_page.svelte.js",
-    "name": "entries/pages/home/completed/_page.svelte",
-    "src": "src/routes/home/completed/+page.svelte",
+  "src/routes/home/[quizID]/+page.svelte": {
+    "file": "entries/pages/home/_quizID_/_page.svelte.js",
+    "name": "entries/pages/home/_quizID_/_page.svelte",
+    "src": "src/routes/home/[quizID]/+page.svelte",
     "isEntry": true,
     "imports": [
       "_lifecycle.js",
       "_ssr.js",
-      "_index4.js",
       "_index2.js",
-      "_card-content.js",
+      "_updater.js",
+      "_id.js",
+      "_index4.js",
+      "_events.js",
+      "_utils.js",
+      "_button.js",
+      "_index3.js",
+      "_carta.js",
+      "_public.js",
       "_card-title.js",
-      "_index3.js"
+      "_card-description.js",
+      "_stores.js",
+      "_Toaster.svelte_svelte_type_style_lang.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.DnberQuA.css"
     ]
   },
-  "src/routes/logout/+page.server.ts": {
-    "file": "entries/pages/logout/_page.server.ts.js",
-    "name": "entries/pages/logout/_page.server.ts",
-    "src": "src/routes/logout/+page.server.ts",
+  "src/routes/home/create/+page.svelte": {
+    "file": "entries/pages/home/create/_page.svelte.js",
+    "name": "entries/pages/home/create/_page.svelte",
+    "src": "src/routes/home/create/+page.svelte",
     "isEntry": true,
     "imports": [
+      "_ssr.js",
+      "_lifecycle.js",
+      "_card-title.js",
+      "_utils.js",
+      "_input.js",
+      "_label.js",
+      "_carta.js",
+      "_index2.js",
+      "_index4.js",
+      "_helpers.js",
+      "_updater.js",
+      "_id.js",
+      "_scheduler.js",
+      "_events.js",
+      "_index3.js",
+      "_index5.js",
+      "_button.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_client.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.E0USghBu.css"
+    ]
+  },
+  "src/routes/home/create/+page.ts": {
+    "file": "entries/pages/home/create/_page.ts.js",
+    "name": "entries/pages/home/create/_page.ts",
+    "src": "src/routes/home/create/+page.ts",
+    "isEntry": true
+  },
+  "src/routes/home/my-quizzes/+page.svelte": {
+    "file": "entries/pages/home/my-quizzes/_page.svelte.js",
+    "name": "entries/pages/home/my-quizzes/_page.svelte",
+    "src": "src/routes/home/my-quizzes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "src/routes/logout/+page.svelte": {
+    "file": "entries/pages/logout/_page.svelte.js",
+    "name": "entries/pages/logout/_page.svelte",
+    "src": "src/routes/logout/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_client.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
       "_index.js"
     ]
   },

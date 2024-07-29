@@ -3,7 +3,7 @@ import { negotiateLanguagePreferences, bestMatch, resolveRoute } from "@inlang/p
 import { b as base } from "./paths.js";
 import { L as LANG_COOKIE_NAME } from "./constants.js";
 import { p as page } from "./stores.js";
-import { f as get_store_value } from "./lifecycle.js";
+import { l as get_store_value } from "./lifecycle.js";
 import { r as runtime } from "./runtime.js";
 function normaliseBase$1(baseValue, currentUrl) {
   if (baseValue === "")

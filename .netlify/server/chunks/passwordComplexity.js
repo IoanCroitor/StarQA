@@ -1,10 +1,12 @@
-import { e as compute_rest_props, s as subscribe } from "./lifecycle.js";
+import { l as languageTag } from "./runtime.js";
+import { c as compute_rest_props, s as subscribe } from "./lifecycle.js";
 import { c as create_ssr_component, s as spread, b as escape_object, d as add_attribute, v as validate_component, a as escape_attribute_value } from "./ssr.js";
 import "dequal";
-import { o as omit, m as makeElement, a as createElHelpers, c as cn } from "./index4.js";
+import { o as omit, m as makeElement, c as createElHelpers } from "./index2.js";
 import { t as toWritableStores, o as overridable, r as removeUndefined, g as getOptionUpdater } from "./updater.js";
-import { w as writable } from "./index3.js";
-import { c as createBitAttrs } from "./input.js";
+import { w as writable } from "./index4.js";
+import { c as createBitAttrs } from "./events.js";
+import { c as cn } from "./utils.js";
 const defaults = {
   defaultValue: 0,
   max: 100
@@ -95,6 +97,14 @@ const Progress$1 = create_ssr_component(($$result, $$props, $$bindings, slots) =
   $$unsubscribe_root();
   return `${asChild ? `${slots.default ? slots.default({ builder }) : ``}` : `<div${spread([escape_object(builder), escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</div>`}`;
 });
+const confirm_password$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Confirm Password`;
+const confirm_password = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: confirm_password$1,
+    fr: confirm_password$1,
+    ro: confirm_password$1
+  }[options.languageTag ?? languageTag()]();
+};
 const Progress = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["class", "max", "value"]);
   let { class: className = void 0 } = $$props;
@@ -148,6 +158,7 @@ function progressColorFunction(arePasswordsMathing, passwordConfirm, strength) {
 }
 export {
   Progress as P,
+  confirm_password as a,
   calculateStrength as c,
   progressColorFunction as p
 };

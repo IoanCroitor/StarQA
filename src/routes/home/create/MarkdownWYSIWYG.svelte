@@ -46,7 +46,6 @@
   }
 
   /* Code dark mode */
-  /* Only if you didn't specify a custom code theme */
   :global(html.dark .shiki),
   :global(html.dark .shiki span) {
     color: theme('colors.gray.200') !important;

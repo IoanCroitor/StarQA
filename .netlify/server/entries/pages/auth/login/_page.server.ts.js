@@ -22,7 +22,7 @@ const actions = {
     }
     const email = form.data.email;
     const password = form.data.password;
-    const { error: supabaseError } = await supabase.auth.signInWithPassword({
+    const { error: supabaseError, data } = await supabase.auth.signInWithPassword({
       email,
       password
     });
@@ -31,7 +31,6 @@ const actions = {
       const status = supabaseError.status;
       return message(form, { status, message: supabaseError.message });
     } else {
-      console.log("success");
       throw redirect(303, "/home");
     }
   }

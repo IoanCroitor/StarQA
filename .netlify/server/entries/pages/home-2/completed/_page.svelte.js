@@ -1,11 +1,11 @@
 import { s as subscribe } from "../../../../chunks/lifecycle.js";
 import { c as create_ssr_component, v as validate_component, d as add_attribute, e as escape, f as each } from "../../../../chunks/ssr.js";
-import "../../../../chunks/index4.js";
-import { g as getTranslationFunctions } from "../../../../chunks/index2.js";
-import { C as Card, a as Card_content } from "../../../../chunks/card-content.js";
-import { C as Card_header, a as Card_title, b as Card_description } from "../../../../chunks/card-title.js";
+import "../../../../chunks/index2.js";
+import { g as getTranslationFunctions } from "../../../../chunks/index3.js";
+import { C as Card, a as Card_header, b as Card_title, c as Card_content } from "../../../../chunks/card-title.js";
+import { C as Card_description } from "../../../../chunks/card-description.js";
 import "clsx";
-import { w as writable } from "../../../../chunks/index3.js";
+import { w as writable } from "../../../../chunks/index4.js";
 const Card_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { id } = $$props;
   let { title } = $$props;

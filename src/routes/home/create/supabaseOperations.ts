@@ -106,6 +106,7 @@ export async function saveQuiz(
         .insert({
           quiz_question_id: questionData.id,
           answer: question.response_option_corect,
+          quiz_id: quizData.id,
         })
 
       if (answerError) {

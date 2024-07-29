@@ -1,16 +1,27 @@
-import { c as create_ssr_component, d as add_attribute, v as validate_component } from "../../../../chunks/ssr.js";
+import { c as create_ssr_component, d as add_attribute, v as validate_component, e as escape } from "../../../../chunks/ssr.js";
 import { s as subscribe } from "../../../../chunks/lifecycle.js";
-import { g as getTranslationFunctions } from "../../../../chunks/index2.js";
-import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index5.js";
+import { g as getTranslationFunctions } from "../../../../chunks/index3.js";
+import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index6.js";
 import { I as Input } from "../../../../chunks/input.js";
 import { t as toast } from "../../../../chunks/Toaster.svelte_svelte_type_style_lang.js";
 import "../../../../chunks/client.js";
 import "just-clone";
 import "ts-deepmerge";
-import { s as superForm, e as zodClient, a as passwordResetSchema } from "../../../../chunks/zod-schema.js";
+import { s as superForm, e as zodClient, d as passwordResetSchema } from "../../../../chunks/zod-schema.js";
 import "../../../../chunks/index.js";
 import "devalue";
 import "memoize-weak";
+import { e as email } from "../../../../chunks/email.js";
+import { l as languageTag } from "../../../../chunks/runtime.js";
+import { e as enter_your_email } from "../../../../chunks/enter_your_email.js";
+const reset_password$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Reset Password`;
+const reset_password = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: reset_password$1,
+    fr: reset_password$1,
+    ro: reset_password$1
+  }[options.languageTag ?? languageTag()]();
+};
 const Password_reset_form = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $delayed, $$unsubscribe_delayed;
   let $formData, $$unsubscribe_formData;
@@ -53,11 +64,11 @@ const Password_reset_form = create_ssr_component(($$result, $$props, $$bindings,
           default: ({ attrs }) => {
             return `${validate_component(Form_label, "Form.Label").$$render($$result, { class: "font-semibold" }, {}, {
               default: () => {
-                return `Email`;
+                return `${escape(email())}`;
               }
             })} ${validate_component(Input, "Input").$$render(
               $$result,
-              Object.assign({}, { disabled: $delayed }, { autocapitalize: "none" }, { autocomplete: "email" }, { autocorrect: "off" }, attrs, { type: "email" }, { placeholder: "Enter your email" }, { value: $formData.email }),
+              Object.assign({}, { disabled: $delayed }, { autocapitalize: "none" }, { autocomplete: "email" }, { autocorrect: "off" }, attrs, { type: "email" }, { placeholder: enter_your_email() }, { value: $formData.email }),
               {
                 value: ($$value) => {
                   $formData.email = $$value;
@@ -79,7 +90,7 @@ const Password_reset_form = create_ssr_component(($$result, $$props, $$bindings,
       {},
       {
         default: () => {
-          return `${$delayed ? `${validate_component(Spinner, "Spinner").$$render($$result, {}, {}, {})}` : `Reset Password`}`;
+          return `${$delayed ? `${validate_component(Spinner, "Spinner").$$render($$result, {}, {}, {})}` : `${escape(/* @__PURE__ */ reset_password())}`}`;
         }
       }
     )}</form></div>`;
@@ -91,7 +102,7 @@ const Password_reset_form = create_ssr_component(($$result, $$props, $$bindings,
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
-  return `${$$result.head += `<!-- HEAD_svelte-1szam7g_START -->Reset Password<!-- HEAD_svelte-1szam7g_END -->`, ""} ${validate_component(Password_reset_form, "SettingsForm").$$render($$result, { data: data.form }, {}, {})}`;
+  return `${$$result.head += `<!-- HEAD_svelte-9qopv5_START -->${escape(/* @__PURE__ */ reset_password())}<!-- HEAD_svelte-9qopv5_END -->`, ""} ${validate_component(Password_reset_form, "SettingsForm").$$render($$result, { data: data.form }, {}, {})}`;
 });
 export {
   Page as default

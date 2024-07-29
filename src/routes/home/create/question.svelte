@@ -23,9 +23,9 @@
   let question_childern_data: QuestionChildrenData = {
     question_answer: '',
     slider: {
-      minValue: 0,
-      maxValue: 100,
-      desiredValue: 50,
+      minValue: '0',
+      maxValue: '100',
+      desiredValue: '50',
     },
     truth_or_false: {
       truth: '',

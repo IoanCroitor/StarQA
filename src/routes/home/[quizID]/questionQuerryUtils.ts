@@ -1,6 +1,6 @@
 import { handleToast } from '@/handleToast'
 
-async function getQuestionUUID(quizId: number, supabase: any) {
+export async function getQuizUUID(quizId: number, supabase: any) {
   let { data: quiz, error } = await supabase
     .from('quizzes')
     .select('id')
@@ -17,11 +17,12 @@ async function getQuizQuestions(uuid: string, supabase: any) {
     .eq('quiz_id', uuid)
 
   if (error) handleToast('error', Number(error.code), error.message)
+  console.log('quiz_questions', quiz_questions)
   return quiz_questions ? quiz_questions : null
 }
 
 export async function getQuestionArrayByQuizId(quizId: number, supabase: any) {
-  const uuid = await getQuestionUUID(quizId, supabase)
+  const uuid = await getQuizUUID(quizId, supabase)
   if (!uuid) return null
   const questions = await getQuizQuestions(uuid, supabase)
   if (!questions) return null

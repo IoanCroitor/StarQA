@@ -1,107 +1,39 @@
-import { n as noop, s as subscribe, r as run_all, d as safe_not_equal, i as is_function } from "./lifecycle.js";
-const subscriber_queue = [];
-function readable(value, start) {
-  return {
-    subscribe: writable(value, start).subscribe
-  };
-}
-function writable(value, start = noop) {
-  let stop;
-  const subscribers = /* @__PURE__ */ new Set();
-  function set(new_value) {
-    if (safe_not_equal(value, new_value)) {
-      value = new_value;
-      if (stop) {
-        const run_queue = !subscriber_queue.length;
-        for (const subscriber of subscribers) {
-          subscriber[1]();
-          subscriber_queue.push(subscriber, value);
-        }
-        if (run_queue) {
-          for (let i = 0; i < subscriber_queue.length; i += 2) {
-            subscriber_queue[i][0](subscriber_queue[i + 1]);
-          }
-          subscriber_queue.length = 0;
-        }
+import { N as NO_TRANSLATE_ATTRIBUTE } from "./constants.js";
+import { g as getContext, d as setContext } from "./lifecycle.js";
+const PARAGLIDE_CONTEXT_KEY = {};
+const getParaglideContext = () => {
+  return (
+    /** @type { ParaglideContext<T> | undefined}*/
+    getContext(PARAGLIDE_CONTEXT_KEY)
+  );
+};
+const setParaglideContext = (context) => {
+  setContext(PARAGLIDE_CONTEXT_KEY, context);
+};
+function getTranslationFunctions() {
+  const ctx = getParaglideContext();
+  function translateAttribute(value, lang_value) {
+    if (typeof value !== "string") return value;
+    if (!ctx) return value;
+    return ctx.translateHref(value, lang_value);
+  }
+  function handleAttributes(attrs, attribute_translations) {
+    if (attrs[NO_TRANSLATE_ATTRIBUTE]) return attrs;
+    for (const { attribute_name, lang_attribute_name } of attribute_translations) {
+      if (attribute_name in attrs) {
+        const attr = attrs[attribute_name];
+        const lang_attr = lang_attribute_name ? attrs[lang_attribute_name] : void 0;
+        attrs[attribute_name] = translateAttribute(
+          attr,
+          typeof lang_attr === "string" ? lang_attr : void 0
+        );
       }
     }
+    return attrs;
   }
-  function update(fn) {
-    set(fn(value));
-  }
-  function subscribe2(run, invalidate = noop) {
-    const subscriber = [run, invalidate];
-    subscribers.add(subscriber);
-    if (subscribers.size === 1) {
-      stop = start(set, update) || noop;
-    }
-    run(value);
-    return () => {
-      subscribers.delete(subscriber);
-      if (subscribers.size === 0 && stop) {
-        stop();
-        stop = null;
-      }
-    };
-  }
-  return { set, update, subscribe: subscribe2 };
-}
-function derived(stores, fn, initial_value) {
-  const single = !Array.isArray(stores);
-  const stores_array = single ? [stores] : stores;
-  if (!stores_array.every(Boolean)) {
-    throw new Error("derived() expects stores as input, got a falsy value");
-  }
-  const auto = fn.length < 2;
-  return readable(initial_value, (set, update) => {
-    let started = false;
-    const values = [];
-    let pending = 0;
-    let cleanup = noop;
-    const sync = () => {
-      if (pending) {
-        return;
-      }
-      cleanup();
-      const result = fn(single ? values[0] : values, set, update);
-      if (auto) {
-        set(result);
-      } else {
-        cleanup = is_function(result) ? result : noop;
-      }
-    };
-    const unsubscribers = stores_array.map(
-      (store, i) => subscribe(
-        store,
-        (value) => {
-          values[i] = value;
-          pending &= ~(1 << i);
-          if (started) {
-            sync();
-          }
-        },
-        () => {
-          pending |= 1 << i;
-        }
-      )
-    );
-    started = true;
-    sync();
-    return function stop() {
-      run_all(unsubscribers);
-      cleanup();
-      started = false;
-    };
-  });
-}
-function readonly(store) {
-  return {
-    subscribe: store.subscribe.bind(store)
-  };
+  return [translateAttribute, handleAttributes];
 }
 export {
-  readonly as a,
-  derived as d,
-  readable as r,
-  writable as w
+  getTranslationFunctions as g,
+  setParaglideContext as s
 };

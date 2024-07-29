@@ -1,4 +1,4 @@
-import { a as set_current_component, r as run_all, c as current_component } from "./lifecycle.js";
+import { a as set_current_component, r as run_all, b as current_component } from "./lifecycle.js";
 const dirty_components = [];
 const binding_callbacks = [];
 let render_callbacks = [];

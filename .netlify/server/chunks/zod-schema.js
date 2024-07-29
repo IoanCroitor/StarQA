@@ -1,7 +1,7 @@
-import { d as derived, w as writable, a as readonly } from "./index3.js";
+import { d as derived, w as writable, r as readonly } from "./index4.js";
 import { p as page, n as navigating } from "./stores.js";
 import { B as BROWSER } from "./prod-ssr.js";
-import { o as onDestroy, f as get_store_value } from "./lifecycle.js";
+import { o as onDestroy, l as get_store_value } from "./lifecycle.js";
 import { t as tick } from "./scheduler.js";
 import { i as invalidateAll, a as applyAction } from "./client.js";
 import * as devalue from "devalue";
@@ -11,7 +11,80 @@ import { merge as merge$1 } from "ts-deepmerge";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import baseMemoize from "memoize-weak";
 import { z } from "zod";
+import { l as languageTag } from "./runtime.js";
 const browser = BROWSER;
+const passwords_dont_match$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Passwords don't match`;
+const p_must_be_at_least_8_characters$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Password must be at least 8 characters long`;
+const p_must_contain_at_least_one_lowercase_letter$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Password must contain at least one lowercase letter`;
+const p_must_contain_at_least_one_uppercase_letter$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Password must contain at least one uppercase letter`;
+const p_must_contain_at_least_one_number$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Password must contain at least one number`;
+const p_must_contain_at_least_one_special_character$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Password must contain at least one special character`;
+const must_be_a_string$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Must be a string`;
+const must_be_a_valid_email$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Must be a valid email`;
+const p_must_be_a_string$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Password must be a string`;
+const passwords_dont_match = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: passwords_dont_match$1,
+    fr: passwords_dont_match$1,
+    ro: passwords_dont_match$1
+  }[options.languageTag ?? languageTag()]();
+};
+const p_must_be_at_least_8_characters = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: p_must_be_at_least_8_characters$1,
+    fr: p_must_be_at_least_8_characters$1,
+    ro: p_must_be_at_least_8_characters$1
+  }[options.languageTag ?? languageTag()]();
+};
+const p_must_contain_at_least_one_lowercase_letter = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: p_must_contain_at_least_one_lowercase_letter$1,
+    fr: p_must_contain_at_least_one_lowercase_letter$1,
+    ro: p_must_contain_at_least_one_lowercase_letter$1
+  }[options.languageTag ?? languageTag()]();
+};
+const p_must_contain_at_least_one_uppercase_letter = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: p_must_contain_at_least_one_uppercase_letter$1,
+    fr: p_must_contain_at_least_one_uppercase_letter$1,
+    ro: p_must_contain_at_least_one_uppercase_letter$1
+  }[options.languageTag ?? languageTag()]();
+};
+const p_must_contain_at_least_one_number = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: p_must_contain_at_least_one_number$1,
+    fr: p_must_contain_at_least_one_number$1,
+    ro: p_must_contain_at_least_one_number$1
+  }[options.languageTag ?? languageTag()]();
+};
+const p_must_contain_at_least_one_special_character = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: p_must_contain_at_least_one_special_character$1,
+    fr: p_must_contain_at_least_one_special_character$1,
+    ro: p_must_contain_at_least_one_special_character$1
+  }[options.languageTag ?? languageTag()]();
+};
+const must_be_a_string = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: must_be_a_string$1,
+    fr: must_be_a_string$1,
+    ro: must_be_a_string$1
+  }[options.languageTag ?? languageTag()]();
+};
+const must_be_a_valid_email = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: must_be_a_valid_email$1,
+    fr: must_be_a_valid_email$1,
+    ro: must_be_a_valid_email$1
+  }[options.languageTag ?? languageTag()]();
+};
+const p_must_be_a_string = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: p_must_be_a_string$1,
+    fr: p_must_be_a_string$1,
+    ro: p_must_be_a_string$1
+  }[options.languageTag ?? languageTag()]();
+};
 function setPath(parent, key, value) {
   parent[key] = value;
   return "skip";
@@ -2446,44 +2519,44 @@ function _zodClient(schema, options) {
 const zod = /* @__PURE__ */ memoize(_zod);
 const zodClient = /* @__PURE__ */ memoize(_zodClient);
 const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8)
+  email: z.string({ message: /* @__PURE__ */ must_be_a_string() }).email({ message: /* @__PURE__ */ must_be_a_valid_email() }),
+  password: z.string({ message: /* @__PURE__ */ p_must_be_a_string() }).min(8, { message: /* @__PURE__ */ p_must_be_at_least_8_characters() })
 });
 const registerSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8, { message: "Password must be at least 8 characters long" }).regex(/[a-z]/, {
-    message: "Password must contain at least one lowercase letter"
+  email: z.string({ message: /* @__PURE__ */ must_be_a_string() }).email({ message: /* @__PURE__ */ must_be_a_valid_email() }),
+  password: z.string({ message: /* @__PURE__ */ p_must_be_a_string() }).min(8, { message: /* @__PURE__ */ p_must_be_at_least_8_characters() }).regex(/[a-z]/, {
+    message: /* @__PURE__ */ p_must_contain_at_least_one_lowercase_letter()
   }).regex(/[A-Z]/, {
-    message: "Password must contain at least one uppercase letter"
-  }).regex(/\d/, { message: "Password must contain at least one number" }).regex(/[\W_]/, {
-    message: "Password must contain at least one special character"
+    message: /* @__PURE__ */ p_must_contain_at_least_one_uppercase_letter()
+  }).regex(/\d/, { message: /* @__PURE__ */ p_must_contain_at_least_one_number() }).regex(/[\W_]/, {
+    message: /* @__PURE__ */ p_must_contain_at_least_one_special_character()
   }),
-  confirmPassword: z.string()
+  confirmPassword: z.string({ message: /* @__PURE__ */ must_be_a_string() })
 }).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
+  message: /* @__PURE__ */ passwords_dont_match(),
   path: ["confirmPassword"]
 });
 const passwordResetSchema = z.object({
-  email: z.string().email()
+  email: z.string({ message: /* @__PURE__ */ must_be_a_string() }).email({ message: /* @__PURE__ */ must_be_a_valid_email() })
 });
 const passwordConfirmSchema = z.object({
-  password: z.string().min(8, { message: "Password must be at least 8 characters long" }).regex(/[a-z]/, {
-    message: "Password must contain at least one lowercase letter"
+  password: z.string({ message: /* @__PURE__ */ p_must_be_a_string() }).min(8, { message: /* @__PURE__ */ p_must_be_at_least_8_characters() }).regex(/[a-z]/, {
+    message: /* @__PURE__ */ p_must_contain_at_least_one_lowercase_letter()
   }).regex(/[A-Z]/, {
-    message: "Password must contain at least one uppercase letter"
-  }).regex(/\d/, { message: "Password must contain at least one number" }).regex(/[\W_]/, {
-    message: "Password must contain at least one special character"
+    message: /* @__PURE__ */ p_must_contain_at_least_one_uppercase_letter()
+  }).regex(/\d/, { message: /* @__PURE__ */ p_must_contain_at_least_one_number() }).regex(/[\W_]/, {
+    message: /* @__PURE__ */ p_must_contain_at_least_one_special_character()
   }),
-  confirmPassword: z.string()
+  confirmPassword: z.string({ message: /* @__PURE__ */ must_be_a_string() })
 }).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
+  message: /* @__PURE__ */ passwords_dont_match(),
   path: ["confirmPassword"]
 });
 export {
-  passwordResetSchema as a,
-  parseRequest as b,
-  mapErrors as c,
-  replaceInvalidDefaults as d,
+  parseRequest as a,
+  mapErrors as b,
+  replaceInvalidDefaults as c,
+  passwordResetSchema as d,
   zodClient as e,
   loginSchema as l,
   mergeDefaults as m,

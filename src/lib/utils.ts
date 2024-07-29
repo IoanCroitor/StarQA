@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { cubicOut } from 'svelte/easing'
 import type { TransitionConfig } from 'svelte/transition'
-import type { MediaType } from '../routes/dashboard/types'
+import type { MediaType } from '../routes/home/create/types'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -91,4 +91,19 @@ export function generate8DigitCode(): string {
     code += Math.floor(Math.random() * 10)
   }
   return code
+}
+
+export function getSubstringAfterLastDot(str: string) {
+  const lastDotIndex = str.lastIndexOf('.')
+  if (lastDotIndex === -1) {
+    return ''
+  }
+  return str.substring(lastDotIndex + 1)
+}
+
+export function removeTrailingSlashAsterisk(str: string) {
+  if (str.endsWith('/*')) {
+    return str.slice(0, -2)
+  }
+  return str
 }

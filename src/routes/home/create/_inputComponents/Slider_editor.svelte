@@ -10,9 +10,9 @@
   let maxValue = 100
   let desiredValue = 50
 
-  $: component.slider.minValue = minValue
-  $: component.slider.maxValue = maxValue
-  $: component.slider.desiredValue = desiredValue
+  $: component.slider.minValue = minValue.toString()
+  $: component.slider.maxValue = maxValue.toString()
+  $: component.slider.desiredValue = desiredValue.toString()
 </script>
 
 <div class="flex flex-col gap-2 mb-3">

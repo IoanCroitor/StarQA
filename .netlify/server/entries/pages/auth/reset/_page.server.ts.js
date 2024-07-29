@@ -2,10 +2,19 @@ import { f as fail } from "../../../../chunks/index.js";
 import "../../../../chunks/client.js";
 import "just-clone";
 import "ts-deepmerge";
-import { z as zod, a as passwordResetSchema } from "../../../../chunks/zod-schema.js";
+import { z as zod, d as passwordResetSchema } from "../../../../chunks/zod-schema.js";
 import "devalue";
 import { s as superValidate, m as message } from "../../../../chunks/superValidate.js";
 import "memoize-weak";
+import { l as languageTag } from "../../../../chunks/runtime.js";
+const we_have_sent_you_an_email_to_reset_your_password$1 = /* @__NO_SIDE_EFFECTS__ */ () => `We have sent you an email with a link to reset your password`;
+const we_have_sent_you_an_email_to_reset_your_password = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: we_have_sent_you_an_email_to_reset_your_password$1,
+    fr: we_have_sent_you_an_email_to_reset_your_password$1,
+    ro: we_have_sent_you_an_email_to_reset_your_password$1
+  }[options.languageTag ?? languageTag()]();
+};
 const load = async () => {
   return {
     form: await superValidate(zod(passwordResetSchema))
@@ -34,7 +43,7 @@ const actions = {
     } else {
       return message(form, {
         status: 200,
-        message: "We've sent you an email to reset your password"
+        message: /* @__PURE__ */ we_have_sent_you_an_email_to_reset_your_password()
       });
     }
   }

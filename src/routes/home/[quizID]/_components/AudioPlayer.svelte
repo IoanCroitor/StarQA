@@ -1,5 +1,9 @@
 <!-- PlyrAudio.svelte -->
 <script lang="ts">
+  import {
+    getSubstringAfterLastDot,
+    removeTrailingSlashAsterisk,
+  } from '@/utils'
   import { onMount, onDestroy } from 'svelte'
 
   export let src: string =
@@ -17,6 +21,10 @@
     })
   })
 
+  $: {
+    type = `audio/${getSubstringAfterLastDot(removeTrailingSlashAsterisk(src))}`
+    console.log(type)
+  }
   onDestroy(() => {
     if (player) {
       player.destroy()

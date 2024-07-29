@@ -1,10 +1,13 @@
 <script lang="ts">
   export let options = ['Adevarat', 'Fals']
-
+  import { createEventDispatcher } from 'svelte'
   let response: string
+
+  const dispatch = createEventDispatcher()
 
   function handleClick(number: number) {
     response = options[number - 1] as string
+    dispatch('responseSelected', { response })
   }
 </script>
 

@@ -1,10 +1,10 @@
-import * as server from '../entries/pages/auth/new-password/_page.server.ts.js';
+import * as server from '../entries/pages/auth/login/_page.server.ts.js';
 
 export const index = 6;
 let component_cache;
-export const component = async () => component_cache ??= (await import('../entries/pages/auth/new-password/_page.svelte.js')).default;
+export const component = async () => component_cache ??= (await import('../entries/pages/auth/login/_page.svelte.js')).default;
 export { server };
-export const server_id = "src/routes/auth/new-password/+page.server.ts";
-export const imports = ["_app/immutable/nodes/6.Br692-um.js","_app/immutable/chunks/scheduler.mFZ6drCs.js","_app/immutable/chunks/index.Bwt966Rt.js","_app/immutable/chunks/index.z9jyRYvW.js","_app/immutable/chunks/zod-schema.BJVJTKFx.js","_app/immutable/chunks/index.DaiaK-aF.js","_app/immutable/chunks/index.lObsX47n.js","_app/immutable/chunks/input.Bc7LqLb-.js","_app/immutable/chunks/each.CfWMxmkq.js","_app/immutable/chunks/button.Chbs1Wqg.js","_app/immutable/chunks/stores.C_ozZbQ-.js","_app/immutable/chunks/12.BfKC9a_a.js","_app/immutable/chunks/_commonjsHelpers.BosuxZz1.js","_app/immutable/chunks/Toaster.svelte_svelte_type_style_lang.DabrnpyT.js","_app/immutable/chunks/passwordComplexity.eq-oOGhT.js","_app/immutable/chunks/updater.Bp-osh5P.js"];
+export const server_id = "src/routes/auth/login/+page.server.ts";
+export const imports = ["_app/immutable/nodes/6.Ce6ANWJu.js","_app/immutable/chunks/scheduler.Dm3-vn-c.js","_app/immutable/chunks/index.BE9acq9p.js","_app/immutable/chunks/index.DzN09-P9.js","_app/immutable/chunks/zod-schema.C66Skp85.js","_app/immutable/chunks/label.hX51m3Y_.js","_app/immutable/chunks/index.B_c4XiUJ.js","_app/immutable/chunks/index.BhboVFvm.js","_app/immutable/chunks/events.CjBLiE_W.js","_app/immutable/chunks/utils.BvKcqNYp.js","_app/immutable/chunks/each.oeO5xJYM.js","_app/immutable/chunks/button.NuqSss75.js","_app/immutable/chunks/stores.BiT-vtCR.js","_app/immutable/chunks/entry.D3ncf4py.js","_app/immutable/chunks/_commonjsHelpers.BosuxZz1.js","_app/immutable/chunks/runtime.DPe9Nsby.js","_app/immutable/chunks/input.BFp7OrD2.js","_app/immutable/chunks/Toaster.svelte_svelte_type_style_lang.Dn3H8hS5.js","_app/immutable/chunks/index.DQfRr7yB.js","_app/immutable/chunks/login.CaLW5k7s.js","_app/immutable/chunks/password.BHhC8lsF.js","_app/immutable/chunks/email.5d07s0Wx.js","_app/immutable/chunks/handleToast.CrHR1leK.js"];
 export const stylesheets = ["_app/immutable/assets/Toaster.436keKGd.css"];
 export const fonts = [];

@@ -1,9 +1,9 @@
-import { c as create_ssr_component, d as add_attribute, v as validate_component } from "../../../../chunks/ssr.js";
+import { c as create_ssr_component, e as escape, d as add_attribute, v as validate_component } from "../../../../chunks/ssr.js";
 import { s as subscribe } from "../../../../chunks/lifecycle.js";
-import { g as getTranslationFunctions } from "../../../../chunks/index2.js";
-import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index5.js";
+import { g as getTranslationFunctions } from "../../../../chunks/index3.js";
+import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index6.js";
 import { I as Input } from "../../../../chunks/input.js";
-import { t as toast } from "../../../../chunks/Toaster.svelte_svelte_type_style_lang.js";
+import "../../../../chunks/Toaster.svelte_svelte_type_style_lang.js";
 import "../../../../chunks/client.js";
 import "just-clone";
 import "ts-deepmerge";
@@ -11,24 +11,28 @@ import { s as superForm, e as zodClient, r as registerSchema } from "../../../..
 import "../../../../chunks/index.js";
 import "devalue";
 import "memoize-weak";
-import { c as calculateStrength, p as progressColorFunction, P as Progress } from "../../../../chunks/passwordComplexity.js";
+import { c as calculateStrength, p as progressColorFunction, a as confirm_password, P as Progress } from "../../../../chunks/passwordComplexity.js";
 import "dequal";
-import "../../../../chunks/index4.js";
+import "../../../../chunks/index2.js";
+import { h as handleToast, p as password, e as enter_your_password } from "../../../../chunks/handleToast.js";
+import { e as email } from "../../../../chunks/email.js";
+import { l as languageTag } from "../../../../chunks/runtime.js";
+import { e as enter_your_email } from "../../../../chunks/enter_your_email.js";
+import { r as register } from "../../../../chunks/register.js";
+const register_an_account$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Register an account`;
+const register_an_account = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: register_an_account$1,
+    fr: register_an_account$1,
+    ro: register_an_account$1
+  }[options.languageTag ?? languageTag()]();
+};
 const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let arePasswordsMathing;
   let strength;
   let progressColor;
   let $formData, $$unsubscribe_formData;
   let $delayed, $$unsubscribe_delayed;
-  function handleErrorToast(status, error) {
-    toast.error(error, {
-      description: "Error Code: " + status,
-      action: {
-        label: "Close",
-        onClick: () => console.info("Closed error message: " + error + " with the status: " + status)
-      }
-    });
-  }
   let { data } = $$props;
   const form = superForm(data, { validators: zodClient(registerSchema) });
   const { form: formData, enhance, delayed, message } = form;
@@ -36,7 +40,7 @@ const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots
   $$unsubscribe_delayed = subscribe(delayed, (value) => $delayed = value);
   message.subscribe((value) => {
     if (value) {
-      handleErrorToast(value.status, value.message);
+      handleToast("error", value.status, value.message);
     }
   });
   const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
@@ -54,17 +58,17 @@ const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots
     arePasswordsMathing = $formData.password === $formData.confirmPassword;
     strength = calculateStrength($formData.password);
     progressColor = progressColorFunction(arePasswordsMathing, $formData.confirmPassword, strength);
-    $$rendered = `${$$result.head += `<!-- HEAD_svelte-1hsbyuy_START -->${$$result.title = `<title>Register an account</title>`, ""}<!-- HEAD_svelte-1hsbyuy_END -->`, ""} <div class="grid gap-2"><form method="POST"${add_attribute("action", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`?/formSubmit`, void 0), 0)} class="w-full grid gap-1"> ${validate_component(Form_field, "Form.Field").$$render($$result, { form, name: "email" }, {}, {
+    $$rendered = `${$$result.head += `<!-- HEAD_svelte-1cntsym_START -->${$$result.title = `<title>${escape(/* @__PURE__ */ register_an_account())}</title>`, ""}<!-- HEAD_svelte-1cntsym_END -->`, ""} <div class="grid gap-2"><form method="POST"${add_attribute("action", paraglide_sveltekit_translate_attribute_pass_translateAttribute(`?/formSubmit`, void 0), 0)} class="w-full grid gap-1"> ${validate_component(Form_field, "Form.Field").$$render($$result, { form, name: "email" }, {}, {
       default: () => {
         return `${validate_component(Control, "Form.Control").$$render($$result, {}, {}, {
           default: ({ attrs }) => {
             return `${validate_component(Form_label, "Form.Label").$$render($$result, { class: "font-semibold" }, {}, {
               default: () => {
-                return `Email`;
+                return `${escape(email())}`;
               }
             })} ${validate_component(Input, "Input").$$render(
               $$result,
-              Object.assign({}, { disabled: $delayed }, { autocapitalize: "none" }, { autocomplete: "email" }, { autocorrect: "off" }, attrs, { type: "email" }, { placeholder: "Enter your email" }, { value: $formData.email }),
+              Object.assign({}, { disabled: $delayed }, { autocapitalize: "none" }, { autocomplete: "email" }, { autocorrect: "off" }, attrs, { type: "email" }, { placeholder: enter_your_email() }, { value: $formData.email }),
               {
                 value: ($$value) => {
                   $formData.email = $$value;
@@ -82,11 +86,11 @@ const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots
           default: ({ attrs }) => {
             return `${validate_component(Form_label, "Form.Label").$$render($$result, { class: "font-semibold" }, {}, {
               default: () => {
-                return `Password`;
+                return `${escape(password())}`;
               }
             })} ${validate_component(Input, "Input").$$render(
               $$result,
-              Object.assign({}, attrs, { type: "password" }, { disabled: $delayed }, { placeholder: "Enter your password" }, { value: $formData.password }),
+              Object.assign({}, attrs, { type: "password" }, { disabled: $delayed }, { placeholder: enter_your_password() }, { value: $formData.password }),
               {
                 value: ($$value) => {
                   $formData.password = $$value;
@@ -104,11 +108,11 @@ const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots
           default: ({ attrs }) => {
             return `${validate_component(Form_label, "Form.Label").$$render($$result, { class: "font-semibold" }, {}, {
               default: () => {
-                return `Confirm password`;
+                return `${escape(confirm_password())}`;
               }
             })} ${validate_component(Input, "Input").$$render(
               $$result,
-              Object.assign({}, attrs, { type: "password" }, { disabled: $delayed }, { placeholder: "Enter your password" }, { value: $formData.confirmPassword }),
+              Object.assign({}, attrs, { type: "password" }, { disabled: $delayed }, { placeholder: enter_your_password() }, { value: $formData.confirmPassword }),
               {
                 value: ($$value) => {
                   $formData.confirmPassword = $$value;
@@ -139,7 +143,7 @@ const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots
       {},
       {
         default: () => {
-          return `${$delayed ? `${validate_component(Spinner, "Spinner").$$render($$result, {}, {}, {})}` : `Register an account`}`;
+          return `${$delayed ? `${validate_component(Spinner, "Spinner").$$render($$result, {}, {}, {})}` : `${escape(/* @__PURE__ */ register_an_account())}`}`;
         }
       }
     )}</form>  </div>`;
@@ -151,7 +155,7 @@ const Register_form = create_ssr_component(($$result, $$props, $$bindings, slots
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
-  return `<h1 class="text-4xl font-bold tracking-tight capitalize" data-svelte-h="svelte-1hc0y5v">Register</h1> ${validate_component(Register_form, "SettingsForm").$$render($$result, { data: data.form }, {}, {})}`;
+  return `<h1 class="text-4xl font-bold tracking-tight capitalize">${escape(register())}</h1> ${validate_component(Register_form, "SettingsForm").$$render($$result, { data: data.form }, {}, {})}`;
 });
 export {
   Page as default

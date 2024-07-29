@@ -1,13 +1,13 @@
 import { c as create_ssr_component, f as each, d as add_attribute, v as validate_component, g as add_styles, h as merge_ssr_styles, e as escape, m as missing_component, s as spread, a as escape_attribute_value, b as escape_object } from "../../chunks/ssr.js";
-import { s as subscribe, f as get_store_value, n as noop, e as compute_rest_props, o as onDestroy } from "../../chunks/lifecycle.js";
+import { s as subscribe, l as get_store_value, n as noop, c as compute_rest_props, o as onDestroy } from "../../chunks/lifecycle.js";
 import { p as page } from "../../chunks/stores.js";
 import { n as normaliseBase, p as parseRoute, s as serializeRoute, g as getHrefBetween, i as i18n } from "../../chunks/i18n.js";
 import { b as base } from "../../chunks/paths.js";
 import "../../chunks/client.js";
-import { s as setParaglideContext, g as getTranslationFunctions } from "../../chunks/index2.js";
+import { s as setParaglideContext, g as getTranslationFunctions } from "../../chunks/index3.js";
 import "@inlang/paraglide-js/internal/adapter-utils";
 import { c as cn, a as toastState, u as useEffect } from "../../chunks/Toaster.svelte_svelte_type_style_lang.js";
-import { d as derived, w as writable } from "../../chunks/index3.js";
+import { d as derived, w as writable } from "../../chunks/index4.js";
 function isExternal(url, currentUrl, base2) {
   const absoluteBase = new URL(base2 ?? "/", currentUrl).pathname;
   return url.origin !== currentUrl.origin || !url.pathname.startsWith(absoluteBase);

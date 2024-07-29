@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Slider } from '$lib/components/ui/slider/index.js'
   import Button from '@/components/ui/button/button.svelte'
-
+  import { createEventDispatcher } from 'svelte'
   export let options: string[]
 
   const minValue = Number(options[0])
@@ -16,8 +16,10 @@
     else response = startingValue.toString()
   }
 
+  const dispatch = createEventDispatcher()
+
   function handleClick() {
-    console.log(slider_value[0])
+    dispatch('responseSelected', { response })
   }
 </script>
 

@@ -1,4 +1,4 @@
-import { r as run_all, j as blank_object, c as current_component, a as set_current_component } from "./lifecycle.js";
+import { r as run_all, k as blank_object, b as current_component, a as set_current_component } from "./lifecycle.js";
 function ensure_array_like(array_like_or_iterator) {
   return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
 }

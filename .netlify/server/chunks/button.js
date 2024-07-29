@@ -1,8 +1,9 @@
-import { e as compute_rest_props } from "./lifecycle.js";
+import { c as compute_rest_props } from "./lifecycle.js";
 import { c as create_ssr_component, s as spread, b as escape_object, d as add_attribute, v as validate_component } from "./ssr.js";
 import "dequal";
-import { i as is_void, c as cn, b as buttonVariants } from "./index4.js";
-import { g as getTranslationFunctions } from "./index2.js";
+import { b as buttonVariants } from "./index2.js";
+import { i as is_void, c as cn } from "./utils.js";
+import { g as getTranslationFunctions } from "./index3.js";
 function getAttrs(builders) {
   const attrs = {};
   builders.forEach((builder) => {

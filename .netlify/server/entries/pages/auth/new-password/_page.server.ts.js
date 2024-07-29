@@ -29,7 +29,6 @@ const actions = {
       const status = supabaseError.status;
       return message(form, { status, message: supabaseError.message });
     } else {
-      console.log("success");
       throw redirect(303, "/auth/login");
     }
   }

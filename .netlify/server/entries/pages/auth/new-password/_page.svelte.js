@@ -1,9 +1,9 @@
-import { c as create_ssr_component, d as add_attribute, v as validate_component } from "../../../../chunks/ssr.js";
+import { c as create_ssr_component, d as add_attribute, v as validate_component, e as escape } from "../../../../chunks/ssr.js";
 import { s as subscribe } from "../../../../chunks/lifecycle.js";
-import { g as getTranslationFunctions } from "../../../../chunks/index2.js";
-import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index5.js";
+import { g as getTranslationFunctions } from "../../../../chunks/index3.js";
+import { F as Form_field, C as Control, a as Form_label, b as Form_field_errors, c as Form_button, S as Spinner } from "../../../../chunks/index6.js";
 import { I as Input } from "../../../../chunks/input.js";
-import { t as toast } from "../../../../chunks/Toaster.svelte_svelte_type_style_lang.js";
+import "../../../../chunks/Toaster.svelte_svelte_type_style_lang.js";
 import "../../../../chunks/client.js";
 import "just-clone";
 import "ts-deepmerge";
@@ -11,22 +11,31 @@ import { s as superForm, e as zodClient, p as passwordConfirmSchema } from "../.
 import "../../../../chunks/index.js";
 import "devalue";
 import "memoize-weak";
-import { c as calculateStrength, p as progressColorFunction, P as Progress } from "../../../../chunks/passwordComplexity.js";
+import { c as calculateStrength, p as progressColorFunction, a as confirm_password, P as Progress } from "../../../../chunks/passwordComplexity.js";
+import { h as handleToast, p as password, e as enter_your_password } from "../../../../chunks/handleToast.js";
+import { l as languageTag } from "../../../../chunks/runtime.js";
+const new_password$1 = /* @__NO_SIDE_EFFECTS__ */ () => `New Password`;
+const change_password$1 = /* @__NO_SIDE_EFFECTS__ */ () => `Change Password`;
+const new_password = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: new_password$1,
+    fr: new_password$1,
+    ro: new_password$1
+  }[options.languageTag ?? languageTag()]();
+};
+const change_password = /* @__NO_SIDE_EFFECTS__ */ (params = {}, options = {}) => {
+  return {
+    en: change_password$1,
+    fr: change_password$1,
+    ro: change_password$1
+  }[options.languageTag ?? languageTag()]();
+};
 const New_password = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let arePasswordsMathing;
   let strength;
   let progressColor;
   let $formData, $$unsubscribe_formData;
   let $delayed, $$unsubscribe_delayed;
-  function handleErrorToast(status, error) {
-    toast.error(error, {
-      description: "Error Code: " + status,
-      action: {
-        label: "Close",
-        onClick: () => console.info("Closed error message: " + error + " with the status: " + status)
-      }
-    });
-  }
   let { data } = $$props;
   const form = superForm(data, {
     validators: zodClient(passwordConfirmSchema)
@@ -36,7 +45,7 @@ const New_password = create_ssr_component(($$result, $$props, $$bindings, slots)
   $$unsubscribe_delayed = subscribe(delayed, (value) => $delayed = value);
   message.subscribe((value) => {
     if (value) {
-      handleErrorToast(value.status, value.message);
+      handleToast("error", value.status, value.message);
     }
   });
   const paraglide_sveltekit_translate_attribute_pass_translationFunctions = getTranslationFunctions();
@@ -60,11 +69,11 @@ const New_password = create_ssr_component(($$result, $$props, $$bindings, slots)
           default: ({ attrs }) => {
             return `${validate_component(Form_label, "Form.Label").$$render($$result, { class: "font-semibold" }, {}, {
               default: () => {
-                return `Password`;
+                return `${escape(password())}`;
               }
             })} ${validate_component(Input, "Input").$$render(
               $$result,
-              Object.assign({}, attrs, { type: "password" }, { disabled: $delayed }, { placeholder: "Enter your password" }, { value: $formData.password }),
+              Object.assign({}, attrs, { type: "password" }, { disabled: $delayed }, { placeholder: enter_your_password() }, { value: $formData.password }),
               {
                 value: ($$value) => {
                   $formData.password = $$value;
@@ -82,11 +91,11 @@ const New_password = create_ssr_component(($$result, $$props, $$bindings, slots)
           default: ({ attrs }) => {
             return `${validate_component(Form_label, "Form.Label").$$render($$result, { class: "font-semibold" }, {}, {
               default: () => {
-                return `Confirm password`;
+                return `${escape(confirm_password())}`;
               }
             })} ${validate_component(Input, "Input").$$render(
               $$result,
-              Object.assign({}, attrs, { type: "password" }, { disabled: $delayed }, { placeholder: "Enter your password" }, { value: $formData.confirmPassword }),
+              Object.assign({}, attrs, { type: "password" }, { disabled: $delayed }, { placeholder: enter_your_password() }, { value: $formData.confirmPassword }),
               {
                 value: ($$value) => {
                   $formData.confirmPassword = $$value;
@@ -103,7 +112,7 @@ const New_password = create_ssr_component(($$result, $$props, $$bindings, slots)
       {
         value: strength,
         max: 100,
-        class: ` ${progressColor} `
+        class: ` ${progressColor}`
       },
       {},
       {}
@@ -117,7 +126,7 @@ const New_password = create_ssr_component(($$result, $$props, $$bindings, slots)
       {},
       {
         default: () => {
-          return `${$delayed ? `${validate_component(Spinner, "Spinner").$$render($$result, {}, {}, {})}` : `Change Password`}`;
+          return `${$delayed ? `${validate_component(Spinner, "Spinner").$$render($$result, {}, {}, {})}` : `${escape(/* @__PURE__ */ change_password())}`}`;
         }
       }
     )}</form></div>`;
@@ -129,7 +138,7 @@ const New_password = create_ssr_component(($$result, $$props, $$bindings, slots)
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
-  return `${$$result.head += `<!-- HEAD_svelte-1aub779_START -->New Password<!-- HEAD_svelte-1aub779_END -->`, ""} ${validate_component(New_password, "SettingsForm").$$render($$result, { data: data.form }, {}, {})}`;
+  return `${$$result.head += `<!-- HEAD_svelte-10tu9pm_START -->${escape(/* @__PURE__ */ new_password())}<!-- HEAD_svelte-10tu9pm_END -->`, ""} ${validate_component(New_password, "SettingsForm").$$render($$result, { data: data.form }, {}, {})}`;
 });
 export {
   Page as default
