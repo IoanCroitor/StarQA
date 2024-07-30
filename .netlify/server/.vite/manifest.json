@@ -1,0 +1,935 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "name": "internal",
+    "src": ".svelte-kit/generated/server/internal.js",
+    "isEntry": true,
+    "imports": [
+      "_internal.js",
+      "_paths.js"
+    ]
+  },
+  "_Icon.js": {
+    "file": "chunks/Icon.js",
+    "name": "Icon",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_functions.js"
+    ]
+  },
+  "_Toaster.svelte_svelte_type_style_lang.js": {
+    "file": "chunks/Toaster.svelte_svelte_type_style_lang.js",
+    "name": "Toaster.svelte_svelte_type_style_lang",
+    "imports": [
+      "_lifecycle.js",
+      "_index5.js"
+    ],
+    "css": [
+      "_app/immutable/assets/Toaster.CDv3jphE.css"
+    ]
+  },
+  "_button.js": {
+    "file": "chunks/button.js",
+    "name": "button",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index3.js",
+      "_utils.js",
+      "_index2.js"
+    ]
+  },
+  "_card-description.js": {
+    "file": "chunks/card-description.js",
+    "name": "card-description",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_utils.js"
+    ]
+  },
+  "_card-footer.js": {
+    "file": "chunks/card-footer.js",
+    "name": "card-footer",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_utils.js"
+    ]
+  },
+  "_card-title.js": {
+    "file": "chunks/card-title.js",
+    "name": "card-title",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_utils.js",
+      "_index2.js"
+    ]
+  },
+  "_carta.js": {
+    "file": "chunks/carta.js",
+    "name": "carta",
+    "imports": [
+      "_ssr.js"
+    ],
+    "dynamicImports": [
+      "node_modules/carta-md/dist/internal/highlight.js",
+      "node_modules/carta-md/dist/internal/highlight.js"
+    ],
+    "css": [
+      "_app/immutable/assets/carta.DWxLKexL.css"
+    ]
+  },
+  "_client.js": {
+    "file": "chunks/client.js",
+    "name": "client",
+    "imports": [
+      "_exports.js"
+    ]
+  },
+  "_constants.js": {
+    "file": "chunks/constants.js",
+    "name": "constants"
+  },
+  "_dropdown-menu-separator.js": {
+    "file": "chunks/dropdown-menu-separator.js",
+    "name": "dropdown-menu-separator",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index3.js",
+      "_index6.js",
+      "_utils.js"
+    ]
+  },
+  "_email.js": {
+    "file": "chunks/email.js",
+    "name": "email",
+    "imports": [
+      "_runtime.js"
+    ]
+  },
+  "_enter_your_email.js": {
+    "file": "chunks/enter_your_email.js",
+    "name": "enter_your_email",
+    "imports": [
+      "_runtime.js"
+    ]
+  },
+  "_events.js": {
+    "file": "chunks/events.js",
+    "name": "events",
+    "imports": [
+      "_lifecycle.js"
+    ]
+  },
+  "_exports.js": {
+    "file": "chunks/exports.js",
+    "name": "exports"
+  },
+  "_functions.js": {
+    "file": "chunks/functions.js",
+    "name": "functions"
+  },
+  "_handleToast.js": {
+    "file": "chunks/handleToast.js",
+    "name": "handleToast",
+    "imports": [
+      "_runtime.js",
+      "_Toaster.svelte_svelte_type_style_lang.js"
+    ]
+  },
+  "_helpers.js": {
+    "file": "chunks/helpers.js",
+    "name": "helpers",
+    "imports": [
+      "_index3.js",
+      "_index5.js",
+      "_lifecycle.js",
+      "_scheduler.js"
+    ]
+  },
+  "_i18n.js": {
+    "file": "chunks/i18n.js",
+    "name": "i18n",
+    "imports": [
+      "_client.js",
+      "_paths.js",
+      "_constants.js",
+      "_stores.js",
+      "_lifecycle.js",
+      "_runtime.js"
+    ]
+  },
+  "_index.js": {
+    "file": "chunks/index.js",
+    "name": "index"
+  },
+  "_index2.js": {
+    "file": "chunks/index2.js",
+    "name": "index",
+    "imports": [
+      "_constants.js",
+      "_lifecycle.js"
+    ]
+  },
+  "_index3.js": {
+    "file": "chunks/index3.js",
+    "name": "index",
+    "imports": [
+      "_index5.js",
+      "_lifecycle.js",
+      "_ssr2.js"
+    ]
+  },
+  "_index4.js": {
+    "file": "chunks/index4.js",
+    "name": "index"
+  },
+  "_index5.js": {
+    "file": "chunks/index5.js",
+    "name": "index",
+    "imports": [
+      "_lifecycle.js"
+    ]
+  },
+  "_index6.js": {
+    "file": "chunks/index6.js",
+    "name": "index",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index3.js",
+      "_utils.js",
+      "_index2.js",
+      "_events.js",
+      "_index5.js",
+      "_updater.js",
+      "_helpers.js",
+      "_scheduler.js"
+    ]
+  },
+  "_index7.js": {
+    "file": "chunks/index7.js",
+    "name": "index",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_utils.js",
+      "_index2.js",
+      "_index4.js"
+    ]
+  },
+  "_index8.js": {
+    "file": "chunks/index8.js",
+    "name": "index",
+    "imports": [
+      "_ssr.js",
+      "_lifecycle.js",
+      "_label.js",
+      "_utils.js",
+      "_index5.js",
+      "_index3.js",
+      "_button.js"
+    ]
+  },
+  "_input.js": {
+    "file": "chunks/input.js",
+    "name": "input",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_utils.js"
+    ]
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "name": "internal",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_ssr2.js",
+      "_paths.js"
+    ],
+    "dynamicImports": [
+      "src/hooks.server.ts",
+      "src/hooks.ts"
+    ]
+  },
+  "_label.js": {
+    "file": "chunks/label.js",
+    "name": "label",
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index3.js",
+      "_events.js",
+      "_utils.js"
+    ]
+  },
+  "_lifecycle.js": {
+    "file": "chunks/lifecycle.js",
+    "name": "lifecycle"
+  },
+  "_login.js": {
+    "file": "chunks/login.js",
+    "name": "login",
+    "imports": [
+      "_runtime.js"
+    ]
+  },
+  "_or.js": {
+    "file": "chunks/or.js",
+    "name": "or",
+    "imports": [
+      "_runtime.js"
+    ]
+  },
+  "_passwordComplexity.js": {
+    "file": "chunks/passwordComplexity.js",
+    "name": "passwordComplexity",
+    "imports": [
+      "_runtime.js",
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index3.js",
+      "_updater.js",
+      "_index5.js",
+      "_events.js",
+      "_utils.js"
+    ]
+  },
+  "_paths.js": {
+    "file": "chunks/paths.js",
+    "name": "paths"
+  },
+  "_prod-ssr.js": {
+    "file": "chunks/prod-ssr.js",
+    "name": "prod-ssr"
+  },
+  "_public.js": {
+    "file": "chunks/public.js",
+    "name": "public"
+  },
+  "_register.js": {
+    "file": "chunks/register.js",
+    "name": "register",
+    "imports": [
+      "_runtime.js"
+    ]
+  },
+  "_runtime.js": {
+    "file": "chunks/runtime.js",
+    "name": "runtime"
+  },
+  "_scheduler.js": {
+    "file": "chunks/scheduler.js",
+    "name": "scheduler",
+    "imports": [
+      "_lifecycle.js"
+    ]
+  },
+  "_ssr.js": {
+    "file": "chunks/ssr.js",
+    "name": "ssr",
+    "imports": [
+      "_lifecycle.js"
+    ]
+  },
+  "_ssr2.js": {
+    "file": "chunks/ssr2.js",
+    "name": "ssr"
+  },
+  "_stores.js": {
+    "file": "chunks/stores.js",
+    "name": "stores",
+    "imports": [
+      "_lifecycle.js",
+      "_client.js"
+    ]
+  },
+  "_superValidate.js": {
+    "file": "chunks/superValidate.js",
+    "name": "superValidate",
+    "imports": [
+      "_index.js",
+      "_zod-schema.js"
+    ]
+  },
+  "_updater.js": {
+    "file": "chunks/updater.js",
+    "name": "updater",
+    "imports": [
+      "_index3.js",
+      "_index5.js"
+    ]
+  },
+  "_utils.js": {
+    "file": "chunks/utils.js",
+    "name": "utils"
+  },
+  "_zod-schema.js": {
+    "file": "chunks/zod-schema.js",
+    "name": "zod-schema",
+    "imports": [
+      "_index5.js",
+      "_stores.js",
+      "_prod-ssr.js",
+      "_lifecycle.js",
+      "_scheduler.js",
+      "_client.js",
+      "_runtime.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "name": "entries/fallbacks/error.svelte",
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_stores.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "name": "index",
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js",
+    "isEntry": true,
+    "imports": [
+      "_prod-ssr.js",
+      "_paths.js",
+      "_index.js",
+      "_exports.js",
+      "_index5.js",
+      "_internal.js"
+    ]
+  },
+  "node_modules/carta-md/dist/internal/assets/markdown.js": {
+    "file": "chunks/markdown.js",
+    "name": "markdown",
+    "src": "node_modules/carta-md/dist/internal/assets/markdown.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/carta-md/dist/internal/assets/theme-dark.js": {
+    "file": "chunks/theme-dark.js",
+    "name": "theme-dark",
+    "src": "node_modules/carta-md/dist/internal/assets/theme-dark.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/carta-md/dist/internal/assets/theme-light.js": {
+    "file": "chunks/theme-light.js",
+    "name": "theme-light",
+    "src": "node_modules/carta-md/dist/internal/assets/theme-light.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/carta-md/dist/internal/highlight.js": {
+    "file": "chunks/highlight.js",
+    "name": "highlight",
+    "src": "node_modules/carta-md/dist/internal/highlight.js",
+    "isDynamicEntry": true,
+    "dynamicImports": [
+      "node_modules/carta-md/dist/internal/assets/theme-light.js",
+      "node_modules/carta-md/dist/internal/assets/theme-dark.js",
+      "node_modules/carta-md/dist/internal/assets/markdown.js"
+    ]
+  },
+  "src/hooks.server.ts": {
+    "file": "chunks/hooks.server.js",
+    "name": "hooks.server",
+    "src": "src/hooks.server.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_i18n.js",
+      "_index.js",
+      "_public.js"
+    ]
+  },
+  "src/hooks.ts": {
+    "file": "chunks/hooks.js",
+    "name": "hooks",
+    "src": "src/hooks.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_i18n.js"
+    ]
+  },
+  "src/routes/+layout.server.ts": {
+    "file": "entries/pages/_layout.server.ts.js",
+    "name": "entries/pages/_layout.server.ts",
+    "src": "src/routes/+layout.server.ts",
+    "isEntry": true
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "name": "entries/pages/_layout.svelte",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_lifecycle.js",
+      "_stores.js",
+      "_i18n.js",
+      "_paths.js",
+      "_client.js",
+      "_index2.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_index5.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.__bzfddL.css"
+    ]
+  },
+  "src/routes/+layout.ts": {
+    "file": "entries/pages/_layout.ts.js",
+    "name": "entries/pages/_layout.ts",
+    "src": "src/routes/+layout.ts",
+    "isEntry": true,
+    "imports": [
+      "_public.js"
+    ]
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "name": "entries/pages/_page.svelte",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_index2.js",
+      "_index3.js",
+      "_runtime.js",
+      "_login.js",
+      "_register.js",
+      "_button.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.DR_iaUrK.css"
+    ]
+  },
+  "src/routes/api/convertMarkdown/+server.ts": {
+    "file": "entries/endpoints/api/convertMarkdown/_server.ts.js",
+    "name": "entries/endpoints/api/convertMarkdown/_server.ts",
+    "src": "src/routes/api/convertMarkdown/+server.ts",
+    "isEntry": true,
+    "imports": [
+      "_carta.js"
+    ]
+  },
+  "src/routes/auth/+layout.server.ts": {
+    "file": "entries/pages/auth/_layout.server.ts.js",
+    "name": "entries/pages/auth/_layout.server.ts",
+    "src": "src/routes/auth/+layout.server.ts",
+    "isEntry": true
+  },
+  "src/routes/auth/+layout.svelte": {
+    "file": "entries/pages/auth/_layout.svelte.js",
+    "name": "entries/pages/auth/_layout.svelte",
+    "src": "src/routes/auth/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index2.js",
+      "_utils.js",
+      "_index3.js",
+      "_client.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_runtime.js",
+      "_stores.js",
+      "_button.js"
+    ]
+  },
+  "src/routes/auth/callback/+server.ts": {
+    "file": "entries/endpoints/auth/callback/_server.ts.js",
+    "name": "entries/endpoints/auth/callback/_server.ts",
+    "src": "src/routes/auth/callback/+server.ts",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/auth/confirm/+server.ts": {
+    "file": "entries/endpoints/auth/confirm/_server.ts.js",
+    "name": "entries/endpoints/auth/confirm/_server.ts",
+    "src": "src/routes/auth/confirm/+server.ts",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/auth/google/+server.ts": {
+    "file": "entries/endpoints/auth/google/_server.ts.js",
+    "name": "entries/endpoints/auth/google/_server.ts",
+    "src": "src/routes/auth/google/+server.ts",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/auth/login/+page.server.ts": {
+    "file": "entries/pages/auth/login/_page.server.ts.js",
+    "name": "entries/pages/auth/login/_page.server.ts",
+    "src": "src/routes/auth/login/+page.server.ts",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_client.js",
+      "_zod-schema.js",
+      "_superValidate.js"
+    ]
+  },
+  "src/routes/auth/login/+page.svelte": {
+    "file": "entries/pages/auth/login/_page.svelte.js",
+    "name": "entries/pages/auth/login/_page.svelte",
+    "src": "src/routes/auth/login/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_lifecycle.js",
+      "_index2.js",
+      "_index8.js",
+      "_input.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_client.js",
+      "_zod-schema.js",
+      "_index.js",
+      "_login.js",
+      "_runtime.js",
+      "_handleToast.js",
+      "_email.js"
+    ]
+  },
+  "src/routes/auth/new-password/+page.server.ts": {
+    "file": "entries/pages/auth/new-password/_page.server.ts.js",
+    "name": "entries/pages/auth/new-password/_page.server.ts",
+    "src": "src/routes/auth/new-password/+page.server.ts",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_client.js",
+      "_zod-schema.js",
+      "_superValidate.js"
+    ]
+  },
+  "src/routes/auth/new-password/+page.svelte": {
+    "file": "entries/pages/auth/new-password/_page.svelte.js",
+    "name": "entries/pages/auth/new-password/_page.svelte",
+    "src": "src/routes/auth/new-password/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_lifecycle.js",
+      "_index2.js",
+      "_index8.js",
+      "_input.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_client.js",
+      "_zod-schema.js",
+      "_index.js",
+      "_passwordComplexity.js",
+      "_handleToast.js",
+      "_runtime.js"
+    ]
+  },
+  "src/routes/auth/register/+page.server.ts": {
+    "file": "entries/pages/auth/register/_page.server.ts.js",
+    "name": "entries/pages/auth/register/_page.server.ts",
+    "src": "src/routes/auth/register/+page.server.ts",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_client.js",
+      "_zod-schema.js",
+      "_superValidate.js"
+    ]
+  },
+  "src/routes/auth/register/+page.svelte": {
+    "file": "entries/pages/auth/register/_page.svelte.js",
+    "name": "entries/pages/auth/register/_page.svelte",
+    "src": "src/routes/auth/register/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_lifecycle.js",
+      "_index2.js",
+      "_index8.js",
+      "_input.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_client.js",
+      "_zod-schema.js",
+      "_index.js",
+      "_passwordComplexity.js",
+      "_index3.js",
+      "_handleToast.js",
+      "_email.js",
+      "_runtime.js",
+      "_enter_your_email.js",
+      "_register.js"
+    ]
+  },
+  "src/routes/auth/reset/+page.server.ts": {
+    "file": "entries/pages/auth/reset/_page.server.ts.js",
+    "name": "entries/pages/auth/reset/_page.server.ts",
+    "src": "src/routes/auth/reset/+page.server.ts",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_client.js",
+      "_zod-schema.js",
+      "_superValidate.js",
+      "_runtime.js"
+    ]
+  },
+  "src/routes/auth/reset/+page.svelte": {
+    "file": "entries/pages/auth/reset/_page.svelte.js",
+    "name": "entries/pages/auth/reset/_page.svelte",
+    "src": "src/routes/auth/reset/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_lifecycle.js",
+      "_index2.js",
+      "_index8.js",
+      "_input.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_client.js",
+      "_zod-schema.js",
+      "_index.js",
+      "_email.js",
+      "_runtime.js",
+      "_enter_your_email.js"
+    ]
+  },
+  "src/routes/home-2/+layout.svelte": {
+    "file": "entries/pages/home-2/_layout.svelte.js",
+    "name": "entries/pages/home-2/_layout.svelte",
+    "src": "src/routes/home-2/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_index2.js",
+      "_index4.js",
+      "_index3.js",
+      "_lifecycle.js",
+      "_index5.js",
+      "_scheduler.js",
+      "_updater.js",
+      "_helpers.js",
+      "_index6.js",
+      "_events.js",
+      "_button.js",
+      "_dropdown-menu-separator.js",
+      "_card-title.js",
+      "_card-description.js",
+      "_input.js",
+      "_client.js",
+      "_or.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_index7.js",
+      "_utils.js"
+    ]
+  },
+  "src/routes/home-2/+page.svelte": {
+    "file": "entries/pages/home-2/_page.svelte.js",
+    "name": "entries/pages/home-2/_page.svelte",
+    "src": "src/routes/home-2/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_index3.js"
+    ]
+  },
+  "src/routes/home-2/completed/+page.svelte": {
+    "file": "entries/pages/home-2/completed/_page.svelte.js",
+    "name": "entries/pages/home-2/completed/_page.svelte",
+    "src": "src/routes/home-2/completed/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index3.js",
+      "_index2.js",
+      "_card-title.js",
+      "_card-description.js",
+      "_index5.js"
+    ]
+  },
+  "src/routes/home-2/create/+page.svelte": {
+    "file": "entries/pages/home-2/create/_page.svelte.js",
+    "name": "entries/pages/home-2/create/_page.svelte",
+    "src": "src/routes/home-2/create/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "src/routes/home/+layout.server.ts": {
+    "file": "entries/pages/home/_layout.server.ts.js",
+    "name": "entries/pages/home/_layout.server.ts",
+    "src": "src/routes/home/+layout.server.ts",
+    "isEntry": true
+  },
+  "src/routes/home/+layout.svelte": {
+    "file": "entries/pages/home/_layout.svelte.js",
+    "name": "entries/pages/home/_layout.svelte",
+    "src": "src/routes/home/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_index2.js",
+      "_lifecycle.js",
+      "_index3.js",
+      "_updater.js",
+      "_index5.js",
+      "_events.js",
+      "_utils.js",
+      "_index6.js",
+      "_button.js",
+      "_dropdown-menu-separator.js"
+    ]
+  },
+  "src/routes/home/+page.svelte": {
+    "file": "entries/pages/home/_page.svelte.js",
+    "name": "entries/pages/home/_page.svelte",
+    "src": "src/routes/home/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_index2.js",
+      "_client.js",
+      "_index3.js",
+      "_input.js",
+      "_card-title.js",
+      "_card-description.js",
+      "_card-footer.js",
+      "_or.js",
+      "_button.js"
+    ]
+  },
+  "src/routes/home/[quizID]/+page.server.ts": {
+    "file": "entries/pages/home/_quizID_/_page.server.ts.js",
+    "name": "entries/pages/home/_quizID_/_page.server.ts",
+    "src": "src/routes/home/[quizID]/+page.server.ts",
+    "isEntry": true
+  },
+  "src/routes/home/[quizID]/+page.svelte": {
+    "file": "entries/pages/home/_quizID_/_page.svelte.js",
+    "name": "entries/pages/home/_quizID_/_page.svelte",
+    "src": "src/routes/home/[quizID]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_lifecycle.js",
+      "_ssr.js",
+      "_index3.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_card-title.js",
+      "_card-description.js",
+      "_functions.js",
+      "_stores.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.DnberQuA.css"
+    ]
+  },
+  "src/routes/home/create/+page.svelte": {
+    "file": "entries/pages/home/create/_page.svelte.js",
+    "name": "entries/pages/home/create/_page.svelte",
+    "src": "src/routes/home/create/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_lifecycle.js",
+      "_card-title.js",
+      "_utils.js",
+      "_input.js",
+      "_label.js",
+      "_Icon.js",
+      "_index3.js",
+      "_index5.js",
+      "_helpers.js",
+      "_updater.js",
+      "_scheduler.js",
+      "_events.js",
+      "_carta.js",
+      "_index2.js",
+      "_index7.js",
+      "_index4.js",
+      "_button.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_client.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.E0USghBu.css"
+    ]
+  },
+  "src/routes/home/create/+page.ts": {
+    "file": "entries/pages/home/create/_page.ts.js",
+    "name": "entries/pages/home/create/_page.ts",
+    "src": "src/routes/home/create/+page.ts",
+    "isEntry": true
+  },
+  "src/routes/home/my-quizzes/+page.svelte": {
+    "file": "entries/pages/home/my-quizzes/_page.svelte.js",
+    "name": "entries/pages/home/my-quizzes/_page.svelte",
+    "src": "src/routes/home/my-quizzes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_public.js",
+      "_index4.js",
+      "_index3.js",
+      "_card-title.js",
+      "_card-description.js",
+      "_card-footer.js",
+      "_index6.js",
+      "_lifecycle.js",
+      "_utils.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_Icon.js",
+      "_button.js"
+    ]
+  },
+  "src/routes/logout/+page.svelte": {
+    "file": "entries/pages/logout/_page.svelte.js",
+    "name": "entries/pages/logout/_page.svelte",
+    "src": "src/routes/logout/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_client.js",
+      "_Toaster.svelte_svelte_type_style_lang.js",
+      "_index.js"
+    ]
+  },
+  "src/routes/privacy/+page.svelte": {
+    "file": "entries/pages/privacy/_page.svelte.js",
+    "name": "entries/pages/privacy/_page.svelte",
+    "src": "src/routes/privacy/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "src/routes/profile/+page.svelte": {
+    "file": "entries/pages/profile/_page.svelte.js",
+    "name": "entries/pages/profile/_page.svelte",
+    "src": "src/routes/profile/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "src/routes/terms/+page.svelte": {
+    "file": "entries/pages/terms/_page.svelte.js",
+    "name": "entries/pages/terms/_page.svelte",
+    "src": "src/routes/terms/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js"
+    ]
+  }
+}

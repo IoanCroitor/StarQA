@@ -1,0 +1,12 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "hello_world": "Bonjour le monde!",
+    "tailored_just_for_you": "Conçu juste pour vous",
+    "login": "Se connecter",
+    "register": "Registre",
+    "stellar": "Stellaire",
+    "quizzes": "Quiz",
+    "crafting_stellar_quizzes": "Créer des quiz stellaires",
+    "error_loading_image_from": "Erreur de chargement de l'image depuis {author}",
+    "on": "sur {name}"
+}
