@@ -1,10 +1,11 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button/index.js'
   import Google from '$lib/components/ui/icons/google.svelte'
-  import { goto } from '$app/navigation'
   import Spinner from '@/assets/Spinner.svelte'
   import { toast } from 'svelte-sonner'
   import * as m from '$lib/paraglide/messages'
+  import { supabase } from '$lib/supabaseClient'
+
   let isLoading = false
   let errorMessage = ''
 
@@ -20,55 +21,31 @@
       },
     })
   }
-  // async function signInWithGoogle() {
-  //   isLoading = true
-  //   errorMessage = ''
-  //   try {
-  //     const response = await fetch('/auth/google', {
-  //       method: 'GET',
-  //     })
 
-  //     const contentType = response.headers.get('content-type')
-  //     if (contentType && contentType.indexOf('application/json') !== -1) {
-  //       const data = await response.json()
-  //       if (!response.ok) {
-  //         console.error('Error:', data)
-  //         errorMessage =
-  //           data.error || 'Failed to sign in with Google. Please try again.'
-  //       } else {
-  //         goto('/home')
-  //       }
-  //     } else {
-  //       // Handle non-JSON response (like a redirect)
-  //       const text = await response.text()
-  //       console.log('Non-JSON response:', text)
-  //       // You might want to handle redirects here if that's the expected behavior
-  //     }
-  //   } catch (error) {
-  //     console.error('Fetch error:', error)
-  //     errorMessage =
-  //       'Network error. Please check your connection and try again.'
-  //   } finally {
-  //     isLoading = false
-  //   }
-  // }
   async function signInWithGoogle() {
+    isLoading = true
+    errorMessage = ''
     try {
-      const response = await fetch('/auth/google', {
-        method: 'GET',
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: 'http://localhost:5173/auth/callback',
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
+        },
       })
 
-      if (response.ok) {
-        // If the response is a redirect (status 3xx), get the URL and navigate to it
-        const redirectUrl = response.url
-        window.location.href = redirectUrl
-      } else {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to initiate Google sign-in')
+      if (error) {
+        throw error
       }
     } catch (error) {
       console.error('Error initiating Google sign-in:', error)
-      // Handle the error (e.g., show an error message to the user)
+      handleErrorToast(500, String(error))
+      errorMessage = 'Failed to sign in with Google. Please try again.'
+    } finally {
+      isLoading = false
     }
   }
 </script>

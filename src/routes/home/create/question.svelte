@@ -16,10 +16,10 @@
     QuestionChildrenData,
     QuestionComponent,
   } from './types'
-  import { getAcceptType } from '@/utils'
+  import { generateRandomBinary, getAcceptType, swapElements } from '@/utils'
+  import { handleToast } from '@/handleToast'
 
   export let index: number
-
   let question_childern_data: QuestionChildrenData = {
     question_answer: '',
     slider: {
@@ -36,6 +36,7 @@
       answer: '',
     },
   }
+
   const answers_type = [
     {
       value: 'truth_false',
@@ -53,6 +54,7 @@
       component: SliderEditor,
     },
   ]
+
   // Default selection for answer
   let answer_type = {
     value: 'truth_false',
@@ -65,6 +67,9 @@
   let description_upload: MediaType | undefined = undefined
   let description_upload_type = ''
 
+  let showQuestionError = false
+  let showFileError = false
+
   const question_data: QuestionComponent = {
     response_options_values: [],
     response_option_corect: '',
@@ -75,6 +80,7 @@
     file,
     file_type: '',
   }
+
   // Updating data to parent, depricated in svelte 5
   const dispatch = createEventDispatcher()
 
@@ -93,9 +99,29 @@
   }
 
   function sendDataToParent() {
-    dispatch('update', question_data)
-    // DBG: debugging
-    // console.log('Data sent to parent: ', question_data)
+    showQuestionError = !validateQuestion()
+    showFileError = !validateFile()
+
+    if (!showQuestionError && !showFileError) {
+      dispatch('update', question_data)
+    }
+  }
+
+  function validateQuestion() {
+    return (
+      response_option_corect.trim() !== '' &&
+      title.trim() !== '' &&
+      description.trim() !== '' &&
+      response_option_corect.trim() !== '' &&
+      response_options_values.every((option) => option.trim() !== '')
+    )
+  }
+
+  function validateFile() {
+    if (description_upload) {
+      return file !== undefined
+    }
+    return true
   }
 
   $: {
@@ -106,37 +132,38 @@
     question_data.title = title
     question_data.description = description
     question_data.description_upload = description_upload
-    ;(question_data.file = file), sendDataToParent()
+    question_data.file = file
+    sendDataToParent()
   }
 
   function getComponentByType(action_type: string) {
-    // Find the entry with the matching value in the answers_type array
     const found = answers_type.find((answer) => answer.value === action_type)
-    // Return the component if found, otherwise return null or a default value
     return found ? found.component : null
   }
 
-  // Answer Component is initialized with null so it isn't shown until update
   let answer_component: any = null
   $: answer_component = getComponentByType(answer_type.value)
 
   let response_options_values: string[]
   let response_option_corect: string
 
+  const random_bit = generateRandomBinary()
   $: {
-    // store the correct answer
-
     switch (answer_type.value) {
       case 'truth_false':
         question_childern_data.question_answer =
           question_childern_data.truth_or_false.truth
-
-        response_options_values = [question_childern_data.truth_or_false.false]
+        response_options_values = [
+          question_childern_data.truth_or_false.false,
+          question_childern_data.truth_or_false.truth,
+        ]
+        if (random_bit === 0) {
+          swapElements(response_options_values, 0, 1)
+        }
         break
       case 'trivia':
         question_childern_data.question_answer =
           question_childern_data.trivia.answer
-
         response_options_values = question_childern_data.trivia.options
         break
       case 'slider':
@@ -155,18 +182,44 @@
     response_option_corect = question_childern_data.question_answer
   }
 
+  function copyToClipboard(string: string) {
+    navigator.clipboard
+      .writeText(string)
+      .then(() => {
+        handleToast('message', 200, string + ' copied in the clipboard')
+      })
+      .catch((err) => {
+        handleToast('error', 400, err)
+      })
+  }
   // DBG debugging
   // $: console.log(description_upload)
   // $: console.log(question_childern_data)
-  $: console.log(question_data)
+  // $: console.log(question_data)
 </script>
 
 <Card.Root>
   <Card.Header>
-    <div class="flex flex-row justify-between">
+    <div class="flex flex-row justify-start gap-2">
       <div class="bg-primary-foreground rounded-lg p-2 w-fit">
         <Card.Title>Question {index + 1}</Card.Title>
       </div>
+      {#if showQuestionError}
+        <div
+          class="bg-red-500/20 text-red-500/80 rounded-lg p-2 w-fit flex flex-row"
+        >
+          <Icon icon="mdi:warning-box" width="1.2rem" height="1.2rem" />
+          <Card.Title>Incomplete question</Card.Title>
+        </div>
+      {/if}
+      {#if showFileError}
+        <div
+          class="bg-red-500/20 text-red-500/80 rounded-lg p-2 w-fit flex flex-row"
+        >
+          <Icon icon="mdi:folder-warning" width="1.2rem" height="1.2rem" />
+          <Card.Title>Select a file</Card.Title>
+        </div>
+      {/if}
     </div>
   </Card.Header>
   <!-- Question Name -->
@@ -196,6 +249,9 @@
         type="single"
         variant="outline"
       >
+        <ToggleGroup.Item value="image" aria-label="Toggle image">
+          <Icon icon="mdi:image" width="1.2rem" height="1.2rem" />Image
+        </ToggleGroup.Item>
         <ToggleGroup.Item value="music" aria-label="Toggle music">
           <Icon icon="mdi:music-note" width="1.2rem" height="1.2rem" />
           Music
@@ -203,32 +259,31 @@
         <ToggleGroup.Item value="video" aria-label="Toggle video">
           <Icon icon="mdi:video" width="1.2rem" height="1.2rem" />Video
         </ToggleGroup.Item>
-        <ToggleGroup.Item value="model" aria-label="Toggle 3D model">
-          <Icon icon="mdi:video-3d" width="1.2rem" height="1.2rem" />CG Model
-        </ToggleGroup.Item>
-        <ToggleGroup.Item value="image" aria-label="Toggle image">
-          <Icon icon="mdi:image" width="1.2rem" height="1.2rem" />Image
+        <ToggleGroup.Item value="model" aria-label="Toggle 3D model" disabled>
+          <Icon icon="mdi:video-3d" width="1.2rem" height="1.2rem" />3D Model
         </ToggleGroup.Item>
       </ToggleGroup.Root>
-      <div
-        class="mx-auto max-w-xs p-4 rounded-lg outline-dashed outline-2 outline-muted-foreground my-2"
-      >
-        <label
-          for="example1"
-          class="mb-1 block text-sm font-medium text-muted-foreground/80"
-          >Upload {description_upload ? `${description_upload}` : ``} file</label
+      {#if description_upload}
+        <div
+          class="mx-auto max-w-xs p-4 rounded-lg outline-dashed outline-2 outline-muted-foreground mt-2"
         >
-        <input
-          id="example1"
-          type="file"
-          class="mt-2 block w-full text-secondary-foreground file:text-primary/90 file:hover:text-primary text-sm file:mr-4 file:rounded-md file:border-0 file:bg-primary-foreground file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-muted transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-60"
-          on:change={handleFileChange}
-          accept={description_upload_type}
-        />
-      </div>
+          <label
+            for="example1"
+            class="mb-1 block text-sm font-medium text-muted-foreground/80"
+            >Upload {description_upload ? `${description_upload}` : ``} file</label
+          >
+          <input
+            id="example1"
+            type="file"
+            class="mt-2 block w-full text-secondary-foreground file:text-primary/90 file:hover:text-primary text-sm file:mr-4 file:rounded-md file:border-0 file:bg-primary-foreground file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-muted transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-60"
+            on:change={handleFileChange}
+            accept={description_upload_type}
+          />
+        </div>
+      {/if}
     </div>
     <!-- Answer -->
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-3 mt-2">
       <Label for="Answer">Answer</Label>
       <Select.Root bind:selected={answer_type}>
         <Select.Trigger class="w-[180px]">

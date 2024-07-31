@@ -10,47 +10,44 @@
   import { createEventDispatcher } from 'svelte'
 
   import { handleToast } from '@/handleToast'
-  import { Markdown} from 'carta-md'
-    import { carta } from '@/Carta'
-    import MarkdownWysiwyg from '../create/MarkdownWYSIWYG.svelte'
+  import { Markdown } from 'carta-md'
+  import { carta } from '@/Carta'
+  import { removeTrailingSlashAsterisk } from '@/utils'
 
   export let question: QuizQuestion
   let options: string[]
 
-
-
   //Server side Markdown conversion using Carta MD is temporary disabled due to a bug in vite ssr circular dependencies
+  //   const convertMarkdown = async (markdown: string) => {
+  //   try {
+  //     const response = await fetch('/api/convertMarkdown', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'text/plain',
+  //       },
+  //       body: markdown, // Send markdown as plain text
+  //     });
 
+  //     if (!response.ok) {
+  //       throw new Error('Failed to convert Markdown');
+  //     }
 
-//   const convertMarkdown = async (markdown: string) => {
-//   try {
-//     const response = await fetch('/api/convertMarkdown', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'text/plain',
-//       },
-//       body: markdown, // Send markdown as plain text
-//     });
+  //     const result = await response.json();
+  //     html = result.html;
+  //   } catch (error) {
+  //     handleToast('error', 500, 'Failed to convert Markdown');
+  //   }
+  // };
 
-//     if (!response.ok) {
-//       throw new Error('Failed to convert Markdown');
-//     }
-
-//     const result = await response.json();
-//     html = result.html;
-//   } catch (error) {
-//     handleToast('error', 500, 'Failed to convert Markdown');
-//   }
-// };
-
-  // $: convertMarkdown(question.description)
-
+  //   $: convertMarkdown(question.description)
 
   //The event dispatcher is deprecated. When migrating to svelte 5 we need to use hooks 'n stuff
+  //Svelte 5 is still in beta and it's unstable
   const dispatch = createEventDispatcher()
-  $: media_type = question.media_type
+  $: media_type = ''
 
   let render = true
+
   $: {
     try {
       options = JSON.parse(question.response_options)
@@ -61,7 +58,6 @@
       render = false
     }
   }
-
 
   type ComponentType = typeof Slider | typeof Trivia | typeof TruthFalse
 
@@ -87,22 +83,21 @@
 
   let CurrentComponent = components[selectedComponent] || null
   let CurrentMediaComponent = mediaComponents[selectedMedia] || null
-  // $: selectedComponent = question.type as keyof typeof components
-  // $: CurrentComponent = components[selectedComponent] || null
 
   // $: selectedMedia = media_type as keyof typeof mediaComponents
-  // $: CurrentMediaComponent = mediaComponents[selectedMedia] || null
 
   $: selectedComponent = question.type as keyof typeof components
   $: CurrentComponent = components[selectedComponent] || null
 
-  $: selectedMedia = question.media_type as keyof typeof mediaComponents
+  $: selectedMedia = removeTrailingSlashAsterisk(
+    question.media_type,
+  ) as keyof typeof mediaComponents
   $: CurrentMediaComponent = mediaComponents[selectedMedia] || null
   $: {
     if (question.media_url_path) {
       url = `${PUBLIC_BUCKET_PATH}${question.media_url_path}`
       src = url
-      alt = `image ${question.type} question`
+      alt = ` ${question.type} question`
     } else {
       src = ''
       alt = ''
@@ -112,6 +107,11 @@
   function handleResponse(event: CustomEvent) {
     const { response } = event.detail
     dispatch('responseSelected', { response })
+  }
+
+  $: {
+    console.log('selected media', selectedMedia)
+    console.log('selected component', CurrentMediaComponent)
   }
 </script>
 
@@ -124,7 +124,7 @@
     </h1>
 
     <div class="text-primary">
-      <Markdown value={question.description} {carta}/>
+      <Markdown value={question.description} {carta} />
     </div>
     {#if CurrentMediaComponent}
       {#each [{ src, alt, type: question.media_type }] as media (src)}

@@ -5,6 +5,6 @@
   import * as m from '$lib/paraglide/messages'
 </script>
 
-<svelte:head>{m.new_password()}</svelte:head>
+<svelte:head><title>{m.new_password()}</title></svelte:head>
 
-<SettingsForm data={data.form} />
+<SettingsForm bind:data={data.form} />

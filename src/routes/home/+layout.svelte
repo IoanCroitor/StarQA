@@ -83,14 +83,13 @@
             Home
             <DropdownMenu.Shortcut>⇧H</DropdownMenu.Shortcut>
           </DropdownMenu.Item>
-
         </DropdownMenu.Group>
         <DropdownMenu.Separator />
         <DropdownMenu.Group>
-          <DropdownMenu.Item href="/home/profile">
+          <!-- <DropdownMenu.Item href="/home/profile">
             Profile
             <DropdownMenu.Shortcut>⇧P</DropdownMenu.Shortcut>
-          </DropdownMenu.Item>
+          </DropdownMenu.Item> -->
           <DropdownMenu.Sub>
             <DropdownMenu.SubTrigger>Invite users</DropdownMenu.SubTrigger>
             <DropdownMenu.SubContent>

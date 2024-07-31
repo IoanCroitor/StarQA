@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Question from './Question.svelte'
   import * as Card from '$lib/components/ui/card/index'
   import { Input } from '$lib/components/ui/input/index'
   import { Label } from '$lib/components/ui/label/index'
@@ -13,6 +12,8 @@
   import { saveQuiz } from './supabaseOperations'
   import Spinner from '@/assets/Spinner.svelte'
   import { goto } from '$app/navigation'
+  import Question from './Question.svelte'
+  import { handleToast } from '@/handleToast'
 
   export let data
 
@@ -39,19 +40,13 @@
 
   function updateQuestion(index: number, data: QuestionComponentInterface) {
     questions[index] = data
-    // DBG debug
-    // console.log('Deleted question:', index, 'index', questions)
-    // console.log('Updated Questions:', index, 'index', questions)
   }
 
   function deleteQuestion(index: number) {
     questions = questions.filter((_, i) => i !== index)
-    // DBG debug
-    // console.log('Deleted question:', index, 'index', questions)
   }
 
   let uploading = false
-  // SUPABASE BUSINESS LOGIC
   async function publishQuiz() {
     uploading = true
     await saveQuiz(
@@ -65,10 +60,27 @@
       supabase,
     ).then(() => {
       uploading = false
-
-      goto('/hello')
+      goto(`/home/${quiz_code}`)
     })
   }
+
+  function copyToClipboard(string: string) {
+    navigator.clipboard
+      .writeText(string)
+      .then(() => {
+        handleToast(
+          'message',
+          200,
+          'Quiz code: ' + string + ' copied in the clipboard',
+        )
+      })
+      .catch((err) => {
+        handleToast('error', 400, err)
+      })
+  }
+
+  $: isFormIncomplete =
+    !quiz_title || !quiz_description || questions.length === 0
 </script>
 
 <div class="py-6 gap-2">
@@ -85,11 +97,14 @@
         <div class="bg-primary-foreground rounded-lg p-2 w-fit">
           <Card.Title>Quiz details:</Card.Title>
         </div>
-        <div class="bg-primary rounded-lg p-2 w-fit">
+        <button
+          class="bg-primary rounded-lg p-2 w-fit"
+          on:click={() => copyToClipboard(quiz_code)}
+        >
           <Card.Title class="text-primary-foreground"
             >Quiz code: {quiz_code}</Card.Title
           >
-        </div>
+        </button>
       </div>
     </Card.Header>
     <!-- Quiz name -->
@@ -138,7 +153,7 @@
             <Label for="picture">Cover image:</Label>
             <Input
               id="picture"
-              class="file:bg-primary-foreground file:text-primary file:p-1 file:rounded-lg "
+              class="file:bg-primary-foreground file:text-primary file:p-1 file:rounded-lg"
               type="file"
               accept="image/*"
               on:change={handleFileChange}
@@ -184,7 +199,7 @@
       Add Question
     </Button>
     <Button
-      disabled={uploading}
+      disabled={uploading || isFormIncomplete}
       class="bg-violet-600 hover:bg-violet-700 font-semibold text-primary"
       on:click={publishQuiz}
     >

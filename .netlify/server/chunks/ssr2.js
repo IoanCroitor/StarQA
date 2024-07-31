@@ -1,8 +1,3 @@
-function onMount() {
-}
-function afterUpdate() {
-}
-export {
-  afterUpdate as a,
-  onMount as o
-};
+function onMount() {}
+function afterUpdate() {}
+export { afterUpdate as a, onMount as o }

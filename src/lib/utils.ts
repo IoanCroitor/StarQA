@@ -107,3 +107,38 @@ export function removeTrailingSlashAsterisk(str: string) {
   }
   return str
 }
+
+export function generateRandomBinary(): number {
+  return Math.floor(Math.random() * 2)
+}
+
+export function swapElements(
+  arr: string[],
+  index1: number,
+  index2: number,
+): void {
+  if (
+    index1 < 0 ||
+    index1 >= arr.length ||
+    index2 < 0 ||
+    index2 >= arr.length
+  ) {
+    throw new Error('Index out of bounds')
+  }
+  const temp = String(arr[index1])
+  arr[index1] = String(arr[index2])
+  arr[index2] = String(temp)
+}
+
+
+ export function formatDate(dateString: string) {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    }
+    return new Date(dateString).toLocaleString('en-US', options)
+  }

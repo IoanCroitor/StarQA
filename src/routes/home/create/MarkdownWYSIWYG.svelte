@@ -2,7 +2,7 @@
   import { math } from '@cartamd/plugin-math'
   import { tikz } from '@cartamd/plugin-tikz'
   import { Carta, MarkdownEditor } from 'carta-md'
-
+  // import DOMPurify from 'isomorphic-dompurify'
   const carta = new Carta({
     sanitizer: false,
     extensions: [

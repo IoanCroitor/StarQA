@@ -1,12 +1,7 @@
-const load = async ({
-  locals: { session },
-  cookies
-}) => {
+const load = async ({ locals: { session }, cookies }) => {
   return {
     session,
-    cookies: cookies.getAll()
-  };
-};
-export {
-  load
-};
+    cookies: cookies.getAll(),
+  }
+}
+export { load }

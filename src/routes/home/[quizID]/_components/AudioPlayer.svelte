@@ -6,13 +6,15 @@
   } from '@/utils'
   import { onMount, onDestroy } from 'svelte'
 
-  export let src: string =
-    'https://vclfhqfyjiplikdyazvq.supabase.co/storage/v1/object/public/public_quiz_uploads/quiz_files/17983428/One%20SATISFYING%20Minute%20of%20Trees%20Falling!%20(Sound%20ON!!!).mp3'
+  export let src: string = ''
   export let type: string = 'audio/mp3'
+  export let alt: string
 
   let player: any // Use 'any' type initially as Plyr will be loaded dynamically
   let Plyr: any // Declare Plyr variable to hold the imported module
 
+  // we dont need an alt atribute for audio
+  alt = ''
   onMount(async () => {
     const module = await import('plyr')
     Plyr = module.default
@@ -37,6 +39,7 @@
 </svelte:head>
 
 <!-- svelte-ignore a11y-media-has-caption -->
+<h1>Hello from audio</h1>
 <div class="rounded-lg overflow-hidden">
   <audio id="plyr-audio" class="plyr" playsinline>
     <source {src} {type} />

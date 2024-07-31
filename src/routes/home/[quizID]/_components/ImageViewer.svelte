@@ -1,11 +1,12 @@
 <script lang="ts">
-  export let src: string = 'https://via.placeholder.com/800x600'
+  export let src: string = ''
   export let alt: string = 'Image'
 
   export let type: string
   type = ''
 </script>
 
+<h1>Hello from image</h1>
 <div class="image-container overflow-hidden rounded-lg">
   <img {src} {alt} />
 </div>

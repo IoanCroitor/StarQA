@@ -4,7 +4,7 @@
   let response: string
 
   const dispatch = createEventDispatcher()
-
+  console.log('Options', options)
   function handleClick(number: number) {
     response = options[number - 1] as string
     dispatch('responseSelected', { response })

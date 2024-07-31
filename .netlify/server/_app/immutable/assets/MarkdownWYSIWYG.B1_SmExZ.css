@@ -1,0 +1,24 @@
+.carta-font-code {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
+  font-size: 1.125rem;
+}
+.carta-theme__default {
+  --border-color: hsl(var(--muted) / 1);
+  --selection-color: hsl(var(--muted) / 1);
+  --focus-outline: hsl(var(--muted) / 1);
+  --hover-color: hsl(var(--secondary) / 1);
+  --caret-color: var(--pop);
+  --text-color: hsl(var(--primary) / 1);
+}
+html.dark .shiki,
+html.dark .shiki span {
+  color: #e5e7eb !important;
+}

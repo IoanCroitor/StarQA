@@ -4,17 +4,17 @@ class HttpError {
    * @param {{message: string} extends App.Error ? (App.Error | string | undefined) : App.Error} body
    */
   constructor(status, body) {
-    this.status = status;
-    if (typeof body === "string") {
-      this.body = { message: body };
+    this.status = status
+    if (typeof body === 'string') {
+      this.body = { message: body }
     } else if (body) {
-      this.body = body;
+      this.body = body
     } else {
-      this.body = { message: `Error: ${status}` };
+      this.body = { message: `Error: ${status}` }
     }
   }
   toString() {
-    return JSON.stringify(this.body);
+    return JSON.stringify(this.body)
   }
 }
 class Redirect {
@@ -23,8 +23,8 @@ class Redirect {
    * @param {string} location
    */
   constructor(status, location) {
-    this.status = status;
-    this.location = location;
+    this.status = status
+    this.location = location
   }
 }
 class SvelteKitError extends Error {
@@ -34,9 +34,9 @@ class SvelteKitError extends Error {
    * @param {string} message
    */
   constructor(status, text2, message) {
-    super(message);
-    this.status = status;
-    this.text = text2;
+    super(message)
+    this.status = status
+    this.text = text2
   }
 }
 class ActionFailure {
@@ -45,52 +45,52 @@ class ActionFailure {
    * @param {T} data
    */
   constructor(status, data) {
-    this.status = status;
-    this.data = data;
+    this.status = status
+    this.data = data
   }
 }
 function redirect(status, location) {
   if (isNaN(status) || status < 300 || status > 308) {
-    throw new Error("Invalid status code");
+    throw new Error('Invalid status code')
   }
   throw new Redirect(
     // @ts-ignore
     status,
-    location.toString()
-  );
+    location.toString(),
+  )
 }
 function json(data, init) {
-  const body = JSON.stringify(data);
-  const headers = new Headers(init?.headers);
-  if (!headers.has("content-length")) {
-    headers.set("content-length", encoder.encode(body).byteLength.toString());
+  const body = JSON.stringify(data)
+  const headers = new Headers(init?.headers)
+  if (!headers.has('content-length')) {
+    headers.set('content-length', encoder.encode(body).byteLength.toString())
   }
-  if (!headers.has("content-type")) {
-    headers.set("content-type", "application/json");
+  if (!headers.has('content-type')) {
+    headers.set('content-type', 'application/json')
   }
   return new Response(body, {
     ...init,
-    headers
-  });
+    headers,
+  })
 }
-const encoder = new TextEncoder();
+const encoder = new TextEncoder()
 function text(body, init) {
-  const headers = new Headers(init?.headers);
-  if (!headers.has("content-length")) {
-    const encoded = encoder.encode(body);
-    headers.set("content-length", encoded.byteLength.toString());
+  const headers = new Headers(init?.headers)
+  if (!headers.has('content-length')) {
+    const encoded = encoder.encode(body)
+    headers.set('content-length', encoded.byteLength.toString())
     return new Response(encoded, {
       ...init,
-      headers
-    });
+      headers,
+    })
   }
   return new Response(body, {
     ...init,
-    headers
-  });
+    headers,
+  })
 }
 function fail(status, data) {
-  return new ActionFailure(status, data);
+  return new ActionFailure(status, data)
 }
 export {
   ActionFailure as A,
@@ -100,5 +100,5 @@ export {
   fail as f,
   json as j,
   redirect as r,
-  text as t
-};
+  text as t,
+}

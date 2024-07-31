@@ -9,3 +9,13 @@ export interface QuizQuestion {
   title: string
   type: string
 }
+
+export interface QuizResponse {
+  quiz_question_id: string
+  answer: string
+}
+
+export interface UserResponse {
+  question_id: any
+  user_answer: any
+}

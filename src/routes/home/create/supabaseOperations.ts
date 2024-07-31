@@ -77,7 +77,7 @@ export async function saveQuiz(
         typeof question.response_options_values === 'string'
           ? `{${question.response_options_values}}`
           : question.response_options_values
-
+      console.log('uploaded resonse options', responseOptions)
       const { data: questionData, error: questionError } = await supabase
         .from('quiz_questions')
         .insert({

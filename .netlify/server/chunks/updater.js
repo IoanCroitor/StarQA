@@ -1,59 +1,58 @@
-import { w as withGet } from "./index3.js";
-import { w as writable } from "./index5.js";
+import { w as withGet } from './index2.js'
+import { w as writable } from './index5.js'
 const overridable = (_store, onChange) => {
-  const store = withGet(_store);
+  const store = withGet(_store)
   const update = (updater, sideEffect) => {
     store.update((curr) => {
-      const next = updater(curr);
-      let res = next;
+      const next = updater(curr)
+      let res = next
       if (onChange) {
-        res = onChange({ curr, next });
+        res = onChange({ curr, next })
       }
-      sideEffect?.(res);
-      return res;
-    });
-  };
+      sideEffect?.(res)
+      return res
+    })
+  }
   const set = (curr) => {
-    update(() => curr);
-  };
+    update(() => curr)
+  }
   return {
     ...store,
     update,
-    set
-  };
-};
+    set,
+  }
+}
 function toWritableStores(properties) {
-  const result = {};
+  const result = {}
   Object.keys(properties).forEach((key) => {
-    const propertyKey = key;
-    const value = properties[propertyKey];
-    result[propertyKey] = withGet(writable(value));
-  });
-  return result;
+    const propertyKey = key
+    const value = properties[propertyKey]
+    result[propertyKey] = withGet(writable(value))
+  })
+  return result
 }
 function removeUndefined(obj) {
-  const result = {};
+  const result = {}
   for (const key in obj) {
-    const value = obj[key];
+    const value = obj[key]
     if (value !== void 0) {
-      result[key] = value;
+      result[key] = value
     }
   }
-  return result;
+  return result
 }
 function getOptionUpdater(options) {
-  return function(key, value) {
-    if (value === void 0)
-      return;
-    const store = options[key];
+  return function (key, value) {
+    if (value === void 0) return
+    const store = options[key]
     if (store) {
-      store.set(value);
+      store.set(value)
     }
-  };
+  }
 }
 export {
   getOptionUpdater as g,
   overridable as o,
   removeUndefined as r,
-  toWritableStores as t
-};
+  toWritableStores as t,
+}

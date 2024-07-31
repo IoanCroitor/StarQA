@@ -21,7 +21,10 @@ async function getQuizQuestions(uuid: string, supabase: any) {
   return quiz_questions ? quiz_questions : null
 }
 
-export async function getQuestionArrayByQuizId(quizId: number, supabase: any) {
+export async function getQuestionArrayByQuizCode(
+  quizId: number,
+  supabase: any,
+) {
   const uuid = await getQuizUUID(quizId, supabase)
   if (!uuid) return null
   const questions = await getQuizQuestions(uuid, supabase)

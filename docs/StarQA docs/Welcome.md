@@ -1,6 +1,7 @@
 # StarQA Project Structure
 
 ## src
+
 - [[lib]]
   - [[config]]
     - [[zod-schema.ts]]
@@ -27,7 +28,9 @@
   - [[+layout.ts]]
 
 ## File Links
+
 ### lib
+
 - [[config]]
   - [[zod-schema.ts]]
 - [[paraglide]]
@@ -37,6 +40,7 @@
     - [[ro.js]]
 
 ### routes
+
 - [[home]]
   - [[create]]
     - [[_inputComponents]]

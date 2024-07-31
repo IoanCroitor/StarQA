@@ -9,10 +9,10 @@ import {
 } from '$env/static/public'
 import type { LayoutLoad } from './$types'
 
-// 
+//
 // Any secure authentification concerns in the console log should be ignored
 // Authentification is handled serverside, the client is only concerned with loading that
-// 
+//
 
 export const load: LayoutLoad = async ({ data, depends, fetch }) => {
   /**

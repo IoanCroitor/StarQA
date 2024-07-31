@@ -2,6 +2,7 @@ import { math } from '@cartamd/plugin-math'
 import { tikz } from '@cartamd/plugin-tikz'
 import { Carta } from 'carta-md'
 
+
 const carta = new Carta({
   sanitizer: false,
   extensions: [

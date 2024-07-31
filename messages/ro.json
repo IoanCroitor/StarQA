@@ -1,12 +1,12 @@
 {
-    "$schema": "https://inlang.com/schema/inlang-message-format",
-    "hello_world": "Salut Lume!",
-    "tailored_just_for_you": "Personalizat doar pentru tine",
-    "login": "Log in",
-    "register": "Inregistreaza-te",
-    "stellar": "Stelar",
-    "quizzes": "Chestionare",
-    "crafting_stellar_quizzes": "Creaza chestionare stelare",
-    "error_loading_image_from": "Eroare la încărcarea imaginii de la {author}",
-    "on": "pe {name}"
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "hello_world": "Salut Lume!",
+  "tailored_just_for_you": "Personalizat doar pentru tine",
+  "login": "Log in",
+  "register": "Inregistreaza-te",
+  "stellar": "Stelar",
+  "quizzes": "Chestionare",
+  "crafting_stellar_quizzes": "Creaza chestionare stelare",
+  "error_loading_image_from": "Eroare la încărcarea imaginii de la {author}",
+  "on": "pe {name}"
 }

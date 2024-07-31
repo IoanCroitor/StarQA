@@ -21,25 +21,6 @@
     progressColorFunction,
   } from '$lib/passwordComplexity'
 
-  // function handleErrorToast(status: number, error: string) {
-  //   toast.error(error, {
-  //     description: m.error_code() + ': ' + status,
-  //     action: {
-  //       label: m.close(),
-  //       onClick: () =>
-  //         console.info(
-  //           m.closed_error_message() +
-  //             ': ' +
-  //             error +
-  //             ' ' +
-  //             m.with_the_status() +
-  //             ': ' +
-  //             status,
-  //         ),
-  //     },
-  //   })
-  // }
-
   export let data: SuperValidated<Infer<PasswordConfirmSchema>>
 
   const form = superForm(data, {
@@ -55,11 +36,10 @@
   })
 
   // password strength progress bar
-
-  $: arePasswordsMathing = $formData.password === $formData.confirmPassword
+  $: arePasswordsMatching = $formData.password === $formData.confirmPassword
   $: strength = calculateStrength($formData.password)
   $: progressColor = progressColorFunction(
-    arePasswordsMathing,
+    arePasswordsMatching,
     $formData.confirmPassword,
     strength,
   )
@@ -88,7 +68,7 @@
 
       <!-- Confirm Password -->
     </Form.Field>
-    <Form.Field {form} name="password">
+    <Form.Field {form} name="confirmPassword">
       <Form.Control let:attrs>
         <Form.Label class="font-semibold">{m.confirm_password()}</Form.Label>
         <Input
@@ -109,7 +89,7 @@
     <Form.Button
       class="self-start mt-1"
       size="sm"
-      disabled={!arePasswordsMathing}
+      disabled={!arePasswordsMatching}
     >
       {#if $delayed}
         <Spinner />

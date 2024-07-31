@@ -2,9 +2,6 @@
   import Skeleton from '$lib/components/ui/skeleton/skeleton.svelte'
   import { Button, type Props } from '$lib/components/ui/button/index'
   import ContinueWithGoogle from './ContinueWithGoogle.svelte'
-  import { onMount } from 'svelte'
-
-  import { goto } from '$app/navigation'
   import { page } from '$app/stores'
   import * as m from '$lib/paraglide/messages'
 

@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit'
 
-export const GET = async (event: any) => {
+export const GET = async (event) => {
   const {
     url,
     locals: { supabase },
@@ -11,7 +11,9 @@ export const GET = async (event: any) => {
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      redirect(303, `/${next.slice(1)}`)
+      throw redirect(303, `/${next.slice(1)}`)
     }
   }
+
+  throw redirect(303, '/auth/login')
 }

@@ -14,19 +14,7 @@
   } from '$lib/config/zod-schema'
   import Spinner from '@/assets/Spinner.svelte'
   import * as m from '$lib/paraglide/messages'
-
-  function handleErrorToast(status: number, error: string) {
-    toast.error(error, {
-      description: 'Code: ' + status,
-      action: {
-        label: 'Close',
-        onClick: () =>
-          console.info(
-            'Closed message: ' + error + ' with the status: ' + status,
-          ),
-      },
-    })
-  }
+  import { handleToast } from '@/handleToast'
 
   export let data: SuperValidated<Infer<PasswordResetSchema>>
 
@@ -38,7 +26,7 @@
 
   message.subscribe((value) => {
     if (value) {
-      handleErrorToast(value.status, value.message)
+      handleToast('error', value.status, value.message)
     }
   })
 </script>

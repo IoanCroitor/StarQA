@@ -1,4 +1,6 @@
+import { handleToast } from '@/handleToast'
 import type { SupabaseClient } from '@supabase/supabase-js'
+import { supabase } from '$lib/supabaseClient'
 
 // Request the specific user's username
 export async function getFieldnameByUserIdInTable(
@@ -44,10 +46,53 @@ export async function getProfilePictureByUserId(
   return profilePictureUrl
 }
 
-export function getUsernameByUserId(userId: string, supabase: SupabaseClient) {
-  return getFieldnameByUserIdInTable(userId, 'username', 'user_data', supabase)
+export async function getUsernameByUserId(
+  userId: string,
+  supabase: SupabaseClient,
+) {
+  return await getFieldnameByUserIdInTable(
+    userId,
+    'username',
+    'user_data',
+    supabase,
+  )
 }
 
 export function getNameById(id: string, supabase: SupabaseClient) {
   return getFieldnameByUserIdInTable(id, 'name', 'user_data', supabase)
+}
+
+export async function fetchLeaderboardData(supabase: SupabaseClient) {
+  const { data, error } = await supabase
+    .from('leaderboard')
+    .select(
+      `
+      rank,
+      score,
+      user_data (username)
+    `,
+    )
+    .order('rank', { ascending: true })
+
+  if (error) {
+    handleToast('error', Number(error.code), error.message)
+    return { data: null, error }
+  }
+
+  return { data, error: null }
+}
+
+export async function fetchQuizzes(limit: number, offset: number) {
+  const { data, error } = await supabase
+    .from('quizzes')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1)
+
+  if (error) {
+    console.error('Error fetching quizzes:', error)
+    return { data: null, error }
+  }
+  console.log(data)
+  return { data, error: null }
 }

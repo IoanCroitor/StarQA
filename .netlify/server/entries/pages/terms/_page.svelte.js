@@ -1,6 +1,6 @@
-import { c as create_ssr_component } from "../../../chunks/ssr.js";
+import { c as create_ssr_component } from '../../../chunks/ssr.js'
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${$$result.head += `<!-- HEAD_svelte-kcd74o_START -->${$$result.title = `<title>Terms of Service📃</title>`, ""}<!-- HEAD_svelte-kcd74o_END -->`, ""} <div class="container max-w-4xl mx-auto p-6 text-primary/90" data-svelte-h="svelte-1k7ef3d"><h1 class="text-4xl font-bold text-primary pt-12">StarQA Terms of Service</h1> <p class="mb-4">Effective Date: <span class="font-semibold">May 15 2024</span></p> <p class="mb-4">Welcome to StarQA, an open-source quiz application licensed under the MIT
+  return `${(($$result.head += `<!-- HEAD_svelte-kcd74o_START -->${(($$result.title = `<title>Terms of Service📃</title>`), '')}<!-- HEAD_svelte-kcd74o_END -->`), '')} <div class="container max-w-4xl mx-auto p-6 text-primary/90" data-svelte-h="svelte-1k7ef3d"><h1 class="text-4xl font-bold text-primary pt-12">StarQA Terms of Service</h1> <p class="mb-4">Effective Date: <span class="font-semibold">May 15 2024</span></p> <p class="mb-4">Welcome to StarQA, an open-source quiz application licensed under the MIT
     License. By using StarQA, you agree to comply with and be bound by the
     following Terms of Service. Please review these terms carefully. If you do
     not agree to these terms, you should not use StarQA.</p> <h2 class="text-2xl font-semibold mt-6 mb-4">1. Acceptance of Terms</h2> <p class="mb-4">By accessing and using StarQA, you accept and agree to be bound by these
@@ -47,8 +47,6 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.</p></div>`;
-});
-export {
-  Page as default
-};
+    IN THE SOFTWARE.</p></div>`
+})
+export { Page as default }
