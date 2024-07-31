@@ -23,7 +23,7 @@ export const actions: Actions = {
     const { error: supabaseError } = await supabase.auth.resetPasswordForEmail(
       email,
       {
-        redirectTo: 'http://localhost:5173/auth/new-password',
+        redirectTo: 'https://starqa.org/auth/new-password',
       },
     )
 

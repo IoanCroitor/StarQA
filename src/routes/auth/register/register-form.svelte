@@ -19,19 +19,6 @@
   import { handleToast } from '@/handleToast'
   import * as m from '$lib/paraglide/messages'
 
-  // function handleErrorToast(status: number, error: string) {
-  //   toast.error(error, {
-  //     description: 'Error Code: ' + status,
-  //     action: {
-  //       label: 'Close',
-  //       onClick: () =>
-  //         console.info(
-  //           'Closed error message: ' + error + ' with the status: ' + status,
-  //         ),
-  //     },
-  //   })
-  // }
-
   export let data: SuperValidated<Infer<RegisterSchema>>
 
   const form = superForm(data, {

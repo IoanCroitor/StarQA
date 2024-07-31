@@ -51,7 +51,7 @@
   {#if !allLoaded}
     <button
       on:click={loadMoreQuizzes}
-      class="px-6 py-2 bg-primary-foreground text-primary-foreground rounded-lg hover:bg-primary-foreground/90 focus:outline-none focus:ring-2 focus:ring-muted-foreground/70 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed"
+      class="px-6 py-2 bg-primary-foreground text-primary rounded-lg hover:bg-primary-foreground/90 focus:outline-none focus:ring-2 focus:ring-muted-foreground/70 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed"
       disabled={loading}
     >
       {#if loading}
@@ -62,6 +62,6 @@
     </button>
   {/if}
   {#if allLoaded}
-    <p class="text-gray-600">No more quizzes to load.</p>
+    <p class="text-primary">No more quizzes to load.</p>
   {/if}
 </div>

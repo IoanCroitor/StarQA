@@ -12,8 +12,6 @@
   export let date = ''
   export let image = ''
 
-  console.log(tags)
-
   // const displayedTags = tags.slice(0, 3)
   $: date = formatDate(date)
   $: image = PUBLIC_BUCKET_PATH + image

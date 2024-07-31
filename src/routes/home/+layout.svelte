@@ -2,11 +2,16 @@
   import * as Avatar from '$lib/components/ui/avatar/index.js'
   import { Button } from '$lib/components/ui/button/index.js'
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js'
+  import DropdownMenuCheckboxItem from '@/components/ui/dropdown-menu/dropdown-menu-checkbox-item.svelte'
   import {
     getProfilePictureByUserId,
     getUsernameByUserId,
     getNameById,
   } from './querryUtils'
+
+  import { availableLanguageTags, languageTag } from '$lib/paraglide/runtime.js'
+  import { i18n } from '$lib/i18n.js'
+  import { page } from '$app/stores'
 
   export let data
 
@@ -78,6 +83,27 @@
       <DropdownMenu.Content class="w-56">
         <DropdownMenu.Label>{user?.email}</DropdownMenu.Label>
         <DropdownMenu.Separator />
+        <!-- 
+        <DropdownMenu.Group>
+          <DropdownMenu.Sub>
+            <DropdownMenu.SubTrigger>Language</DropdownMenu.SubTrigger>
+            <DropdownMenu.SubContent>
+              {#each availableLanguageTags as lang}
+                <DropdownMenu.Item>
+                  <a
+                    href={i18n.route($page.url.pathname)}
+                    hreflang={lang}
+                    aria-current={lang === languageTag() ? 'page' : undefined}
+                  >
+                    {lang}
+                  </a>
+                </DropdownMenu.Item>
+              {/each}
+            </DropdownMenu.SubContent>
+            <DropdownMenu.Separator />
+          </DropdownMenu.Sub>
+        </DropdownMenu.Group> -->
+
         <DropdownMenu.Group>
           <DropdownMenu.Item href="/home">
             Home
@@ -86,10 +112,10 @@
         </DropdownMenu.Group>
         <DropdownMenu.Separator />
         <DropdownMenu.Group>
-          <!-- <DropdownMenu.Item href="/home/profile">
+          <DropdownMenu.Item href="/home/profile">
             Profile
             <DropdownMenu.Shortcut>⇧P</DropdownMenu.Shortcut>
-          </DropdownMenu.Item> -->
+          </DropdownMenu.Item>
           <DropdownMenu.Sub>
             <DropdownMenu.SubTrigger>Invite users</DropdownMenu.SubTrigger>
             <DropdownMenu.SubContent>

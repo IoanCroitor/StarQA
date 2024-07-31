@@ -31,3 +31,6 @@ export async function getQuestionArrayByQuizCode(
   if (!questions) return null
   return questions
 }
+
+
+
