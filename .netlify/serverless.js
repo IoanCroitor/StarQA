@@ -1,145 +1,145 @@
-import './shims.js'
-import { Server } from './server/index.js'
-import { createReadStream } from 'node:fs'
-import { Readable } from 'node:stream'
-import 'node:buffer'
-import 'node:crypto'
+import './shims.js';
+import { Server } from './server/index.js';
+import { createReadStream } from 'node:fs';
+import { Readable } from 'node:stream';
+import 'node:buffer';
+import 'node:crypto';
 
-var setCookie = { exports: {} }
+var setCookie = {exports: {}};
 
 var defaultParseOptions = {
   decodeValues: true,
   map: false,
   silent: false,
-}
+};
 
 function isNonEmptyString(str) {
-  return typeof str === 'string' && !!str.trim()
+  return typeof str === "string" && !!str.trim();
 }
 
 function parseString(setCookieValue, options) {
-  var parts = setCookieValue.split(';').filter(isNonEmptyString)
+  var parts = setCookieValue.split(";").filter(isNonEmptyString);
 
-  var nameValuePairStr = parts.shift()
-  var parsed = parseNameValuePair(nameValuePairStr)
-  var name = parsed.name
-  var value = parsed.value
+  var nameValuePairStr = parts.shift();
+  var parsed = parseNameValuePair(nameValuePairStr);
+  var name = parsed.name;
+  var value = parsed.value;
 
   options = options
     ? Object.assign({}, defaultParseOptions, options)
-    : defaultParseOptions
+    : defaultParseOptions;
 
   try {
-    value = options.decodeValues ? decodeURIComponent(value) : value // decode cookie value
+    value = options.decodeValues ? decodeURIComponent(value) : value; // decode cookie value
   } catch (e) {
     console.error(
       "set-cookie-parser encountered an error while decoding a cookie with value '" +
         value +
         "'. Set options.decodeValues to false to disable this feature.",
-      e,
-    )
+      e
+    );
   }
 
   var cookie = {
     name: name,
     value: value,
-  }
+  };
 
   parts.forEach(function (part) {
-    var sides = part.split('=')
-    var key = sides.shift().trimLeft().toLowerCase()
-    var value = sides.join('=')
-    if (key === 'expires') {
-      cookie.expires = new Date(value)
-    } else if (key === 'max-age') {
-      cookie.maxAge = parseInt(value, 10)
-    } else if (key === 'secure') {
-      cookie.secure = true
-    } else if (key === 'httponly') {
-      cookie.httpOnly = true
-    } else if (key === 'samesite') {
-      cookie.sameSite = value
+    var sides = part.split("=");
+    var key = sides.shift().trimLeft().toLowerCase();
+    var value = sides.join("=");
+    if (key === "expires") {
+      cookie.expires = new Date(value);
+    } else if (key === "max-age") {
+      cookie.maxAge = parseInt(value, 10);
+    } else if (key === "secure") {
+      cookie.secure = true;
+    } else if (key === "httponly") {
+      cookie.httpOnly = true;
+    } else if (key === "samesite") {
+      cookie.sameSite = value;
     } else {
-      cookie[key] = value
+      cookie[key] = value;
     }
-  })
+  });
 
-  return cookie
+  return cookie;
 }
 
 function parseNameValuePair(nameValuePairStr) {
   // Parses name-value-pair according to rfc6265bis draft
 
-  var name = ''
-  var value = ''
-  var nameValueArr = nameValuePairStr.split('=')
+  var name = "";
+  var value = "";
+  var nameValueArr = nameValuePairStr.split("=");
   if (nameValueArr.length > 1) {
-    name = nameValueArr.shift()
-    value = nameValueArr.join('=') // everything after the first =, joined by a "=" if there was more than one part
+    name = nameValueArr.shift();
+    value = nameValueArr.join("="); // everything after the first =, joined by a "=" if there was more than one part
   } else {
-    value = nameValuePairStr
+    value = nameValuePairStr;
   }
 
-  return { name: name, value: value }
+  return { name: name, value: value };
 }
 
 function parse(input, options) {
   options = options
     ? Object.assign({}, defaultParseOptions, options)
-    : defaultParseOptions
+    : defaultParseOptions;
 
   if (!input) {
     if (!options.map) {
-      return []
+      return [];
     } else {
-      return {}
+      return {};
     }
   }
 
   if (input.headers) {
-    if (typeof input.headers.getSetCookie === 'function') {
+    if (typeof input.headers.getSetCookie === "function") {
       // for fetch responses - they combine headers of the same type in the headers array,
       // but getSetCookie returns an uncombined array
-      input = input.headers.getSetCookie()
-    } else if (input.headers['set-cookie']) {
+      input = input.headers.getSetCookie();
+    } else if (input.headers["set-cookie"]) {
       // fast-path for node.js (which automatically normalizes header names to lower-case
-      input = input.headers['set-cookie']
+      input = input.headers["set-cookie"];
     } else {
       // slow-path for other environments - see #25
       var sch =
         input.headers[
           Object.keys(input.headers).find(function (key) {
-            return key.toLowerCase() === 'set-cookie'
+            return key.toLowerCase() === "set-cookie";
           })
-        ]
+        ];
       // warn if called on a request-like object with a cookie header rather than a set-cookie header - see #34, 36
       if (!sch && input.headers.cookie && !options.silent) {
         console.warn(
-          'Warning: set-cookie-parser appears to have been called on a request object. It is designed to parse Set-Cookie headers from responses, not Cookie headers from requests. Set the option {silent: true} to suppress this warning.',
-        )
+          "Warning: set-cookie-parser appears to have been called on a request object. It is designed to parse Set-Cookie headers from responses, not Cookie headers from requests. Set the option {silent: true} to suppress this warning."
+        );
       }
-      input = sch
+      input = sch;
     }
   }
   if (!Array.isArray(input)) {
-    input = [input]
+    input = [input];
   }
 
   options = options
     ? Object.assign({}, defaultParseOptions, options)
-    : defaultParseOptions
+    : defaultParseOptions;
 
   if (!options.map) {
     return input.filter(isNonEmptyString).map(function (str) {
-      return parseString(str, options)
-    })
+      return parseString(str, options);
+    });
   } else {
-    var cookies = {}
+    var cookies = {};
     return input.filter(isNonEmptyString).reduce(function (cookies, str) {
-      var cookie = parseString(str, options)
-      cookies[cookie.name] = cookie
-      return cookies
-    }, cookies)
+      var cookie = parseString(str, options);
+      cookies[cookie.name] = cookie;
+      return cookies;
+    }, cookies);
   }
 }
 
@@ -156,82 +156,81 @@ function parse(input, options) {
 */
 function splitCookiesString(cookiesString) {
   if (Array.isArray(cookiesString)) {
-    return cookiesString
+    return cookiesString;
   }
-  if (typeof cookiesString !== 'string') {
-    return []
+  if (typeof cookiesString !== "string") {
+    return [];
   }
 
-  var cookiesStrings = []
-  var pos = 0
-  var start
-  var ch
-  var lastComma
-  var nextStart
-  var cookiesSeparatorFound
+  var cookiesStrings = [];
+  var pos = 0;
+  var start;
+  var ch;
+  var lastComma;
+  var nextStart;
+  var cookiesSeparatorFound;
 
   function skipWhitespace() {
     while (pos < cookiesString.length && /\s/.test(cookiesString.charAt(pos))) {
-      pos += 1
+      pos += 1;
     }
-    return pos < cookiesString.length
+    return pos < cookiesString.length;
   }
 
   function notSpecialChar() {
-    ch = cookiesString.charAt(pos)
+    ch = cookiesString.charAt(pos);
 
-    return ch !== '=' && ch !== ';' && ch !== ','
+    return ch !== "=" && ch !== ";" && ch !== ",";
   }
 
   while (pos < cookiesString.length) {
-    start = pos
-    cookiesSeparatorFound = false
+    start = pos;
+    cookiesSeparatorFound = false;
 
     while (skipWhitespace()) {
-      ch = cookiesString.charAt(pos)
-      if (ch === ',') {
+      ch = cookiesString.charAt(pos);
+      if (ch === ",") {
         // ',' is a cookie separator if we have later first '=', not ';' or ','
-        lastComma = pos
-        pos += 1
+        lastComma = pos;
+        pos += 1;
 
-        skipWhitespace()
-        nextStart = pos
+        skipWhitespace();
+        nextStart = pos;
 
         while (pos < cookiesString.length && notSpecialChar()) {
-          pos += 1
+          pos += 1;
         }
 
         // currently special character
-        if (pos < cookiesString.length && cookiesString.charAt(pos) === '=') {
+        if (pos < cookiesString.length && cookiesString.charAt(pos) === "=") {
           // we found cookies separator
-          cookiesSeparatorFound = true
+          cookiesSeparatorFound = true;
           // pos is inside the next cookie, so back up and return it.
-          pos = nextStart
-          cookiesStrings.push(cookiesString.substring(start, lastComma))
-          start = pos
+          pos = nextStart;
+          cookiesStrings.push(cookiesString.substring(start, lastComma));
+          start = pos;
         } else {
           // in param ',' or param separator ';',
           // we continue from that comma
-          pos = lastComma + 1
+          pos = lastComma + 1;
         }
       } else {
-        pos += 1
+        pos += 1;
       }
     }
 
     if (!cookiesSeparatorFound || pos >= cookiesString.length) {
-      cookiesStrings.push(cookiesString.substring(start, cookiesString.length))
+      cookiesStrings.push(cookiesString.substring(start, cookiesString.length));
     }
   }
 
-  return cookiesStrings
+  return cookiesStrings;
 }
 
-setCookie.exports = parse
-setCookie.exports.parse = parse
-setCookie.exports.parseString = parseString
-var splitCookiesString_1 = (setCookie.exports.splitCookiesString =
-  splitCookiesString)
+setCookie.exports = parse;
+setCookie.exports.parse = parse;
+setCookie.exports.parseString = parseString;
+var splitCookiesString_1 = setCookie.exports.splitCookiesString = splitCookiesString;
 
 /**
  * Splits headers into two categories: single value and multi value
@@ -242,25 +241,25 @@ var splitCookiesString_1 = (setCookie.exports.splitCookiesString =
  * }}
  */
 function split_headers(headers) {
-  /** @type {Record<string, string>} */
-  const h = {}
+	/** @type {Record<string, string>} */
+	const h = {};
 
-  /** @type {Record<string, string[]>} */
-  const m = {}
+	/** @type {Record<string, string[]>} */
+	const m = {};
 
-  headers.forEach((value, key) => {
-    if (key === 'set-cookie') {
-      if (!m[key]) m[key] = []
-      m[key].push(...splitCookiesString_1(value))
-    } else {
-      h[key] = value
-    }
-  })
+	headers.forEach((value, key) => {
+		if (key === 'set-cookie') {
+			if (!m[key]) m[key] = [];
+			m[key].push(...splitCookiesString_1(value));
+		} else {
+			h[key] = value;
+		}
+	});
 
-  return {
-    headers: h,
-    multiValueHeaders: m,
-  }
+	return {
+		headers: h,
+		multiValueHeaders: m
+	};
 }
 
 /**
@@ -270,7 +269,7 @@ function split_headers(headers) {
  * @since 2.4.0
  */
 function createReadableStream(file) {
-  return /** @type {ReadableStream} */ (Readable.toWeb(createReadStream(file)))
+	return /** @type {ReadableStream} */ (Readable.toWeb(createReadStream(file)));
 }
 
 /**
@@ -278,47 +277,47 @@ function createReadableStream(file) {
  * @returns {import('@netlify/functions').Handler}
  */
 function init(manifest) {
-  const server = new Server(manifest)
+	const server = new Server(manifest);
 
-  let init_promise = server.init({
-    env: process.env,
-    read: (file) => createReadableStream(`.netlify/server/${file}`),
-  })
+	let init_promise = server.init({
+		env: process.env,
+		read: (file) => createReadableStream(`.netlify/server/${file}`)
+	});
 
-  return async (event, context) => {
-    if (init_promise !== null) {
-      await init_promise
-      init_promise = null
-    }
+	return async (event, context) => {
+		if (init_promise !== null) {
+			await init_promise;
+			init_promise = null;
+		}
 
-    const response = await server.respond(to_request(event), {
-      platform: { context },
-      getClientAddress() {
-        return event.headers['x-nf-client-connection-ip']
-      },
-    })
+		const response = await server.respond(to_request(event), {
+			platform: { context },
+			getClientAddress() {
+				return event.headers['x-nf-client-connection-ip'];
+			}
+		});
 
-    const partial_response = {
-      statusCode: response.status,
-      ...split_headers(response.headers),
-    }
+		const partial_response = {
+			statusCode: response.status,
+			...split_headers(response.headers)
+		};
 
-    if (!is_text(response.headers.get('content-type'))) {
-      // Function responses should be strings (or undefined), and responses with binary
-      // content should be base64 encoded and set isBase64Encoded to true.
-      // https://github.com/netlify/functions/blob/main/src/function/response.ts
-      return {
-        ...partial_response,
-        isBase64Encoded: true,
-        body: Buffer.from(await response.arrayBuffer()).toString('base64'),
-      }
-    }
+		if (!is_text(response.headers.get('content-type'))) {
+			// Function responses should be strings (or undefined), and responses with binary
+			// content should be base64 encoded and set isBase64Encoded to true.
+			// https://github.com/netlify/functions/blob/main/src/function/response.ts
+			return {
+				...partial_response,
+				isBase64Encoded: true,
+				body: Buffer.from(await response.arrayBuffer()).toString('base64')
+			};
+		}
 
-    return {
-      ...partial_response,
-      body: await response.text(),
-    }
-  }
+		return {
+			...partial_response,
+			body: await response.text()
+		};
+	};
 }
 
 /**
@@ -326,28 +325,28 @@ function init(manifest) {
  * @returns {Request}
  */
 function to_request(event) {
-  const { httpMethod, headers, rawUrl, body, isBase64Encoded } = event
+	const { httpMethod, headers, rawUrl, body, isBase64Encoded } = event;
 
-  /** @type {RequestInit} */
-  const init = {
-    method: httpMethod,
-    headers: new Headers(headers),
-  }
+	/** @type {RequestInit} */
+	const init = {
+		method: httpMethod,
+		headers: new Headers(headers)
+	};
 
-  if (httpMethod !== 'GET' && httpMethod !== 'HEAD') {
-    const encoding = isBase64Encoded ? 'base64' : 'utf-8'
-    init.body = typeof body === 'string' ? Buffer.from(body, encoding) : body
-  }
+	if (httpMethod !== 'GET' && httpMethod !== 'HEAD') {
+		const encoding = isBase64Encoded ? 'base64' : 'utf-8';
+		init.body = typeof body === 'string' ? Buffer.from(body, encoding) : body;
+	}
 
-  return new Request(rawUrl, init)
+	return new Request(rawUrl, init);
 }
 
 const text_types = new Set([
-  'application/xml',
-  'application/json',
-  'application/x-www-form-urlencoded',
-  'multipart/form-data',
-])
+	'application/xml',
+	'application/json',
+	'application/x-www-form-urlencoded',
+	'multipart/form-data'
+]);
 
 /**
  * Decides how the body should be parsed based on its mime type
@@ -356,12 +355,10 @@ const text_types = new Set([
  * @returns {boolean}
  */
 function is_text(content_type) {
-  if (!content_type) return true // defaults to json
-  const type = content_type.split(';')[0].toLowerCase() // get the mime type
+	if (!content_type) return true; // defaults to json
+	const type = content_type.split(';')[0].toLowerCase(); // get the mime type
 
-  return (
-    type.startsWith('text/') || type.endsWith('+xml') || text_types.has(type)
-  )
+	return type.startsWith('text/') || type.endsWith('+xml') || text_types.has(type);
 }
 
-export { init }
+export { init };

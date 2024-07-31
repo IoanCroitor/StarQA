@@ -125,7 +125,6 @@
         >
           {m.privacy_policy()}
         </a>
-        .
       </p>
     </div>
   </div>

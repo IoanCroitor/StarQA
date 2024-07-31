@@ -1,6 +1,6 @@
-import { c as create_ssr_component } from '../../../chunks/ssr.js'
+import { c as create_ssr_component } from "../../../chunks/ssr.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${(($$result.head += `<!-- HEAD_svelte-15qy9mm_START -->${(($$result.title = `<title>Privacy Policy🔒</title>`), '')}<!-- HEAD_svelte-15qy9mm_END -->`), '')} <div class="container max-w-4xl mx-auto p-6 text-primary/90" data-svelte-h="svelte-av39zu"><h1 class="text-4xl font-bold text-primary pt-12">StarQA Privacy Policy</h1> <p class="mb-4">Effective Date: <span class="font-semibold">17 May 2024</span></p> <p class="mb-4">Your privacy is important to us. This Privacy Policy explains how StarQA
+  return `${$$result.head += `<!-- HEAD_svelte-15qy9mm_START -->${$$result.title = `<title>Privacy Policy🔒</title>`, ""}<!-- HEAD_svelte-15qy9mm_END -->`, ""} <div class="container max-w-4xl mx-auto p-6 text-primary/90" data-svelte-h="svelte-av39zu"><h1 class="text-4xl font-bold text-primary pt-12">StarQA Privacy Policy</h1> <p class="mb-4">Effective Date: <span class="font-semibold">17 May 2024</span></p> <p class="mb-4">Your privacy is important to us. This Privacy Policy explains how StarQA
     collects, uses, discloses, and protects your information when you use our
     application. By using StarQA, you agree to the collection and use of
     information in accordance with this policy.</p> <h2 class="text-2xl font-semibold mt-6 mb-4">1. Information We Collect</h2> <ul class="list-disc list-inside mb-4"><li><span class="font-semibold">Personal Information:</span> When you register
@@ -22,6 +22,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     information from a child under 13, we will take steps to delete such
     information.</p> <h2 class="text-2xl font-semibold mt-6 mb-4">8. Changes to This Privacy Policy</h2> <p class="mb-4">We may update our Privacy Policy from time to time. We will notify you of
     any changes by posting the new Privacy Policy on this page. You are advised
-    to review this Privacy Policy periodically for any changes.</p> <h2 class="text-2xl font-semibold mt-6 mb-4">9. Contact Us</h2> <p class="mb-4">If you have any questions about this Privacy Policy, please contact us at <span class="font-semibold">ioancrq@gmail.com</span>.</p></div>`
-})
-export { Page as default }
+    to review this Privacy Policy periodically for any changes.</p> <h2 class="text-2xl font-semibold mt-6 mb-4">9. Contact Us</h2> <p class="mb-4">If you have any questions about this Privacy Policy, please contact us at <span class="font-semibold">ioancrq@gmail.com</span>.</p></div>`;
+});
+export {
+  Page as default
+};
