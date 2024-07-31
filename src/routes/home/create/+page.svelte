@@ -12,7 +12,7 @@
   import { saveQuiz } from './supabaseOperations'
   import Spinner from '@/assets/Spinner.svelte'
   import { goto } from '$app/navigation'
-  import Question from './Question.svelte'
+  import Question from './question.svelte'
   import { handleToast } from '@/handleToast'
 
   export let data
